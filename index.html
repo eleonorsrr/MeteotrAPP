@@ -89,6 +89,49 @@
 
     </div>
 
+    <div class="side-panel"> <!--Contenitore relativo alla ricerca dellà città-->
+
+      <div id="city-search">
+        <label for="city-input">Inserisci il nome di una città:</label>
+        <input type="text" id="city-input" placeholder="Es. Milano, Tokyo..." />
+        <button id="search-btn">Cerca</button>
+      </div>
+      
+
+      <div class="weather-feature-panel location">
+        <h3>Location</h3>
+        <p><span id="location">--</span></p>
+      </div>
+
+
+      <div class="weather-description-panel ">
+        <h3>Current Weather</h3>
+        <p><span id="weather-description">--</span></p>
+      </div> 
+
+
+      <div class="weather-feature-panel temperature">
+        <h3>Temperature</h3>
+        <p>Current: <span id="temp-current">--</span>°C</p>
+        <p>Min: <span id="temp-min">--</span>°C</p>
+        <p>Max: <span id="temp-max">--</span>°C</p>
+      </div>
+    
+
+      <div class="weather-feature-panel wind">
+        <h3>Wind</h3>
+        <p>Speed: <span id="wind-speed">--</span> m/s</p>
+        <p>Direction: <span id="wind-direction">--</span>°</p>
+      </div>
+    
+
+      <div class="weather-feature-panel Time">
+        <h3>Time</h3>
+        <p><span id="time-time">--</span></p>
+      </div>
+
+    </div>   
+
   </div>
 
   <script type="module" src="./script.js"></script>
