@@ -1,0 +1,92 @@
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MeteotrAPP</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
+
+  <link href="./style.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+
+</head>
+
+<body>
+  
+  <div class="app-container"> <!--Contenitore principale di tutta l'applicazione (top/central/bottom panel)-->
+
+    <div class="top-panel"> <!--Contenitore relativo al pannello superiore (instruments, play/reset, bpm, tempo)-->
+
+      <select id="instruments">
+        <option value="rhodes">Rhodes</option>
+        <option value="epiano">E-Piano</option>
+        <option value="indian">Indian</option>
+      </select>
+  
+      <button id="play-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg></button>
+      <button id="stop-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg></button>
+      <button id="reset-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+  
+      <label for="bpm">BPM:</label>
+      <input type="number" id="bpm" min="40" max="200" value="120" />
+  
+      <label for="time-signature">Tempo:</label>
+      <select id="time-signature">
+        <option value="4/4">4/4</option>
+        <option value="3/4">3/4</option>
+        <option value="6/8">6/8</option>
+      </select>
+    
+    </div>
+
+    <div class="central-panel"> <!--Contenitore relativo al blocco centrale (weather row, chord row)-->
+
+      <div class="weather-row"> <!--Contenitore relativo alle varie condizioni meteo e scale ad esse associate-->
+          
+        <div class="weather-item">
+          <button class="weather-btn" id="sunny"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+          <div class="dropdown-container" id="sunny-dropdown"></div>
+        </div>
+        
+        <div class="weather-item">
+          <button class="weather-btn" id="rainy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-rain-wind"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m9.2 22 3-7"/><path d="m9 13-3 7"/><path d="m17 13-3 7"/></svg></button>
+          <div class="dropdown-container" id="rainy-dropdown"></div>
+        </div>
+          
+        <div class="weather-item">
+          <button class="weather-btn" id="cloudy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloudy"><path d="M17.5 21H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg></button>
+          <div class="dropdown-container" id="cloudy-dropdown"></div>
+        </div>
+          
+        <div class="weather-item">
+          <button class="weather-btn" id="snowy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg></button>
+          <div class="dropdown-container" id="snowy-dropdown"></div>
+        </div>
+          
+      </div>
+        
+      <div class="chord-row"> <!--Contenitore relativo agli accordi proposti per il loop-->
+
+        <button class="chord-btn" id="btn1">C</button>
+        <button class="chord-btn" id="btn2">D</button>
+        <button class="chord-btn" id="btn3">E</button>
+        <button class="chord-btn" id="btn4">F</button>
+        <button class="chord-btn" id="btn5">G</button>
+        <button class="chord-btn" id="btn6">A</button>
+        <button class="chord-btn" id="btn7">B</button>
+
+      </div>
+
+    </div>  
+
+    <div class="bottom-panel"> <!--Contenitore relativo alla sezione di effettistica-->
+
+    </div>
+
+  </div>
+
+  <script type="module" src="./script.js"></script>
+
+</body>
