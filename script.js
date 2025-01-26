@@ -437,4 +437,3 @@ weatherButtons.cloudy.addEventListener("click", () => {
 weatherButtons.snowy.addEventListener("click", () => {
   playWeatherSound("snowy");
 });
-

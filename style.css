@@ -98,7 +98,7 @@ label {
 }
 
 .volume-slider {
-  width: 65px;  /* Imposta la larghezza a tuo piacimento */
+  width: 65px; 
 }
 
 .weather-item {
@@ -175,7 +175,6 @@ label {
   gap: 5px;
 }
 
-/* Aggiungi questi stili al tuo file CSS */
 select.dropdownContainer {
   font-family: 'Cormorant Garamon';
   background-color: #f0f0f0;
@@ -200,4 +199,75 @@ select.dropdownContainer option:hover {
   background-color: #e0f7fa;
 }
 
-/* 4. Bottom Panel */
+/* 4. Side Panel */
+side-panel {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 100%;
+}
+
+.weather-description-panel {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.weather-feature-panel {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.weather-feature-panel h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333333;
+}
+
+.weather-feature-panel p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555555;
+}
+
+#temp-current, #temp-min, #temp-max, #humidity, #wind-speed, #wind-direction, #sunrise, #sunset {
+  font-weight: bold;
+  color: #914caa;
+}
+
+
+
+#city-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#city-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#search-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#search-btn:hover {
+  background-color: #0056b3;
+}
