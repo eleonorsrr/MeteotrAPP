@@ -97,6 +97,10 @@ label {
   margin-bottom: 20px;
 }
 
+.volume-slider {
+  width: 65px;  /* Imposta la larghezza a tuo piacimento */
+}
+
 .weather-item {
   display: flex;
   flex-direction: column;
