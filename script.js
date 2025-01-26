@@ -306,6 +306,19 @@ document.getElementById("time-signature").addEventListener("change", (e) => {
 
 // Scegli l'immagine di sfondo in base alla condizione atmosferica
 // LOLA 25/01
+const images = {
+  sunnyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg',
+  rainyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg',
+  cloudyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg',
+  snowyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg',
+  defaultImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg'
+};
+
+// Preload delle immagini per non avere delay
+Object.values(images).forEach(imageUrl => {
+  const img = new Image();
+  img.src = imageUrl;
+});
 
 weatherButtons.sunny.addEventListener("click", () => {
   changeBackground("sunnyy", weatherButtons.sunny);
@@ -329,18 +342,18 @@ function changeBackground(weather) {
   
   switch(weather) {
     default:
-      imageUrl = 'sfondo.jpg';
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
     case 'sunnyy':
-      imageUrl = 'sunny.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
       break;
     case 'rainyy':
-      imageUrl = 'rainy.jpg';
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg';
       break;
     case 'cloudyy':
-      imageUrl = 'cloudy.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg'; 
       break;
     case 'snowyy':
-      imageUrl = 'snowy.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg'; 
       break;
   }
 
@@ -354,7 +367,6 @@ function changeBackground(weather) {
 // ANNA 26/01
 
 // Mappa dei bottoni meteo già dichiarata
-// Mappa degli slider del volume -- da aggiugere
 // Mappa dei suoni meteo
 const weatherSounds = {
   sunny: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/birds.mp3'),
@@ -363,7 +375,12 @@ const weatherSounds = {
   snowy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/snow.mp3')
 };
 
-  // Correlazione tra il meteo e il suono
+// Preload dei suoni caratteristici
+Object.values(weatherSounds).forEach(sound => {
+  const snd = new Sound();
+  img.src = sound;
+});
+
   function playWeatherSound(weather) {
     let sound;
   
@@ -395,8 +412,6 @@ const weatherSounds = {
     }
   }
   
-  
-//Eventi sui bottoni meteo
   weatherButtons.sunny.addEventListener("click", () => {
     playWeatherSound("sunnyy");
   });
