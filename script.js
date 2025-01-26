@@ -357,44 +357,28 @@ function changeBackground(weather) {
 // Mappa degli slider del volume -- da aggiugere
 // Mappa dei suoni meteo
 const weatherSounds = {
-  ssunny: new Audio("progetto 26genn/birds.mp3"),
-  srainy: new Audio("progetto 26genn/rain.mp3"),
-  scloudy: new Audio("progetto 26genn/wind.mp3"),
-  ssnowy: new Audio("progetto 26genn/snow.mp3")
+  sunny: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/birds.mp3'),
+  rainy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/rain.mp3'),
+  cloudy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/wind.mp3'),
+  snowy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/snow.mp3')
 };
 
-console.log(weatherSounds.ssunny); // Verifica che il suono venga correttamente caricato
-
-
-// Funzione per gestire il cambiamento del meteo
-function handleWeatherChange(weather) {
-  // Ferma eventuali suoni precedenti
-  stopAllSounds();
-
-  // Riproduce il suono corrispondente
-  playWeatherSound(weather);
-}
-
-// Funzione per riprodurre il suono in loop
-function playWeatherSound(weather) {
-  let sound;
-  
   // Correlazione tra il meteo e il suono
   function playWeatherSound(weather) {
     let sound;
   
-    switch(weather) {
-      case 'ssunny':
-        sound = weatherSounds.ssunny;
+    switch (weather) {
+      case 'sunnyy':
+        sound = weatherSounds.sunny;
         break;
-      case 'srainy':
-        sound = weatherSounds.srainy;
+      case 'rainyy':
+        sound = weatherSounds.rainy;
         break;
-      case 'scloudy':
-        sound = weatherSounds.scloudy;
+      case 'cloudyy':
+        sound = weatherSounds.cloudy;
         break;
-      case 'ssnowy':
-        sound = weatherSounds.ssnowy;
+      case 'snowyy':
+        sound = weatherSounds.snowy;
         break;
       default:
         console.error("Suono non trovato per", weather);
@@ -404,34 +388,27 @@ function playWeatherSound(weather) {
     if (sound) {
       console.log("Riproduzione suono:", sound.src);
       sound.loop = true;
+      sound.currentTime = 0;  // Riparte dall'inizio
       sound.play();
     } else {
       console.log("Suono non disponibile");
     }
   }
-}
-
-// Ferma tutti i suoni
-function stopAllSounds() {
-  Object.values(weatherSounds).forEach(sound => sound.pause());
-}
-
-// Eventi sui bottoni meteo
-weatherButtons.sunny.addEventListener("click", () => {
-  handleWeatherChange("ssunny");
-});
-
-weatherButtons.rainy.addEventListener("click", () => {
-  handleWeatherChange("srainy");
-});
-
-weatherButtons.cloudy.addEventListener("click", () => {
-  handleWeatherChange("scloudy");
-});
-
-weatherButtons.snowy.addEventListener("click", () => {
-  handleWeatherChange("ssnowy");
-});
-
-
-
+  
+  
+//Eventi sui bottoni meteo
+  weatherButtons.sunny.addEventListener("click", () => {
+    playWeatherSound("sunnyy");
+  });
+  
+  weatherButtons.rainy.addEventListener("click", () => {
+    playWeatherSound("rainyy");
+  });
+  
+  weatherButtons.cloudy.addEventListener("click", () => {
+    playWeatherSound("cloudyy");
+  });
+  
+  weatherButtons.snowy.addEventListener("click", () => {
+    playWeatherSound("snowyy");
+  });
