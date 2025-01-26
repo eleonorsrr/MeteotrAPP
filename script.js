@@ -173,7 +173,7 @@ function calculateInterval(bpm, timeSignature) {
     case '3/4':
       return (60000 / bpm) * 3; // Un accordo per battuta in 3/4
     case '6/8':
-      return (60000 / bpm) * 2; // Due accordi per battuta in 6/8 (SBAGLIATO)
+      return (60000 / (bpm/2)) * 2; // Due accordi per battuta in 6/8
     default:
       console.warn("Time signature non riconosciuta, impostazione predefinita su 4/4.");
       return (60000 / bpm) * 4;
