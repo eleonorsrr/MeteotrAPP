@@ -350,5 +350,88 @@ function changeBackground(weather) {
   document.body.style.backgroundRepeat = 'no-repeat';
 }
 
+// Suono di default corrispondente alle condizioni meteo
+// ANNA 26/01
+
+// Mappa dei bottoni meteo già dichiarata
+// Mappa degli slider del volume -- da aggiugere
+// Mappa dei suoni meteo
+const weatherSounds = {
+  ssunny: new Audio("progetto 26genn/birds.mp3"),
+  srainy: new Audio("progetto 26genn/rain.mp3"),
+  scloudy: new Audio("progetto 26genn/wind.mp3"),
+  ssnowy: new Audio("progetto 26genn/snow.mp3")
+};
+
+console.log(weatherSounds.ssunny); // Verifica che il suono venga correttamente caricato
+
+
+// Funzione per gestire il cambiamento del meteo
+function handleWeatherChange(weather) {
+  // Ferma eventuali suoni precedenti
+  stopAllSounds();
+
+  // Riproduce il suono corrispondente
+  playWeatherSound(weather);
+}
+
+// Funzione per riprodurre il suono in loop
+function playWeatherSound(weather) {
+  let sound;
+  
+  // Correlazione tra il meteo e il suono
+  function playWeatherSound(weather) {
+    let sound;
+  
+    switch(weather) {
+      case 'ssunny':
+        sound = weatherSounds.ssunny;
+        break;
+      case 'srainy':
+        sound = weatherSounds.srainy;
+        break;
+      case 'scloudy':
+        sound = weatherSounds.scloudy;
+        break;
+      case 'ssnowy':
+        sound = weatherSounds.ssnowy;
+        break;
+      default:
+        console.error("Suono non trovato per", weather);
+        sound = null;
+    }
+  
+    if (sound) {
+      console.log("Riproduzione suono:", sound.src);
+      sound.loop = true;
+      sound.play();
+    } else {
+      console.log("Suono non disponibile");
+    }
+  }
+}
+
+// Ferma tutti i suoni
+function stopAllSounds() {
+  Object.values(weatherSounds).forEach(sound => sound.pause());
+}
+
+// Eventi sui bottoni meteo
+weatherButtons.sunny.addEventListener("click", () => {
+  handleWeatherChange("ssunny");
+});
+
+weatherButtons.rainy.addEventListener("click", () => {
+  handleWeatherChange("srainy");
+});
+
+weatherButtons.cloudy.addEventListener("click", () => {
+  handleWeatherChange("scloudy");
+});
+
+weatherButtons.snowy.addEventListener("click", () => {
+  handleWeatherChange("ssnowy");
+});
+
 
 
