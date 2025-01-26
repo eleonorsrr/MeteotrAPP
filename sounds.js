@@ -2,8 +2,8 @@
 
 // 1.1 Base URL delle note
 const UrlRhodes = 'https://frafra39.github.io/sound-pack2/RHODES ACTAM 1/';
-const UrlEPIANO = 'https://frafra39.github.io/sound-pack2/ACTAM EPIANO/';
-const UrlINDIAN = 'https://frafra39.github.io/sound-pack2/ACTAM INDIAN/';
+const UrlEPIANO = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/epiano/';
+const UrlINDIAN = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/indian/';
 
 // 1.2 Mappatura delle note con i rispettivi URL
 const rhodes = {
