@@ -9,6 +9,201 @@ console.log(rhodes, epiano, indian);
 import { scales, chords } from './scalesandchords.js';
 console.log(scales, chords);
 
+// 1.3 Key API OpenWeather
+
+// Scelta della città
+document.getElementById("search-btn").addEventListener("click", () => {
+  const city = document.getElementById("city-input").value.trim();
+  if (city) {
+      getWeatherData(city);
+  } else {
+      alert("Inserisci il nome di una città.");
+  }
+});
+
+// Funzione per ottenere e visualizzare i dati meteo
+function getWeatherData(city = "Milano") { // Default: Milano
+  const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  fetch(url)
+      .then(response => {
+          if (!response.ok) {
+              throw new Error("Città non trovata. Controlla il nome e riprova.");
+          }
+          return response.json();
+      })
+      .then(data => {
+          // Mostra i dati nel pannello laterale
+          document.getElementById('location').innerText = data.name;
+          document.getElementById('temp-current').innerText = data.main.temp; // facoltativi
+          document.getElementById('temp-min').innerText = data.main.temp_min; // facoltativi
+          document.getElementById('temp-max').innerText = data.main.temp_max; // facoltativi
+          document.getElementById('wind-speed').innerText = data.wind.speed;
+          document.getElementById('wind-direction').innerText = data.wind.deg;
+
+          // Mostra descrizione delle condizioni meteo
+          const weatherDescription = data.weather[0].description;
+          document.getElementById('weather-description').innerText = weatherDescription;
+
+          // Calcola l'ora locale usando l'offset timezone
+          const utcTimestamp = data.dt; // Tempo UTC in secondi
+          const timezoneOffset = data.timezone; // Offset in secondi
+          const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
+          
+          // Converte il timestamp locale in un oggetto Date
+          const localDate = new Date(localTimestamp * 1000);
+          
+          // Formatta l'ora locale in un formato leggibile
+          const localTime = localDate.toLocaleTimeString('it-IT', {
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+          });
+          
+          // Mostra l'ora locale nel pannello laterale
+          document.getElementById('time-time').innerText = localTime;
+
+          // Usa la funzione per determinare la condizione meteo
+          const weatherCondition = getWeatherCondition(weatherDescription);
+
+          // Seleziona una scala casuale in base alla condizione meteo
+          const randomScale = getRandomScale(weatherCondition);
+
+          // Funzione che aggiorna accordi visualizzati
+          //updateChordButtons(randomScale,rootNote);
+          updateChordButtons(randomScale.selectedScale,randomScale.rootNote);
+      })
+      .catch(error => {
+          console.error('Errore nel recuperare i dati meteo:', error);
+          alert("Errore: " + error.message);
+      });
+}
+
+
+// Carica i dati meteo per una città predefinita quando la pagina è pronta
+getWeatherData();
+
+
+// 1.4 Categorie di descrizioni meteo
+const weatherCategories = {
+  sunny: [
+    "clear sky"
+  ],
+  rainy: [
+    "light rain","moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "light intensity shower rain","shower rain","heavy intensity shower rain"," ragged shower rain", "thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "thunderstorm","heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle", "light intensity drizzle", "drizzle" ,
+    "heavy intensity drizzle" ,
+    "light intensity drizzle rain" ,
+    "drizzle rain" ,
+    "heavy intensity drizzle rain", 
+    "shower rain and drizzle" ,
+    "heavy shower rain and drizzle", 
+    "shower drizzle", "sand/dust whirls", "squalls", "tornado"
+  ],
+  cloudy: [
+    "few clouds", "scattered clouds", "broken clouds", "overcast clouds","mist", "smoke", "haze", "fog", "dust"
+  ],
+  snowy: [
+    "light snow", "Snow", "Heavy snow", "Sleet", "Light shower sleet", "Shower sleet", "Light rain and snow","Rain and snow", "Light shower snow", "Shower snow", "Heavy shower snow"
+  ]
+};
+
+// 1.5 Funzione per associare la descrizione meteo alla condizione ATTENZIONE ANCORA IN PROVA  
+
+function getWeatherCondition(weatherDescription) {
+  const description = weatherDescription.toLowerCase();
+
+  // Controlla in quale categoria rientra la descrizione
+  if (weatherCategories.sunny.some(keyword => description.includes(keyword))) {
+    return "sunny";
+  } else if (weatherCategories.rainy.some(keyword => description.includes(keyword))) {
+    return "rainy";
+  } else if (weatherCategories.cloudy.some(keyword => description.includes(keyword))) {
+    return "cloudy";
+  } else if (weatherCategories.snowy.some(keyword => description.includes(keyword))) {
+    return "snowy";
+  }
+}
+
+// 1.6 Funzione per selezionare una scala casuale in base alla condizione meteo
+function getRandomScale(weatherCondition) {
+  let scalesArray;
+
+  switch (weatherCondition) {
+    case "sunny":
+      scalesArray = "major";  // Scala maggiore
+      break;
+    case "rainy":
+      scalesArray = "minor";  // Scala minore
+      break;
+    case "cloudy":
+      scalesArray = "sus4";  // Scala sus4
+      break;
+    case "snowy":
+      scalesArray = "major7";  // Scala major7
+      break;
+    default:
+      scalesArray = "major";  // Default
+      break;
+  }
+
+   // Seleziona una root randomica dalla scala
+   const rootNotes = Object.keys(scalesArray); // Le root note disponibili (C, D, E...)
+   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
+ 
+   // Ritorna sia la root che la scala associata
+   return { selectedScale: scalesArray, rootNote: randomRootNote};
+
+
+
+  //return scalesArray[randomKey];
+}
+
+// 1.7 Assegnazione degli eventi al pulsante per la selezione della città
+const cityButton = document.getElementById("search-btn");
+cityButton.addEventListener("click", () => {
+  // Supponiamo che "data.weather[0].description" venga recuperato da un'API
+  const weatherDescription = data.weather[0].description;  // Sostituisci con la risposta API reale
+  
+  // Ottieni la condizione meteo
+  const weatherCondition = getWeatherCondition(weatherDescription);
+
+  // Ottieni una scala casuale in base alla condizione meteo
+  const randomScale = getRandomScale(weatherCondition);
+
+  // Crea il dropdown con la scala randomica
+  
+});
+
+
+/*
+// 1.8 Funzione aggiornamento accordi
+const chordButtonsContainer = document.querySelector(".chord-row");
+
+function updateChordButtonsCity(selectedScale) {
+  // Svuota i pulsanti esistenti
+  chordButtonsContainer.innerHTML = ""; 
+
+  if (selectedScale && selectedScale.length > 0) {
+    // Itera sulla scala selezionata per creare i pulsanti
+    selectedScale.forEach(note => {
+      const button = document.createElement("button"); // Crea un elemento HTML button (pulsante)
+      button.classList.add("chord-btn"); // Aggiunge una classe a tale pulsante
+      button.textContent = note; // Imposta il testo del pulsante come il nome della nota
+      button.dataset.chord = note; // Aggiunge un attributo personalizzato data-chord
+
+      button.addEventListener("click", () => {
+        toggleChordSelection(button); // All'evento click, seleziona o deseleziona l'accordo
+      });
+
+      chordButtonsContainer.appendChild(button); // Aggiunge il pulsante al contenitore
+    });
+  } else {
+    console.error("Scala non valida o vuota:", selectedScale);
+  }
+}
+*/
+
 
 // 2. Funzioni e/o logica per la gestione dell'applicazione
 
@@ -305,13 +500,14 @@ document.getElementById("time-signature").addEventListener("change", (e) => {
 });
 
 
-// Scegli l'immagine di sfondo in base alla condizione atmosferica
+// 4 Scegli l'immagine di sfondo in base alla condizione atmosferica
+
 const images = {
-  sunnyImage: 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/sunny.jpg',
-  rainyImage: 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/rainy.jpg',
-  cloudyImage: 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/cloudy.jpg',
-  snowyImage: 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/snowy.jpg',
-  defaultImage: 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/sfondo.jpg'
+  sunnyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg',
+  rainyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg',
+  cloudyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg',
+  snowyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg',
+  defaultImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg'
 };
 
 // Preload delle immagini per non aver delay
@@ -343,18 +539,18 @@ function changeBackground(weather) {
   
   switch(weather) {
     default:
-      imageUrl = 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/sfondo.jpg';
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
     case 'sunnyy':
-      imageUrl = 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/sunny.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
       break;
     case 'rainyy':
-      imageUrl = 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/rainy.jpg';
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg';
       break;
     case 'cloudyy':
-      imageUrl = 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/cloudy.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg'; 
       break;
     case 'snowyy':
-      imageUrl = 'https://raw.githubusercontent.com/eleonorsrr/MeteotrAPP/refs/heads/main/assets/images/snowy.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg'; 
       break;
   }
 
@@ -365,8 +561,7 @@ function changeBackground(weather) {
 }
 
 
-//Suono di default corrispondente alla condizione meteo
-// ANNA 26/01
+// 5 Impostazione suono di default corrispondente alla condizione meteo
 
 // Mappa dei bottoni meteo già dichiarata
 // Mappa dei suoni meteo
@@ -438,209 +633,6 @@ weatherButtons.cloudy.addEventListener("click", () => {
 weatherButtons.snowy.addEventListener("click", () => {
   playWeatherSound("snowy");
 });
-
-
-
-
-//----------------------------------------------------------------------------------------
-
-// PARTE COLLEGAMENTO METEO NON DEFINITIVA !!!!!!!
-// crociani 27/01
-
-// 1.3 Key API OpenWeather
-
-// Scelta della città
-document.getElementById("search-btn").addEventListener("click", () => {
-  const city = document.getElementById("city-input").value.trim();
-  if (city) {
-      getWeatherData(city);
-  } else {
-      alert("Inserisci il nome di una città.");
-  }
-});
-
-// Funzione per ottenere e visualizzare i dati meteo
-function getWeatherData(city = "Milano") { // Default: Milano
-  const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-  fetch(url)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error("Città non trovata. Controlla il nome e riprova.");
-          }
-          return response.json();
-      })
-      .then(data => {
-          // Mostra i dati nel pannello laterale
-          document.getElementById('location').innerText = data.name;
-          document.getElementById('temp-current').innerText = data.main.temp; // facoltativi
-          document.getElementById('temp-min').innerText = data.main.temp_min; // facoltativi
-          document.getElementById('temp-max').innerText = data.main.temp_max; // facoltativi
-          document.getElementById('wind-speed').innerText = data.wind.speed;
-          document.getElementById('wind-direction').innerText = data.wind.deg;
-
-          // Mostra descrizione delle condizioni meteo
-          const weatherDescription = data.weather[0].description;
-          document.getElementById('weather-description').innerText = weatherDescription;
-
-          // Calcola l'ora locale usando l'offset timezone
-          const utcTimestamp = data.dt; // Tempo UTC in secondi
-          const timezoneOffset = data.timezone; // Offset in secondi
-          const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
-          
-          // Converte il timestamp locale in un oggetto Date
-          const localDate = new Date(localTimestamp * 1000);
-          
-          // Formatta l'ora locale in un formato leggibile
-          const localTime = localDate.toLocaleTimeString('it-IT', {
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit',
-          });
-          
-          // Mostra l'ora locale nel pannello laterale
-          document.getElementById('time-time').innerText = localTime;
-
-          // Usa la funzione per determinare la condizione meteo
-          const weatherCondition = getWeatherCondition(weatherDescription);
-
-          // Seleziona una scala casuale in base alla condizione meteo
-          const randomScale = getRandomScale(weatherCondition);
-
-          // Funzione che aggiorna accordi visualizzati
-          //updateChordButtons(randomScale,rootNote);
-          updateChordButtons(randomScale.selectedScale,randomScale.rootNote);
-      })
-      .catch(error => {
-          console.error('Errore nel recuperare i dati meteo:', error);
-          alert("Errore: " + error.message);
-      });
-}
-
-
-// Carica i dati meteo per una città predefinita quando la pagina è pronta
-getWeatherData();
-
-
-// 1.4 Categorie di descrizioni meteo
-const weatherCategories = {
-  sunny: [
-    "clear sky"
-  ],
-  rainy: [
-    "light rain","moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "light intensity shower rain","shower rain","heavy intensity shower rain"," ragged shower rain", "thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "thunderstorm","heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle", "light intensity drizzle", "drizzle" ,
-    "heavy intensity drizzle" ,
-    "light intensity drizzle rain" ,
-    "drizzle rain" ,
-    "heavy intensity drizzle rain", 
-    "shower rain and drizzle" ,
-    "heavy shower rain and drizzle", 
-    "shower drizzle", "sand/dust whirls", "squalls", "tornado"
-  ],
-  cloudy: [
-    "few clouds", "scattered clouds", "broken clouds", "overcast clouds","mist", "smoke", "haze", "fog", "dust"
-  ],
-  snowy: [
-    "light snow", "Snow", "Heavy snow", "Sleet", "Light shower sleet", "Shower sleet", "Light rain and snow","Rain and snow", "Light shower snow", "Shower snow", "Heavy shower snow"
-  ]
-};
-
-// 1.5 Funzione per associare la descrizione meteo alla condizione ATTENZIONE ANCORA IN PROVA  
-
-function getWeatherCondition(weatherDescription) {
-  const description = weatherDescription.toLowerCase();
-
-  // Controlla in quale categoria rientra la descrizione
-  if (weatherCategories.sunny.some(keyword => description.includes(keyword))) {
-    return "sunny";
-  } else if (weatherCategories.rainy.some(keyword => description.includes(keyword))) {
-    return "rainy";
-  } else if (weatherCategories.cloudy.some(keyword => description.includes(keyword))) {
-    return "cloudy";
-  } else if (weatherCategories.snowy.some(keyword => description.includes(keyword))) {
-    return "snowy";
-  }
-}
-
-// 1.6 Funzione per selezionare una scala casuale in base alla condizione meteo
-function getRandomScale(weatherCondition) {
-  let scalesArray;
-
-  switch (weatherCondition) {
-    case "sunny":
-      scalesArray = "major";  // Scala maggiore
-      break;
-    case "rainy":
-      scalesArray = "minor";  // Scala minore
-      break;
-    case "cloudy":
-      scalesArray = "sus4";  // Scala sus4
-      break;
-    case "snowy":
-      scalesArray = "major7";  // Scala major7
-      break;
-    default:
-      scalesArray = "major";  // Default
-      break;
-  }
-
-   // Seleziona una root randomica dalla scala
-   const rootNotes = Object.keys(scalesArray); // Le root note disponibili (C, D, E...)
-   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
- 
-   // Ritorna sia la root che la scala associata
-   return { selectedScale: scalesArray, rootNote: randomRootNote};
-
-
-
-  //return scalesArray[randomKey];
-}
-
-// 1.7 Assegnazione degli eventi al pulsante per la selezione della città
-const cityButton = document.getElementById("search-btn");
-cityButton.addEventListener("click", () => {
-  // Supponiamo che "data.weather[0].description" venga recuperato da un'API
-  const weatherDescription = data.weather[0].description;  // Sostituisci con la risposta API reale
-  
-  // Ottieni la condizione meteo
-  const weatherCondition = getWeatherCondition(weatherDescription);
-
-  // Ottieni una scala casuale in base alla condizione meteo
-  const randomScale = getRandomScale(weatherCondition);
-
-  // Crea il dropdown con la scala randomica
-  
-});
-
-
-/*
-// 1.8 Funzione aggiornamento accordi
-const chordButtonsContainer = document.querySelector(".chord-row");
-
-function updateChordButtonsCity(selectedScale) {
-  // Svuota i pulsanti esistenti
-  chordButtonsContainer.innerHTML = ""; 
-
-  if (selectedScale && selectedScale.length > 0) {
-    // Itera sulla scala selezionata per creare i pulsanti
-    selectedScale.forEach(note => {
-      const button = document.createElement("button"); // Crea un elemento HTML button (pulsante)
-      button.classList.add("chord-btn"); // Aggiunge una classe a tale pulsante
-      button.textContent = note; // Imposta il testo del pulsante come il nome della nota
-      button.dataset.chord = note; // Aggiunge un attributo personalizzato data-chord
-
-      button.addEventListener("click", () => {
-        toggleChordSelection(button); // All'evento click, seleziona o deseleziona l'accordo
-      });
-
-      chordButtonsContainer.appendChild(button); // Aggiunge il pulsante al contenitore
-    });
-  } else {
-    console.error("Scala non valida o vuota:", selectedScale);
-  }
-}
-*/
 
 
 
