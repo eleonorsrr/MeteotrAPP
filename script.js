@@ -176,35 +176,6 @@ cityButton.addEventListener("click", () => {
 });
 
 
-/*
-// 1.8 Funzione aggiornamento accordi
-const chordButtonsContainer = document.querySelector(".chord-row");
-
-function updateChordButtonsCity(selectedScale) {
-  // Svuota i pulsanti esistenti
-  chordButtonsContainer.innerHTML = ""; 
-
-  if (selectedScale && selectedScale.length > 0) {
-    // Itera sulla scala selezionata per creare i pulsanti
-    selectedScale.forEach(note => {
-      const button = document.createElement("button"); // Crea un elemento HTML button (pulsante)
-      button.classList.add("chord-btn"); // Aggiunge una classe a tale pulsante
-      button.textContent = note; // Imposta il testo del pulsante come il nome della nota
-      button.dataset.chord = note; // Aggiunge un attributo personalizzato data-chord
-
-      button.addEventListener("click", () => {
-        toggleChordSelection(button); // All'evento click, seleziona o deseleziona l'accordo
-      });
-
-      chordButtonsContainer.appendChild(button); // Aggiunge il pulsante al contenitore
-    });
-  } else {
-    console.error("Scala non valida o vuota:", selectedScale);
-  }
-}
-*/
-
-
 // 2. Funzioni e/o logica per la gestione dell'applicazione
 
 // 2.1 Logica gestione cambio strumento
