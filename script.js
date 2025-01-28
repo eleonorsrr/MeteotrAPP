@@ -583,6 +583,25 @@ weatherButtons.snowy.addEventListener("click", () => {
   playWeatherSound("snowy");
 });
 
+// Funzione per far roteare le manopole
+
+document.querySelectorAll('.knob').forEach(knob => {
+  let rotation = 0;
+  knob.addEventListener('mousedown', (event) => {
+    const startY = event.clientY;
+    const handleMouseMove = (moveEvent) => {
+      const deltaY = startY - moveEvent.clientY;
+      rotation = Math.max(-135, Math.min(135, rotation + deltaY / 5));
+      knob.style.transform = `rotate(${rotation}deg)`;
+    };
+    const stopMouseMove = () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', stopMouseMove);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', stopMouseMove);
+  });
+});
 
 
 
