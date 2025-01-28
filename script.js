@@ -203,33 +203,33 @@ function getWeatherCondition2(weatherDescription) {
 
 // 1.6.1 Funzione per selezionare una scala casuale in base alla condizione meteo
 function getRandomScale(weatherCondition) {
-  let scalesArray;
+  let scaleType;
 
+  // Associa la condizione meteo al tipo di scala
   switch (weatherCondition) {
     case "sunny":
-      scalesArray = "major";  // Scala maggiore
+      scaleType = "major"; // Scala maggiore
       break;
     case "rainy":
-      scalesArray = "minor";  // Scala minore
+      scaleType = "minor"; // Scala minore
       break;
     case "cloudy":
-      scalesArray = "sus4";  // Scala sus4
+      scaleType = "sus4"; // Scala sus4
       break;
     case "snowy":
-      scalesArray = "major7";  // Scala major7
+      scaleType = "major7"; // Scala major7
       break;
     default:
-      scalesArray = "major";  // Default
+      scaleType = "major"; // Default
       break;
   }
 
-  // Seleziona una root randomica dalla scala
-  const rootNotes = Object.keys(scalesArray); // Le root note disponibili (C, D, E...)
+  // Recupera tutte le root notes disponibili per la scala
+  const rootNotes = Object.keys(scales[scaleType]); // `scales` è un oggetto globale predefinito
   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
- 
-  // Ritorna sia la root che la scala associata
-  return { selectedScale: scalesArray, rootNote: randomRootNote};
 
+  // Ritorna sia il tipo di scala che la root note selezionata
+  return { scaleType, rootNote: randomRootNote };
 }
 
 
