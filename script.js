@@ -34,32 +34,32 @@ function getWeatherData(city = "Milano") { // Default: Milano
           return response.json();
       })
       .then(data => {
-          // Mostra i dati nel pannello laterale
-          document.getElementById('location').innerText = data.name;
-          document.getElementById('temp-current').innerText = data.main.temp; // facoltativi
-          document.getElementById('temp-min').innerText = data.main.temp_min; // facoltativi
-          document.getElementById('temp-max').innerText = data.main.temp_max; // facoltativi
-          document.getElementById('wind-speed').innerText = data.wind.speed;
-          document.getElementById('wind-direction').innerText = data.wind.deg;
+        // Mostra i dati nel pannello laterale
+        document.getElementById('location').innerText = data.name; 
+        document.getElementById('temp-current').innerText = data.main.temp; // Temperatura attuale
+        document.getElementById('temp-min').innerText = data.main.temp_min; // Temperatura minima
+        document.getElementById('temp-max').innerText = data.main.temp_max; // Temperatura massima
+        document.getElementById('wind-speed').innerText = data.wind.speed; // Velocità del vento
+        document.getElementById('wind-direction').innerText = data.wind.deg; // Direzione del vento
 
-          // Mostra descrizione delle condizioni meteo
-          const weatherDescription = data.weather[0].description;
-          document.getElementById('weather-description').innerText = weatherDescription;
+        // Mostra descrizione delle condizioni meteo
+        const weatherDescription = data.weather[0].description;
+        document.getElementById('weather-description').innerText = weatherDescription;
 
-          // Calcola l'ora locale usando l'offset timezone
-          const utcTimestamp = data.dt; // Tempo UTC in secondi
-          const timezoneOffset = data.timezone; // Offset in secondi
-          const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
+        // Calcola l'ora locale usando l'offset timezone
+        const utcTimestamp = data.dt; // Tempo UTC in secondi
+        const timezoneOffset = data.timezone; // Offset in secondi
+        const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
           
-          // Converte il timestamp locale in un oggetto Date
-          const localDate = new Date(localTimestamp * 1000);
+        // Converte il timestamp locale in un oggetto Date
+         const localDate = new Date(localTimestamp * 1000);
           
-          // Formatta l'ora locale in un formato leggibile
-          const localTime = localDate.toLocaleTimeString('it-IT', {
-              hour: '2-digit',
-              minute: '2-digit',
-              second: '2-digit',
-          });
+        // Formatta l'ora locale in un formato leggibile
+        const localTime = localDate.toLocaleTimeString('it-IT', {
+          hour: '2-digit',
+          minute: '2-digit',
+           second: '2-digit',
+        });
           
           // Mostra l'ora locale nel pannello laterale
           document.getElementById('time-time').innerText = localTime;
@@ -195,7 +195,7 @@ function getWeatherCondition2(weatherDescription) {
 
 }
 
-// 1.6 Funzione per selezionare una scala casuale in base alla condizione meteo
+// 1.6.1 Funzione per selezionare una scala casuale in base alla condizione meteo
 function getRandomScale(weatherCondition) {
   let scaleType;
 
@@ -224,6 +224,73 @@ function getRandomScale(weatherCondition) {
 
   // Ritorna sia il tipo di scala che la root note selezionata
   return { scaleType, rootNote: randomRootNote };
+}
+
+
+// 1.6.2 Funzione per cambiare il background in base alla condizione meteo
+
+// Preload delle immagini per non aver delay
+const images = {
+  clear: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg',
+  lowrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF',
+  mediumrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumrain.GIF',
+  highrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highrain.GIF',
+  fewclouds: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/fewclouds.GIF',
+  mediumclouds: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF',
+  manyclouds: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/manyclouds.GIF',
+  lowsnow: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowsnow.GIF',
+  mediumsnow: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumsnow.GIF',
+  highsnow: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'
+};
+
+Object.values(images).forEach(imageUrl => {
+  const img = new Image();
+  img.src = imageUrl;
+});
+
+function changeBackground(weatherCondition2){
+  let gifUrl;
+
+  switch (weatherCondition2) {
+    case "clear":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'
+      break;
+    case "lowrain":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF'
+      break;
+    case "mediumrain":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumrain.GIF'
+      break;
+    case "highrain":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highrain.GIF'
+      break;
+    case "fewclouds":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/fewclouds.GIF'
+      break;
+    case "mediumclouds":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF'
+      break;
+    case "manyclouds":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/manyclouds.GIF'
+      break;
+    case "lowsnow":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowsnow.GIF'
+      break;
+    case "mediumsnow":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumsnow.GIF'
+      break;
+    case "highsnow":
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'
+      break;
+    default:
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg'
+      break;
+  }
+
+  document.body.style.backgroundImage = `url(${gifUrl})`;
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
+  document.body.style.backgroundRepeat = 'no-repeat';
 }
 
 
