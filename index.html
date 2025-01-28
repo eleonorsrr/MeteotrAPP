@@ -40,7 +40,7 @@
       </select>
     
     </div>
-
+    <div class="main-layout">
     <div class="central-panel"> <!--Contenitore relativo al blocco centrale (weather row, chord row)-->
 
       <div class="weather-row"> <!--Contenitore relativo alle varie condizioni meteo e scale ad esse associate-->
@@ -83,7 +83,30 @@
 
       </div>
 
-    </div>  
+    </div>
+    <div class="effects-panel">
+      <div class="knobs-row">
+        <div class="knob-container">
+          <label for="knob1">REV (wind)</label>
+          <div class="knob" id="knob1"></div>
+        </div>
+        <div class="knob-container">
+          <label for="knob2">SAT (°C)</label>
+          <div class="knob" id="knob2"></div>
+        </div>
+        <div class="knob-container">
+          <label for="knob3">DIST (air)</label>
+          <div class="knob" id="knob3"></div>
+        </div>
+      </div>
+    
+      <!-- Gain Slider sotto le manopole -->
+      <div class="gain-slider-container">
+        <label for="gain-slider">Gain Control</label>
+        <input id="gain-slider" type="range" min="0" max="100" step="1" value="50">
+      </div>
+    </div>
+</div>    
 
     <div class="bottom-panel"> <!--Contenitore relativo alla sezione di effettistica-->
 
