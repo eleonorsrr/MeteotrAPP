@@ -71,7 +71,8 @@ function getWeatherData(city = "Milano") { // Default: Milano
           const randomScale = getRandomScale(weatherCondition);
 
           // Funzione che aggiorna accordi visualizzati
-          updateChordButtons(randomScale.selectedScale,randomScale.rootNote);
+          
+          updateChordButtons(randomScale.scaleType,randomScale.rootNote);
       })
       .catch(error => {
           console.error('Errore nel recuperare i dati meteo:', error);
@@ -90,19 +91,22 @@ const weatherCategories = {
     "clear sky"
   ],
   rainy: [
-      "light rain", "light intensity shower rain", "light thunderstorm", "thunderstorm with light rain", "light intensity drizzle", "light intensity drizzle rain", "thunderstorm with light drizzle",
-      "moderate rain", "shower rain", "drizzle rain", "drizzle", "shower drizzle", "thunderstorm with rain", "thunderstorm", "light intensity shower rain and drizzle", "thunderstorm with drizzle",
-      "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "heavy intensity shower rain", "ragged shower rain", "thunderstorm with heavy rain", "heavy thunderstorm", "ragged thunderstorm", "thunderstorm with heavy drizzle", "heavy intensity drizzle", "heavy intensity drizzle rain", "heavy shower rain and drizzle"
+    "light rain","moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "light intensity shower rain","shower rain","heavy intensity shower rain"," ragged shower rain", "thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "thunderstorm","heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle", "light intensity drizzle", "drizzle" ,
+    "heavy intensity drizzle" ,
+    "light intensity drizzle rain" ,
+    "drizzle rain" ,
+    "heavy intensity drizzle rain", 
+    "shower rain and drizzle" ,
+    "heavy shower rain and drizzle", 
+    "shower drizzle", "sand/dust whirls", "squalls", "tornado"
   ],
   cloudy: [
-      "few clouds", "scattered clouds", "broken clouds", "overcast clouds", "mist", "smoke", "haze", "fog", "dust"
-    ],
-    snowy: [
-      "light snow", "light shower sleet", "light rain and snow", "light shower snow",
-      "snow", "sleet", "shower sleet", "rain and snow", "shower snow",
-      "heavy snow", "heavy shower snow"
-    ]
-  };
+    "few clouds", "scattered clouds", "broken clouds", "overcast clouds","mist", "smoke", "haze", "fog", "dust"
+  ],
+  snowy: [
+    "light snow", "Snow", "Heavy snow", "Sleet", "Light shower sleet", "Shower sleet", "Light rain and snow","Rain and snow", "Light shower snow", "Shower snow", "Heavy shower snow"
+  ]
+};
 
 // 1.5 Funzione per associare la descrizione meteo alla condizione ATTENZIONE ANCORA IN PROVA  
 
@@ -121,55 +125,36 @@ function getWeatherCondition(weatherDescription) {
   }
 }
 
-// 1.6 Funzione per selezionare una scala casuale in base alla condizione meteo
-function getRandomScale(weatherCondition) {
-  let scalesArray;
 
+function getRandomScale(weatherCondition) {
+  let scaleType;
+
+  // Associa la condizione meteo al tipo di scala
   switch (weatherCondition) {
     case "sunny":
-      scalesArray = "major";  // Scala maggiore
+      scaleType = "major"; // Scala maggiore
       break;
     case "rainy":
-      scalesArray = "minor";  // Scala minore
+      scaleType = "minor"; // Scala minore
       break;
     case "cloudy":
-      scalesArray = "sus4";  // Scala sus4
+      scaleType = "sus4"; // Scala sus4
       break;
     case "snowy":
-      scalesArray = "major7";  // Scala major7
+      scaleType = "major7"; // Scala major7
       break;
     default:
-      scalesArray = "major";  // Default
+      scaleType = "major"; // Default
       break;
   }
 
-   // Seleziona una root randomica dalla scala
-   const rootNotes = Object.keys(scalesArray); // Le root note disponibili (C, D, E...)
-   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
- 
-   // Ritorna sia la root che la scala associata
-   return { selectedScale: scalesArray, rootNote: randomRootNote};
+  // Recupera tutte le root notes disponibili per la scala
+  const rootNotes = Object.keys(scales[scaleType]); // `scales` è un oggetto globale predefinito
+  const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
 
-
-
-  //return scalesArray[randomKey];
+  // Ritorna sia il tipo di scala che la root note selezionata
+  return { scaleType, rootNote: randomRootNote };
 }
-
-// 1.7 Assegnazione degli eventi al pulsante per la selezione della città
-const cityButton = document.getElementById("search-btn");
-cityButton.addEventListener("click", () => {
-  // Supponiamo che "data.weather[0].description" venga recuperato da un'API
-  const weatherDescription = data.weather[0].description;  // Sostituisci con la risposta API reale
-  
-  // Ottieni la condizione meteo
-  const weatherCondition = getWeatherCondition(weatherDescription);
-
-  // Ottieni una scala casuale in base alla condizione meteo
-  const randomScale = getRandomScale(weatherCondition);
-
-  // Crea il dropdown con la scala randomica
-  
-});
 
 
 // 2. Funzioni e/o logica per la gestione dell'applicazione
