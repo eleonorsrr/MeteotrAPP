@@ -91,20 +91,17 @@ const weatherCategories = {
     "clear sky"
   ],
   rainy: [
-    "light rain","moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "light intensity shower rain","shower rain","heavy intensity shower rain"," ragged shower rain", "thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "thunderstorm","heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle", "light intensity drizzle", "drizzle" ,
-    "heavy intensity drizzle" ,
-    "light intensity drizzle rain" ,
-    "drizzle rain" ,
-    "heavy intensity drizzle rain", 
-    "shower rain and drizzle" ,
-    "heavy shower rain and drizzle", 
-    "shower drizzle", "sand/dust whirls", "squalls", "tornado"
+    "light rain", "light intensity shower rain", "light thunderstorm", "thunderstorm with light rain", "light intensity drizzle", "light intensity drizzle rain", "thunderstorm with light drizzle",
+    "moderate rain", "shower rain", "drizzle rain", "drizzle", "shower drizzle", "thunderstorm with rain", "thunderstorm", "light intensity shower rain and drizzle", "thunderstorm with drizzle",
+    "heavy intensity rain", "very heavy rain", "extreme rain", "freezing rain", "heavy intensity shower rain", "ragged shower rain", "thunderstorm with heavy rain", "heavy thunderstorm", "ragged thunderstorm", "thunderstorm with heavy drizzle", "heavy intensity drizzle", "heavy intensity drizzle rain", "heavy shower rain and drizzle"
   ],
   cloudy: [
-    "few clouds", "scattered clouds", "broken clouds", "overcast clouds","mist", "smoke", "haze", "fog", "dust"
+    "few clouds", "scattered clouds", "broken clouds", "overcast clouds", "mist", "smoke", "haze", "fog", "dust"
   ],
   snowy: [
-    "light snow", "Snow", "Heavy snow", "Sleet", "Light shower sleet", "Shower sleet", "Light rain and snow","Rain and snow", "Light shower snow", "Shower snow", "Heavy shower snow"
+    "light snow", "light shower sleet", "light rain and snow", "light shower snow",
+    "snow", "sleet", "shower sleet", "rain and snow", "shower snow",
+    "heavy snow", "heavy shower snow"
   ]
 };
 
