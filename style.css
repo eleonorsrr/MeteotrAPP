@@ -82,6 +82,14 @@ label {
 }
 
 /* 3. Central Panel */
+.main-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
 .central-panel {
   background-color: #e9b3ff;
   border-radius: 12px;
@@ -270,4 +278,89 @@ side-panel {
 
 #search-btn:hover {
   background-color: #0056b3;
+}
+
+/* Effects panel*/
+
+.effects-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 20px;
+  width: 300px;
+}
+
+.knobs-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.knob-container {
+  text-align: center;
+}
+
+.knob {
+  width: 50px;
+  height: 50px;
+  background-color: #444;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.knob:after {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background-color: #f0f0f0;
+  position: absolute;
+  top: 8px;
+  transform-origin: bottom center;
+  transform: rotate(0deg);
+}
+
+.gain-slider-container {
+  width: 100%;
+  text-align: center;
+}
+
+#gain-slider {
+  width: 90%;
+  height: 8px;
+  background: #914caa;
+  border-radius: 5px;
+  appearance: none;
+  cursor: pointer;
+}
+
+#gain-slider::-webkit-slider-runnable-track {
+  background: #914caa;
+  height: 8px;
+  border-radius: 5px;
+}
+
+#gain-slider::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  background: #f7f7f7;
+  border: 2px solid #914caa;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#gain-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #f7f7f7;
+  border: 2px solid #914caa;
+  border-radius: 50%;
+  cursor: pointer;
 }
