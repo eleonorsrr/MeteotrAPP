@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
 
   <link href="./style.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
 
 </head>
@@ -40,6 +40,7 @@
       </select>
     
     </div>
+
     <div class="main-layout">
     <div class="central-panel"> <!--Contenitore relativo al blocco centrale (weather row, chord row)-->
 
@@ -115,10 +116,11 @@
     <div class="side-panel"> <!--Contenitore relativo alla ricerca dellà città-->
 
       <div id="city-search">
-        <label for="city-input">Inserisci il nome di una città:</label>
-        <input type="text" id="city-input" placeholder="Es. Milano, Tokyo..." />
+        <label for="city-input">Search location:</label>
+        <input type="text" id="city-input" placeholder="e.g. Milano, Tokyo..." />
         <button id="search-btn">Cerca</button>
       </div>
+      
       
 
       <div class="weather-feature-panel location">
