@@ -9,15 +9,15 @@ console.log(rhodes, epiano, indian);
 import { scales, chords } from './scalesandchords.js';
 console.log(scales, chords);
 
-// 1.3 Key API OpenWeather
+// 1.3 Key API OpenWeather: ottieni dati, ottieni scala in base a dati ottenuti e cambia sfondo in base a dati ottenuti
 
 // Scelta della città
 document.getElementById("search-btn").addEventListener("click", () => {
   const city = document.getElementById("city-input").value.trim();
   if (city) {
-      getWeatherData(city);
+    getWeatherData(city);
   } else {
-      alert("Inserisci il nome di una città.");
+    alert("Inserisci il nome di una città.");
   }
 });
 
@@ -27,57 +27,65 @@ function getWeatherData(city = "Milano") { // Default: Milano
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   fetch(url)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error("Città non trovata. Controlla il nome e riprova.");
-          }
-          return response.json();
-      })
-      .then(data => {
-        // Mostra i dati nel pannello laterale
-        document.getElementById('location').innerText = data.name; 
-        document.getElementById('temp-current').innerText = data.main.temp; // Temperatura attuale
-        document.getElementById('temp-min').innerText = data.main.temp_min; // Temperatura minima
-        document.getElementById('temp-max').innerText = data.main.temp_max; // Temperatura massima
-        document.getElementById('wind-speed').innerText = data.wind.speed; // Velocità del vento
-        document.getElementById('wind-direction').innerText = data.wind.deg; // Direzione del vento
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Città non trovata. Controlla il nome e riprova.");
+    }
+    return response.json();
+  })
 
-        // Mostra descrizione delle condizioni meteo
-        const weatherDescription = data.weather[0].description;
-        document.getElementById('weather-description').innerText = weatherDescription;
+  .then(data => {
+    // Mostra i dati nel pannello laterale
+    document.getElementById('location').innerText = data.name;
+    document.getElementById('temp-current').innerText = data.main.temp; // Temperatura attuale
+    document.getElementById('temp-min').innerText = data.main.temp_min; // Temperatura minima
+    document.getElementById('temp-max').innerText = data.main.temp_max; // Temperatura massima
+    document.getElementById('wind-speed').innerText = data.wind.speed; // Velocità del vento
+    document.getElementById('wind-direction').innerText = data.wind.deg; // Direzione del vento
+    
+    // Mostra descrizione delle condizioni meteo
+    const weatherDescription = data.weather[0].description;
+    document.getElementById('weather-description').innerText = weatherDescription;
 
-        // Calcola l'ora locale usando l'offset timezone
-        const utcTimestamp = data.dt; // Tempo UTC in secondi
-        const timezoneOffset = data.timezone; // Offset in secondi
-        const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
+    // Calcola l'ora locale usando l'offset timezone
+    const utcTimestamp = data.dt; // Tempo UTC in secondi
+    const timezoneOffset = data.timezone; // Offset in secondi
+    const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
           
-        // Converte il timestamp locale in un oggetto Date
-         const localDate = new Date(localTimestamp * 1000);
+    // Converte il timestamp locale in un oggetto Date
+    const localDate = new Date(localTimestamp * 1000);
           
-        // Formatta l'ora locale in un formato leggibile
-        const localTime = localDate.toLocaleTimeString('it-IT', {
-          hour: '2-digit',
-          minute: '2-digit',
-           second: '2-digit',
-        });
+    // Formatta l'ora locale in un formato leggibile
+    const localTime = localDate.toLocaleTimeString('it-IT', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    }
+    );
           
-          // Mostra l'ora locale nel pannello laterale
-          document.getElementById('time-time').innerText = localTime;
+    // Mostra l'ora locale nel pannello laterale
+    document.getElementById('time-time').innerText = localTime;
 
-          // Usa la funzione per determinare la condizione meteo
-          const weatherCondition = getWeatherCondition(weatherDescription);
+    // Usa la funzione per determinare la condizione meteo
+    const weatherCondition = getWeatherCondition(weatherDescription);
+    const weatherCondition2 = getWeatherCondition2(weatherDescription);
 
-          // Seleziona una scala casuale in base alla condizione meteo
-          const randomScale = getRandomScale(weatherCondition);
+    // Seleziona una scala casuale in base alla condizione meteo
+    const randomScale = getRandomScale(weatherCondition);
 
-          // Funzione che aggiorna accordi visualizzati
-          
-          updateChordButtons(randomScale.scaleType,randomScale.rootNote);
-      })
-      .catch(error => {
-          console.error('Errore nel recuperare i dati meteo:', error);
-          alert("Errore: " + error.message);
-      });
+    // Funzione che aggiorna accordi visualizzati
+    updateChordButtons(randomScale.selectedScale,randomScale.rootNote);
+
+
+    // Chiama funzione che aggiorna background
+    changeBackground(weatherCondition2);
+  }
+  )
+
+  .catch(error => {
+    console.error('Errore nel recuperare i dati meteo:', error);
+    alert("Errore: " + error.message);
+  });
 }
 
 
@@ -142,11 +150,7 @@ const weatherCategories2 = {
   ]
 };
 
-
-
-
-// 1.5.1 Funzione per associare la descrizione meteo alla condizione 
-
+// 1.5.1 Funzione per associare la descrizione meteo ad una delle 4 condizioni meteo generali
 function getWeatherCondition(weatherDescription) {
   const description = weatherDescription.toLowerCase();
 
@@ -195,35 +199,37 @@ function getWeatherCondition2(weatherDescription) {
 
 }
 
+
+
 // 1.6.1 Funzione per selezionare una scala casuale in base alla condizione meteo
 function getRandomScale(weatherCondition) {
-  let scaleType;
+  let scalesArray;
 
-  // Associa la condizione meteo al tipo di scala
   switch (weatherCondition) {
     case "sunny":
-      scaleType = "major"; // Scala maggiore
+      scalesArray = "major";  // Scala maggiore
       break;
     case "rainy":
-      scaleType = "minor"; // Scala minore
+      scalesArray = "minor";  // Scala minore
       break;
     case "cloudy":
-      scaleType = "sus4"; // Scala sus4
+      scalesArray = "sus4";  // Scala sus4
       break;
     case "snowy":
-      scaleType = "major7"; // Scala major7
+      scalesArray = "major7";  // Scala major7
       break;
     default:
-      scaleType = "major"; // Default
+      scalesArray = "major";  // Default
       break;
   }
 
-  // Recupera tutte le root notes disponibili per la scala
-  const rootNotes = Object.keys(scales[scaleType]); // `scales` è un oggetto globale predefinito
+  // Seleziona una root randomica dalla scala
+  const rootNotes = Object.keys(scalesArray); // Le root note disponibili (C, D, E...)
   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
+ 
+  // Ritorna sia la root che la scala associata
+  return { selectedScale: scalesArray, rootNote: randomRootNote};
 
-  // Ritorna sia il tipo di scala che la root note selezionata
-  return { scaleType, rootNote: randomRootNote };
 }
 
 
@@ -292,6 +298,7 @@ function changeBackground(weatherCondition2){
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
 }
+
 
 
 // 2. Funzioni e/o logica per la gestione dell'applicazione
@@ -588,6 +595,7 @@ document.getElementById("time-signature").addEventListener("change", (e) => {
   setTimeSignature(e.target.value); // Imposta la nuova Time-Signature
 });
 
+
 // 4 Impostazione suono di default corrispondente alla condizione meteo
 
 // Mappa dei bottoni meteo già dichiarata
@@ -661,6 +669,7 @@ weatherButtons.snowy.addEventListener("click", () => {
   playWeatherSound("snowy");
 });
 
+
 // Funzione per far roteare le manopole
 
 document.querySelectorAll('.knob').forEach(knob => {
@@ -680,6 +689,10 @@ document.querySelectorAll('.knob').forEach(knob => {
     window.addEventListener('mouseup', stopMouseMove);
   });
 });
+
+
+
+
 
 
 
