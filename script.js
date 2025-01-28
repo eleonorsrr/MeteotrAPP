@@ -85,7 +85,7 @@ function getWeatherData(city = "Milano") { // Default: Milano
 getWeatherData();
 
 
-// 1.4 Categorie di descrizioni meteo
+// 1.4.1 Categorie di descrizioni meteo per associazione agli accordi
 const weatherCategories = {
   sunny: [
     "clear sky"
@@ -105,7 +105,47 @@ const weatherCategories = {
   ]
 };
 
-// 1.5 Funzione per associare la descrizione meteo alla condizione ATTENZIONE ANCORA IN PROVA  
+// 1.4.2 Categorie di descrizioni meteo per cambiare background
+const weatherCategories2 = {
+  clear: ["clear sky"],
+  lowrain: [
+    "light rain", "light intensity shower rain", "light thunderstorm", 
+    "thunderstorm with light rain", "light intensity drizzle", 
+    "light intensity drizzle rain", "thunderstorm with light drizzle"
+  ],
+  mediumrain: [
+    "moderate rain", "shower rain", "drizzle rain", "drizzle", 
+    "shower drizzle", "thunderstorm with rain", "thunderstorm", 
+    "light intensity shower rain and drizzle", "thunderstorm with drizzle"
+  ],
+  highrain: [
+    "heavy rain", "heavy shower rain"
+  ],
+  fewclouds: [
+    "few clouds", "scattered clouds", "broken clouds"
+  ],
+  mediumclouds: [
+    "overcast clouds", "mist", "smoke"
+  ],
+  manyclouds: [
+    "haze", "fog", "dust"
+  ],
+  lowsnow: [
+    "light snow", "light shower sleet", "light rain and snow", 
+    "light shower snow"
+  ],
+  mediumsnow: [
+    "snow", "sleet", "shower sleet", "rain and snow", "shower snow"
+  ],
+  highsnow: [
+    "heavy snow", "heavy shower snow"
+  ]
+};
+
+
+
+
+// 1.5.1 Funzione per associare la descrizione meteo alla condizione 
 
 function getWeatherCondition(weatherDescription) {
   const description = weatherDescription.toLowerCase();
@@ -122,7 +162,40 @@ function getWeatherCondition(weatherDescription) {
   }
 }
 
+// 1.5.2 Funzione per associare la descrizione meteo ad una delle 10 condizioni che determinano il background
+function getWeatherCondition2(weatherDescription) {
+  const description2 = weatherDescription.toLowerCase();
 
+  // Controlla in quale categoria rientra la descrizione
+  if (weatherCategories2.clear.some(keyword => description2.includes(keyword))) {
+    return "clear";
+
+  } else if (weatherCategories2.lowrain.some(keyword => description2.includes(keyword))) {
+    return "lowrain";
+  } else if (weatherCategories2.mediumrain.some(keyword => description2.includes(keyword))) {
+    return "mediumrain";
+  } else if (weatherCategories2.highrain.some(keyword => description2.includes(keyword))) {
+    return "highrain";
+
+  } else if (weatherCategories2.fewclouds.some(keyword => description2.includes(keyword))) {
+    return "fewclouds";
+  } else if (weatherCategories2.mediumclouds.some(keyword => description2.includes(keyword))) {
+    return "mediumclouds";
+  } else if (weatherCategories2.manyclouds.some(keyword => description2.includes(keyword))) {
+    return "manyclouds";
+
+  } else if (weatherCategories2.lowsnow.some(keyword => description2.includes(keyword))) {
+    return "lowsnow";
+  } else if (weatherCategories2.mediumsnow.some(keyword => description2.includes(keyword))) {
+    return "mediumsnow";
+  } else if (weatherCategories2.highsnow.some(keyword => description2.includes(keyword))) {
+    return "highsnow";
+  }
+
+
+}
+
+// 1.6 Funzione per selezionare una scala casuale in base alla condizione meteo
 function getRandomScale(weatherCondition) {
   let scaleType;
 
@@ -448,69 +521,7 @@ document.getElementById("time-signature").addEventListener("change", (e) => {
   setTimeSignature(e.target.value); // Imposta la nuova Time-Signature
 });
 
-
-// 4 Scegli l'immagine di sfondo in base alla condizione atmosferica
-
-const images = {
-  sunnyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg',
-  rainyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg',
-  cloudyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg',
-  snowyImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg',
-  defaultImage: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg'
-};
-
-// Preload delle immagini per non aver delay
-Object.values(images).forEach(imageUrl => {
-  const img = new Image();
-  img.src = imageUrl;
-});
-
-
-weatherButtons.sunny.addEventListener("click", () => {
-  changeBackground("sunnyy", weatherButtons.sunny);
-});
-
-weatherButtons.rainy.addEventListener("click", () => {
-  changeBackground("rainyy", weatherButtons.rainy);
-});
-
-weatherButtons.cloudy.addEventListener("click", () => {
-  changeBackground("cloudyy", weatherButtons.cloudy);
-});
-
-weatherButtons.snowy.addEventListener("click", () => {
-  changeBackground("snowyy", weatherButtons.snowy);
-});
-
-
-function changeBackground(weather) {
-  let imageUrl;
-  
-  switch(weather) {
-    default:
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
-    case 'sunnyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
-      break;
-    case 'rainyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg';
-      break;
-    case 'cloudyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg'; 
-      break;
-    case 'snowyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg'; 
-      break;
-  }
-
-  document.body.style.backgroundImage = `url(${imageUrl})`;
-  document.body.style.backgroundSize = 'cover';
-  document.body.style.backgroundPosition = 'center';
-  document.body.style.backgroundRepeat = 'no-repeat';
-}
-
-
-// 5 Impostazione suono di default corrispondente alla condizione meteo
+// 4 Impostazione suono di default corrispondente alla condizione meteo
 
 // Mappa dei bottoni meteo già dichiarata
 // Mappa dei suoni meteo
