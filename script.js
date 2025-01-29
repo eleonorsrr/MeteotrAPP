@@ -74,7 +74,7 @@ function getWeatherData(city = "Milano") { // Default: Milano
     const randomScale = getRandomScale(weatherCondition);
 
     // Funzione che aggiorna accordi visualizzati
-    updateChordButtons(randomScale.selectedScale,randomScale.rootNote);
+    updateChordButtons(randomScale.scaleType,randomScale.rootNote);
 
 
     // Chiama funzione che aggiorna background
