@@ -8,14 +8,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
 
   <link href="./style.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
 
 </head>
 
 <body>
   
-  <div class="app-container"> <!--Contenitore principale di tutta l'applicazione (top/central/bottom panel)-->
+  <div class="app-container"> <!--Contenitore principale di tutta l'applicazione (top/central/weather/effect/bottom panels)-->
 
     <div class="top-panel"> <!--Contenitore relativo al pannello superiore (instruments, play/reset, bpm, tempo)-->
 
@@ -41,74 +41,101 @@
     
     </div>
 
-    <div class="central-panel"> <!--Contenitore relativo al blocco centrale (weather row, chord row)-->
+    <div class="main-layout"> <!--Parte centrale costituita da central panel + effects panel-->
 
-      <div class="weather-row"> <!--Contenitore relativo alle varie condizioni meteo e scale ad esse associate-->
-          
-        <div class="weather-item">
-          <button class="weather-btn" id="sunny"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
-          <div class="dropdown-container" id="sunny-dropdown"></div>
-          <input type="range" id="sunny-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+      <div class="central-panel"> <!--Contenitore relativo al blocco centrale (weather row, chord row)-->
+      
+        <div class="weather-row"> <!--Contenitore relativo alle varie condizioni meteo e scale ad esse associate-->
+
+          <div class="weather-item">
+            <button class="weather-btn" id="sunny"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+            <div class="dropdown-container" id="sunny-dropdown"></div>
+            <input type="range" id="sunny-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+          </div>
+
+          <div class="weather-item">
+            <button class="weather-btn" id="rainy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-rain-wind"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m9.2 22 3-7"/><path d="m9 13-3 7"/><path d="m17 13-3 7"/></svg></button>
+            <div class="dropdown-container" id="rainy-dropdown"></div>
+            <input type="range" id="rainy-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+          </div>
+
+          <div class="weather-item">
+            <button class="weather-btn" id="cloudy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloudy"><path d="M17.5 21H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg></button>
+            <div class="dropdown-container" id="cloudy-dropdown"></div>
+            <input type="range" id="cloudy-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+          </div>
+
+          <div class="weather-item">
+            <button class="weather-btn" id="snowy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg></button>
+            <div class="dropdown-container" id="snowy-dropdown"></div>
+            <input type="range" id="snowy-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
+          </div>
+
         </div>
+
+        <div class="chord-row"> <!--Contenitore relativo agli accordi proposti per il loop-->
         
-        <div class="weather-item">
-          <button class="weather-btn" id="rainy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloud-rain-wind"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m9.2 22 3-7"/><path d="m9 13-3 7"/><path d="m17 13-3 7"/></svg></button>
-          <div class="dropdown-container" id="rainy-dropdown"></div>
-          <input type="range" id="rainy-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-        </div>
-          
-        <div class="weather-item">
-          <button class="weather-btn" id="cloudy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cloudy"><path d="M17.5 21H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg></button>
-          <div class="dropdown-container" id="cloudy-dropdown"></div>
-          <input type="range" id="cloudy-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-        </div>
-          
-        <div class="weather-item">
-          <button class="weather-btn" id="snowy"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-snowflake"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg></button>
-          <div class="dropdown-container" id="snowy-dropdown"></div>
-          <input type="range" id="snowy-volume" class="volume-slider" min="0" max="1" step="0.01" value="0.5">
-        </div>
-          
-      </div>
+          <button class="chord-btn" id="btn1">C</button>
+          <button class="chord-btn" id="btn2">D</button>
+          <button class="chord-btn" id="btn3">E</button>
+          <button class="chord-btn" id="btn4">F</button>
+          <button class="chord-btn" id="btn5">G</button>
+          <button class="chord-btn" id="btn6">A</button>
+          <button class="chord-btn" id="btn7">B</button>
         
-      <div class="chord-row"> <!--Contenitore relativo agli accordi proposti per il loop-->
-
-        <button class="chord-btn" id="btn1">C</button>
-        <button class="chord-btn" id="btn2">D</button>
-        <button class="chord-btn" id="btn3">E</button>
-        <button class="chord-btn" id="btn4">F</button>
-        <button class="chord-btn" id="btn5">G</button>
-        <button class="chord-btn" id="btn6">A</button>
-        <button class="chord-btn" id="btn7">B</button>
+        </div>
 
       </div>
 
-    </div>  
 
-    <div class="bottom-panel"> <!--Contenitore relativo alla sezione di effettistica-->
+      <div class="effects-panel">
+      
+        <div class="knobs-row">
+        
+          <div class="knob-container">
+            <label for="knob1">REV (wind)</label>
+            <div class="knob" id="knob1"></div>
+          </div>
+
+          <div class="knob-container">
+            <label for="knob2">SAT (°C)</label>
+            <div class="knob" id="knob2"></div>
+          </div>
+
+          <div class="knob-container">
+            <label for="knob3">DIST (air)</label>
+            <div class="knob" id="knob3"></div>
+          </div>
+
+        </div>
+
+        <div class="gain-slider-container">
+          <label for="gain-slider">Gain Control</label>
+          <input id="gain-slider" type="range" min="0" max="100" step="1" value="50">
+        </div>
+
+      </div>
 
     </div>
 
-    <div class="side-panel"> <!--Contenitore relativo alla ricerca dellà città-->
+
+
+    <div class="weather-panel"> <!--Contenitore relativo alla ricerca meteo di città-->
 
       <div id="city-search">
-        <label for="city-input">Inserisci il nome di una città:</label>
-        <input type="text" id="city-input" placeholder="Es. Milano, Tokyo..." />
-        <button id="search-btn">Cerca</button>
+        <input type="text" id="city-input" placeholder="Search location..." />
+        <button id="search-btn">Go</button>
       </div>
-      
 
       <div class="weather-feature-panel location">
         <h3>Location</h3>
         <p><span id="location">--</span></p>
       </div>
 
-
       <div class="weather-description-panel ">
         <h3>Current Weather</h3>
         <p><span id="weather-description">--</span></p>
       </div> 
-
 
       <div class="weather-feature-panel temperature">
         <h3>Temperature</h3>
@@ -116,23 +143,26 @@
         <p>Min: <span id="temp-min">--</span>°C</p>
         <p>Max: <span id="temp-max">--</span>°C</p>
       </div>
-    
 
       <div class="weather-feature-panel wind">
         <h3>Wind</h3>
         <p>Speed: <span id="wind-speed">--</span> m/s</p>
         <p>Direction: <span id="wind-direction">--</span>°</p>
       </div>
-    
 
       <div class="weather-feature-panel Time">
         <h3>Time</h3>
         <p><span id="time-time">--</span></p>
       </div>
 
-    </div>   
+    </div>  
+    
 
-  </div>
+    <div class="bottom-panel">
+      qua compariranno gli accordi selezionati piu carini 
+    </div>
+    
+  </div>  
 
   <script type="module" src="./script.js"></script>
 
