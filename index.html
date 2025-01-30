@@ -10,6 +10,8 @@
   <link href="./style.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 </head>
 
@@ -17,31 +19,29 @@
   <img src="https://eleonorsrr.github.io/MeteotrAPP/assets/images/logo.png" alt="Logo MeteotrAPP">
 </div>
 
+
 <body>
   
   <div class="app-container"> <!--Contenitore principale di tutta l'applicazione (top/central/weather/effect/bottom panels)-->
 
     <div class="top-panel"> <!--Contenitore relativo al pannello superiore (instruments, play/reset, bpm, tempo)-->
-
-      <select id="instruments">
-        <option value="rhodes">Rhodes</option>
-        <option value="epiano">E-Piano</option>
-        <option value="indian">Indian</option>
-      </select>
-  
       <button id="play-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg></button>
       <button id="stop-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg></button>
       <button id="reset-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
   
-      <label for="bpm">BPM:</label>
-      <input type="number" id="bpm" min="40" max="200" value="120" />
+      <div class="input-group">
+        <label for="bpm">BPM:</label>
+        <input type="number" id="bpm" min="40" max="200" value="120" />
+      </div>
   
-      <label for="time-signature">Tempo:</label>
-      <select id="time-signature">
-        <option value="4/4">4/4</option>
-        <option value="3/4">3/4</option>
-        <option value="6/8">6/8</option>
-      </select>
+      <div class="input-group">
+    <label for="time-signature">Time signature:</label>
+    <select id="time-signature">
+      <option value="4/4">4/4</option>
+      <option value="3/4">3/4</option>
+      <option value="6/8">6/8</option>
+    </select>
+  </div>
     
     </div>
 
@@ -92,76 +92,61 @@
       </div>
 
 
-      <div class="effects-panel">
-      
-        <div class="knobs-row">
-        
-          <div class="knob-container">
-            <label for="knob1">REV (wind)</label>
-            <div class="knob" id="knob1"></div>
-          </div>
-
-          <div class="knob-container">
-            <label for="knob2">SAT (°C)</label>
-            <div class="knob" id="knob2"></div>
-          </div>
-
-          <div class="knob-container">
-            <label for="knob3">DIST (air)</label>
-            <div class="knob" id="knob3"></div>
-          </div>
-
-        </div>
-
-        <div class="gain-slider-container">
-          <label for="gain-slider">Gain Control</label>
-          <input id="gain-slider" type="range" min="0" max="100" step="1" value="50">
-        </div>
-
+      <div class="map-panel">
+        <div id="map" style="height: 195px; width: 100%; border: 1px solid #ccc;"></div>
       </div>
+      
 
     </div>
 
 
 
-    <div class="weather-panel"> <!--Contenitore relativo alla ricerca meteo di città-->
-
-      <div id="city-search">
-        <input type="text" id="city-input" placeholder="Search location..." />
-        <button id="search-btn">Go</button>
+    <div class="weather-panel">
+      <div class="instrument-search-container">
+        <div class="instrument-selection">
+          <label for="instruments">Choose an instrument:</label>
+          <select id="instruments">
+            <option value="rhodes">Rhodes</option>
+            <option value="epiano">E-Piano</option>
+            <option value="indian">Indian</option>
+          </select>
+        </div>
+    
+        <div id="city-search">
+          <input type="text" id="city-input" placeholder="Search location..." />
+          <button id="search-btn">Go</button>
+        </div>
       </div>
-
+    
       <div class="weather-feature-panel location">
         <h3>Location</h3>
         <p><span id="location">--</span></p>
       </div>
-
-      <div class="weather-description-panel ">
+    
+      <div class="weather-description-panel">
         <h3>Current Weather</h3>
         <p><span id="weather-description">--</span></p>
       </div> 
-
+    
       <div class="weather-feature-panel temperature">
         <h3>Temperature</h3>
         <p>Current: <span id="temp-current">--</span>°C</p>
         <p>Min: <span id="temp-min">--</span>°C</p>
         <p>Max: <span id="temp-max">--</span>°C</p>
       </div>
-
+    
       <div class="weather-feature-panel wind">
         <h3>Wind</h3>
         <p>Speed: <span id="wind-speed">--</span> m/s</p>
         <p>Direction: <span id="wind-direction">--</span>°</p>
       </div>
-
-      <div class="weather-feature-panel Time">
+    
+      <div class="weather-feature-panel time">
         <h3>Time</h3>
         <p><span id="time-time">--</span></p>
       </div>
-
-    </div>  
+    </div>
     
-
     <div class="bottom-panel">
       qua compariranno gli accordi selezionati piu carini 
     </div>
