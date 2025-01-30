@@ -24,6 +24,30 @@ document.getElementById("search-btn").addEventListener("click", () => {
   }
 });
 
+// Variabile globale per la mappa
+let map;
+
+function initializeMap(lat, lon) {
+  // Se la mappa esiste già, rimuovila prima di crearne una nuova
+  if (map) {
+    map.remove();
+  }
+
+  // Crea una nuova mappa e impostala sulle nuove coordinate
+  map = L.map('map').setView([lat, lon], 10);  // 10 è il livello di zoom
+
+  // Aggiungi una tile layer (mappa base)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // Aggiungi un marcatore alla posizione
+  L.marker([lat, lon]).addTo(map)
+    .bindPopup("Weather position")
+    .openPopup();
+}
+
+
 // Funzione per ottenere e visualizzare i dati meteo
 function getWeatherData(city = "Milano") { // Default: Milano
   const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
@@ -54,7 +78,7 @@ function getWeatherData(city = "Milano") { // Default: Milano
     const utcTimestamp = data.dt; // Tempo UTC in secondi
     const timezoneOffset = data.timezone; // Offset in secondi
     const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
-          
+
     // Converte il timestamp locale in un oggetto Date
     const localDate = new Date(localTimestamp * 1000);
           
@@ -68,6 +92,11 @@ function getWeatherData(city = "Milano") { // Default: Milano
           
     // Mostra l'ora locale nel pannello laterale
     document.getElementById('time-time').innerText = localTime;
+    
+        // Aggiungi la mappa geografica
+        const lat = data.coord.lat; // Latitudine
+        const lon = data.coord.lon; // Longitudine
+        initializeMap(lat, lon);
 
     // Usa la funzione per determinare la condizione meteo
     const weatherCondition = getWeatherCondition(weatherDescription);
@@ -203,7 +232,6 @@ function getWeatherCondition2(weatherDescription) {
 }
 
 
-
 // 1.6.1 Funzione per selezionare una scala casuale in base alla condizione meteo
 function getRandomScale(weatherCondition) {
   let scaleType;
@@ -304,6 +332,8 @@ function changeBackground(weatherCondition2){
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
 }
+
+
 
 
 
@@ -697,7 +727,6 @@ document.querySelectorAll('.knob').forEach(knob => {
     window.addEventListener('mouseup', stopMouseMove);
   });
 });
-
 
 
 
