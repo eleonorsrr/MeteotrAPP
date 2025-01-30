@@ -5,11 +5,11 @@
 import { rhodes, epiano, indian } from './sounds.js';
 console.log(rhodes, epiano, indian);
 
-// 1.2 Definizione e mappatura di scale e accordi
+// 1.2.1 Definizione e mappatura di scale e accordi
 import { scales, chords } from './scalesandchords.js';
 console.log(scales, chords);
 
-// 1.3 Definizione e mappatura accordi nella tendina
+// 1.2.2 Definizione e mappatura accordi nella tendina
 import { getChordName } from "./chordmapping.js";
 console.log(getChordName);
 
@@ -228,13 +228,16 @@ function getRandomScale(weatherCondition) {
       break;
   }
 
+  
   // Recupera tutte le root notes disponibili per la scala
   const rootNotes = Object.keys(scales[scaleType]); // `scales` è un oggetto globale predefinito
   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
 
   // Ritorna sia il tipo di scala che la root note selezionata
   return { scaleType, rootNote: randomRootNote };
+  
 }
+
 
 
 // 1.6.2 Funzione per cambiare il background in base alla condizione meteo
@@ -302,6 +305,7 @@ function changeBackground(weatherCondition2){
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
 }
+
 
 
 
@@ -376,7 +380,6 @@ function createDropdown(scaleType, weatherButton) {
   });
 
   weatherButton.parentElement.insertBefore(dropdownContainer, weatherButton.nextSibling); // Aggiunge il menù a tendina creato al DOM (dopo il pulsante weatheButtons)
-  
 }
 
 // 2.4 Aggiornamento degli accordi in relazione alla scala scelta
@@ -469,7 +472,7 @@ function calculateInterval(bpm, timeSignature) {
     case '3/4':
       return (60000 / bpm) * 3; // Un accordo per battuta in 3/4
     case '6/8':
-      return (60000 / bpm) * 2; // Due accordi per battuta in 6/8 (SBAGLIATO)
+      return (60000/(bpm/2)) * 2; // Due accordi per battuta in 6/8 (SBAGLIATO)
     default:
       console.warn("Time signature non riconosciuta, impostazione predefinita su 4/4.");
       return (60000 / bpm) * 4;
@@ -565,6 +568,7 @@ weatherButtons.snowy.addEventListener("click", () => {
   createDropdown("major7", weatherButtons.snowy);
 });
 
+
 // 3.2 Riproduzione dell'accordo selezionato tramite click
 document.querySelectorAll('.chord-row').forEach(button => {
 
@@ -657,20 +661,21 @@ function playWeatherSound(weather) {
 }
 
 // Eventi sui bottoni meteo
-weatherButtons.sunny.addEventListener("click", () => {
-  playWeatherSound("sunny");
-});
 
-weatherButtons.rainy.addEventListener("click", () => {
-  playWeatherSound("rainy");
-});
+// Funzione che resetta un weather button al click di un altro)
+function resetButtons(except) {
+  Object.values(weatherButtons).forEach(button => {
+    if (button !== except) button.classList.remove("active");
+  });
+}
 
-weatherButtons.cloudy.addEventListener("click", () => {
-  playWeatherSound("cloudy");
-});
-
-weatherButtons.snowy.addEventListener("click", () => {
-  playWeatherSound("snowy");
+Object.entries(weatherButtons).forEach(([weather, button]) => {
+  button.addEventListener("click", () => {
+    const isActive = button.classList.contains("active");
+    resetButtons(button); // Disattiva tutti gli altri bottoni
+    button.classList.toggle("active", !isActive); // Se era già attivo, lo spegne
+    playWeatherSound(weather);
+  });
 });
 
 
@@ -693,10 +698,6 @@ document.querySelectorAll('.knob').forEach(knob => {
     window.addEventListener('mouseup', stopMouseMove);
   });
 });
-
-
-
-
 
 
 
