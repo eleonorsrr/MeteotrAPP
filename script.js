@@ -9,6 +9,10 @@ console.log(rhodes, epiano, indian);
 import { scales, chords } from './scalesandchords.js';
 console.log(scales, chords);
 
+// 1.3 Definizione e mappatura accordi nella tendina
+import { getChordName } from "./chordmapping.js";
+console.log(getChordName);
+
 // 1.3 Key API OpenWeather: ottieni dati, ottieni scala in base a dati ottenuti e cambia sfondo in base a dati ottenuti
 
 // Scelta della città
@@ -389,7 +393,7 @@ function updateChordButtons(scaleType, rootNote) {
 
       const button = document.createElement("button"); // Crea un elemento HTML button (pulsante)
       button.classList.add("chord-btn"); // Aggiunge una classe a tale pulsante 
-      button.textContent = note;
+      button.textContent = getChordName(note);
       button.dataset.chord = note; // Aggiunge un attributo personalizzato data-chord a tale pulsante
 
       button.addEventListener("click", () => {
