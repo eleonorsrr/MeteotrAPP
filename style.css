@@ -16,17 +16,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 75%;
 }
 
 /* 2. Top Panel */
 .top-panel {
+  width: 1050px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
+  background-color: #bec7f4e6;
   padding: 10px;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 #play-btn:hover {
-  background-color: #f7c346;
+  background-color: #e3b240;
 }
 
 #stop-btn {
@@ -87,15 +87,17 @@ label {
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  width: 100%;
+  
 }
 
 .central-panel {
-  background-color: #e9b3ff;
-  border-radius: 12px;
+  background-color: #ffffff;
+  border: 4px solid #bec7f4e6;
+  border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 60%;
+  width: 540px;
+  height: 200px;
 }
 
 .weather-row {
@@ -106,7 +108,28 @@ label {
 }
 
 .volume-slider {
+  background: #bec7f4e6;
+  margin-top: 8px;
   width: 65px; 
+  border-radius: 20px;
+  appearance: none;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  background: #bec7f4e6;
+  height: 8px;
+  border-radius: 20px;
+  appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  background: #3e54c2e6;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -3px;
+  appearance: none;
 }
 
 .weather-item {
@@ -132,6 +155,11 @@ label {
   transition: transform 0.2s ease;
 }
 
+.weather-btn.active {
+  background-color: #add8e6;
+  transform: scale(1.15);
+}
+
 .weather-btn:hover {
   transform: scale(1.1);
 }
@@ -153,7 +181,7 @@ label {
 }
 
 .chord-btn {
-  background-color: #f0f8ff;
+  background-color: #bec7f4e6;
   font-family: 'Nunito';
   border: none;
   border-radius: 8px;
@@ -164,7 +192,7 @@ label {
 }
 
 .chord-btn:hover {
-  background-color: #add8e6;
+  background-color: #3e54c2e6;
   transform: scale(1.1);
 }
 
@@ -185,8 +213,8 @@ label {
 
 select.dropdownContainer {
   font-family: 'Nunito';
-  background-color: #f0f0f0;
-  border: 2px solid #ffdf6c;
+  background-color: #ffffff;
+  border: 2px solid #bec7f4e6;
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
@@ -207,90 +235,19 @@ select.dropdownContainer option:hover {
   background-color: #e0f7fa;
 }
 
-/* 4. Side Panel */
-.side-panel {
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  width: 100%;
-}
-
-.weather-description-panel {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-}
-
-.weather-feature-panel {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-}
-
-.weather-feature-panel h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333333;
-}
-
-.weather-feature-panel p {
-  font-size: 14px;
-  margin: 5px 0;
-  color: #555555;
-}
-
-#temp-current, #temp-min, #temp-max, #humidity, #wind-speed, #wind-direction, #sunrise, #sunset {
-  font-weight: bold;
-  color: #914caa;
-}
-
-
-
-#city-search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-#city-input {
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#search-btn {
-  padding: 8px 16px;
-  font-size: 16px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#search-btn:hover {
-  background-color: #0056b3;
-}
-
 /* Effects panel*/
 
 .effects-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  border-radius: 20px;
+  background-color: #ffffff;
+  border: 4px solid #bec7f4e6;
+  border-radius: 10px;
   padding: 20px;
-  gap: 20px;
-  width: 300px;
+  gap: 55px;
+  width: 420px;
+  height: 200px;
 }
 
 .knobs-row {
@@ -335,33 +292,110 @@ select.dropdownContainer option:hover {
 #gain-slider {
   width: 90%;
   height: 8px;
-  background: #914caa;
+  background: #bec7f4e6;
   border-radius: 5px;
   appearance: none;
   cursor: pointer;
 }
 
 #gain-slider::-webkit-slider-runnable-track {
-  background: #914caa;
+  background: #bec7f4e6;
   height: 8px;
   border-radius: 5px;
+  appearance: none;
 }
 
 #gain-slider::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
-  background: #f7f7f7;
-  border: 2px solid #914caa;
+  background: #3e54c2e6;
   border-radius: 50%;
+  cursor: pointer;
+  margin-top: -6px;
+  appearance: none;
+}
+
+/* 4. Weather Panel */
+.weather-panel {
+  background-color: #bec7f4e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  width: 1030px;
+}
+
+.weather-description-panel {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.weather-feature-panel {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.weather-feature-panel h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333333;
+}
+
+.weather-feature-panel p {
+  font-size: 14px;
+  margin: 5px 0;
+  color: #555555;
+}
+
+#temp-current, #temp-min, #temp-max, #humidity, #wind-speed, #wind-direction, #sunrise, #sunset {
+  font-weight: bold;
+  color: #3e54c2e6;
+}
+
+#city-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#city-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#search-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: white;
+  background-color: #3e54c2e6;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-#gain-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: #f7f7f7;
-  border: 2px solid #914caa;
-  border-radius: 50%;
-  cursor: pointer;
+#search-btn:hover {
+  background-color: #222f6ee6;
 }
 
+
+/* Bottom panel */
+.bottom-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #bec7f4e6;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 1050px;
+  height: 50px;
+}
