@@ -12,6 +12,20 @@ body {
   align-items: flex-start;
 }
 
+.logo-container {
+  position: fixed;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Assicura che il logo sia sempre sopra altri elementi */
+}
+
+.logo-container img {
+  max-width: 250px; /* Dimensione del logo regolabile */
+  height: auto;
+}
+
+
 .app-container {
   display: flex;
   flex-direction: column;
