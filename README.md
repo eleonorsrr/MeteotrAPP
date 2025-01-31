@@ -4,9 +4,9 @@ An application to create just the right tune for sunny or rainy days!
 <h1>
   Presenting our web app
 </h1>
-<h5> 
+<h4> 
   ⁠Presentazione generale sull’app: nome, motivi della scelta meteo, utilità
-</h5>
+</h4>
 <h1>
  App features
 </h1>
