@@ -13,15 +13,18 @@ body {
 }
 
 .logo-container {
-  position: absolute;
-  margin-top: 570px;
+  position: fixed; /* Mantiene il logo fisso durante lo scroll */
+  bottom: -15px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1; /* Invia il logo sotto gli altri elementi */
+  pointer-events: none; /* Evita che catturi clic */
 }
 
 .logo-container img {
   max-width: 250px;
   height: auto;
 }
-
 
 .app-container {
   display: flex;
