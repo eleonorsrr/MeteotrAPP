@@ -1,8 +1,8 @@
 // 1. Importazione script secondari
 
 // 1.1 Acquisizione, mappatura e preload dei campioni audio
-import { rhodes, epiano, indian } from './sounds.js';
-console.log(rhodes, epiano, indian);
+import { soulpad, epiano, indian, nightblade } from './sounds.js';
+console.log(soulpad, nightblade, epiano, indian);
 
 // 1.2.1 Definizione e mappatura di scale e accordi
 import { scales, chords } from './scalesandchords.js';
@@ -102,8 +102,16 @@ function getWeatherData(city = "Milano") { // Default: Milano
     const weatherCondition = getWeatherCondition(weatherDescription);
     const weatherCondition2 = getWeatherCondition2(weatherDescription);
 
+
     // Seleziona una scala casuale in base alla condizione meteo
     const randomScale = getRandomScale(weatherCondition);
+    highlightWeatherButton(weatherCondition);
+
+    // Trova il primo pulsante con la classe 'weather-btn' e crea il dropdown per la condizione meteo
+    const weatherButton = document.querySelector('.weather-btn');
+    if (weatherButton) {
+    createDropdown(randomScale.scaleType, weatherButton); // Crea il dropdown per il tipo di scala specifico
+    }
 
     // Funzione che aggiorna accordi visualizzati
     updateChordButtons(randomScale.scaleType,randomScale.rootNote);
@@ -283,10 +291,12 @@ const images = {
   highsnow: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'
 };
 
-Object.values(images).forEach(imageUrl => {
+Object.values(images).forEach(gifUrl => {
   const img = new Image();
-  img.src = imageUrl;
+  img.src = gifUrl;
 });
+
+
 
 function changeBackground(weatherCondition2){
   let gifUrl;
@@ -341,21 +351,24 @@ function changeBackground(weatherCondition2){
 // 2. Funzioni e/o logica per la gestione dell'applicazione
 
 // 2.1 Logica gestione cambio strumento
-let currentNotes = rhodes; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
+let currentNotes = epiano; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
 
 document.getElementById('instruments').addEventListener('change', (event) => {
 
   const selectedInstrument = event.target.value; // Rappresenta il valore attuale dell'elemento HTML che ha generato l'evento (lo strumento selezionato)
 
-  if (selectedInstrument === 'rhodes') {
-    currentNotes = rhodes;
-
-  } else if (selectedInstrument === 'epiano') {
+  if (selectedInstrument === 'epiano') {
     currentNotes = epiano;
+
+  } else if (selectedInstrument === 'nightblade') {
+    currentNotes = nightblade;
 
   } else if (selectedInstrument === 'indian') {
     currentNotes = indian;
-  }
+
+  } else if (selectedInstrument === 'soulpad') {
+    currentNotes = soulpad;
+  } 
 
 });
 
@@ -708,7 +721,6 @@ Object.entries(weatherButtons).forEach(([weather, button]) => {
 });
 
 
-
 // Logica per l'immagine di sfondo al click del weather button
 
 weatherButtons.sunny.addEventListener("click", () => {
@@ -753,3 +765,21 @@ function changeBackground2(weather) {
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
 }
+
+
+
+
+function highlightWeatherButton(condition) {
+  // Rimuove la classe 'active' da tutti i pulsanti meteo
+  document.querySelectorAll(".weather-btn").forEach(button => {
+    button.classList.remove("yellowactive");
+  });
+
+  // Seleziona il pulsante corrispondente alla condizione meteo e aggiunge la classe 'active'
+  const activeButton = document.querySelector(`.weather-btn.${condition}`);
+  if (activeButton) {
+    activeButton.classList.add("yellowactive");
+  }
+}
+
+
