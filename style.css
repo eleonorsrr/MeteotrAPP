@@ -206,8 +206,13 @@ label {
   transition: transform 0.2s ease;
 }
 
-.weather-btn.active {
-  background-color: #add8e6;
+.weather-btn.soundactive {
+  border: 2px solid #3e54c2e6;
+  transform: scale(1.15);
+}
+
+.weather-btn.scaleactive {
+  background-color: #bec7f4e6;
   transform: scale(1.15);
 }
 
