@@ -1,37 +1,67 @@
 // 1. Acquisizione, mappatura e preload dei campioni audio
 
 // 1.1 Base URL delle note
-const UrlRhodes = 'https://frafra39.github.io/sound-pack2/RHODES ACTAM 1/';
+const UrlNIGHTBLADE = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/night blade/';
 const UrlEPIANO = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/epiano/';
 const UrlINDIAN = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/indian/';
+const UrlSOULPAD = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/soul revived pad/';
+
 
 // 1.2 Mappatura delle note con i rispettivi URL
-const rhodes = {
-  C: new Audio(`${UrlRhodes}Pattern 1_4.wav`), 
-  Csharp: new Audio(`${UrlRhodes}Pattern 1_5.wav`), 
-  D: new Audio(`${UrlRhodes}Pattern 1_6.wav`), 
-  Dsharp: new Audio(`${UrlRhodes}Pattern 1_7.wav`),
-  E: new Audio(`${UrlRhodes}Pattern 1_8.wav`),
-  F: new Audio(`${UrlRhodes}Pattern 1_9.wav`), 
-  Fsharp: new Audio(`${UrlRhodes}Pattern 1_10.wav`),
-  G: new Audio(`${UrlRhodes}Pattern 1_11.wav`),
-  Gsharp: new Audio(`${UrlRhodes}Pattern 1_12.wav`),
-  A: new Audio(`${UrlRhodes}Pattern 1_13.wav`),
-  Asharp: new Audio(`${UrlRhodes}Pattern 1_14.wav`),
-  B: new Audio(`${UrlRhodes}Pattern 1_15.wav`),
-  C2: new Audio(`${UrlRhodes}Pattern 1_16.wav`),
-  C2sharp: new Audio(`${UrlRhodes}Pattern 1_17.wav`),
-  D2: new Audio(`${UrlRhodes}Pattern 1_18.wav`),
-  D2sharp: new Audio(`${UrlRhodes}Pattern 1_19.wav`),
-  E2: new Audio(`${UrlRhodes}Pattern 1_20.wav`),
-  F2: new Audio(`${UrlRhodes}Pattern 1_21.wav`),
-  F2sharp: new Audio(`${UrlRhodes}Pattern 1_22.wav`),
-  G2: new Audio(`${UrlRhodes}Pattern 1_23.wav`),
-  G2sharp: new Audio(`${UrlRhodes}Pattern 1_24.wav`),
-  A2: new Audio(`${UrlRhodes}Pattern 1_25.wav`),
-  A2sharp: new Audio(`${UrlRhodes}Pattern 1_26.wav`),
-  B2: new Audio(`${UrlRhodes}Pattern 1_27.wav`),
-  C3: new Audio(`${UrlRhodes}Pattern 1_28.wav`),
+const soulpad = {
+  C: new Audio(`${UrlSOULPAD}soul revived pad.wav`), 
+  Csharp: new Audio(`${UrlSOULPAD}soul revived pad_2.wav`), 
+  D: new Audio(`${UrlSOULPAD}soul revived pad_3.wav`), 
+  Dsharp: new Audio(`${UrlSOULPAD}soul revived pad_4.wav`),
+  E: new Audio(`${UrlSOULPAD}soul revived pad_5.wav`),
+  F: new Audio(`${UrlSOULPAD}soul revived pad_6.wav`), 
+  Fsharp: new Audio(`${UrlSOULPAD}soul revived pad_7.wav`),
+  G: new Audio(`${UrlSOULPAD}soul revived pad_8.wav`),
+  Gsharp: new Audio(`${UrlSOULPAD}soul revived pad_9.wav`),
+  A: new Audio(`${UrlSOULPAD}soul revived pad_10.wav`),
+  Asharp: new Audio(`${UrlSOULPAD}soul revived pad_11.wav`),
+  B: new Audio(`${UrlSOULPAD}soul revived pad_12.wav`),
+  C2: new Audio(`${UrlSOULPAD}soul revived pad_13.wav`),
+  C2sharp: new Audio(`${UrlSOULPAD}soul revived pad_14.wav`),
+  D2: new Audio(`${UrlSOULPAD}soul revived pad_15.wav`),
+  D2sharp: new Audio(`${UrlSOULPAD}soul revived pad_16.wav`),
+  E2: new Audio(`${UrlSOULPAD}soul revived pad_17.wav`),
+  F2: new Audio(`${UrlSOULPAD}soul revived pad_18.wav`),
+  F2sharp: new Audio(`${UrlSOULPAD}soul revived pad_19.wav`),
+  G2: new Audio(`${UrlSOULPAD}soul revived pad_20.wav`),
+  G2sharp: new Audio(`${UrlSOULPAD}soul revived pad_21.wav`),
+  A2: new Audio(`${UrlSOULPAD}soul revived pad_22.wav`),
+  A2sharp: new Audio(`${UrlSOULPAD}soul revived pad_23.wav`),
+  B2: new Audio(`${UrlSOULPAD}soul revived pad_24.wav`),
+  C3: new Audio(`${UrlSOULPAD}soul revived pad_25.wav`),
+};
+
+const nightblade = {
+  C: new Audio(`${UrlNIGHTBLADE}night blade synth.wav`), 
+  Csharp: new Audio(`${UrlNIGHTBLADE}night blade synth_2.wav`), 
+  D: new Audio(`${UrlNIGHTBLADE}night blade synth_3.wav`), 
+  Dsharp: new Audio(`${UrlNIGHTBLADE}night blade synth_4.wav`),
+  E: new Audio(`${UrlNIGHTBLADE}night blade synth_5.wav`),
+  F: new Audio(`${UrlNIGHTBLADE}night blade synth_6.wav`), 
+  Fsharp: new Audio(`${UrlNIGHTBLADE}night blade synth_7.wav`),
+  G: new Audio(`${UrlNIGHTBLADE}night blade synth_8.wav`),
+  Gsharp: new Audio(`${UrlNIGHTBLADE}night blade synth_9.wav`),
+  A: new Audio(`${UrlNIGHTBLADE}night blade synth_10.wav`),
+  Asharp: new Audio(`${UrlNIGHTBLADE}night blade synth_11.wav`),
+  B: new Audio(`${UrlNIGHTBLADE}night blade synth_12.wav`),
+  C2: new Audio(`${UrlNIGHTBLADE}night blade synth_13.wav`),
+  C2sharp: new Audio(`${UrlNIGHTBLADE}night blade synth_14.wav`),
+  D2: new Audio(`${UrlNIGHTBLADE}night blade synth_15.wav`),
+  D2sharp: new Audio(`${UrlNIGHTBLADE}night blade synth_16.wav`),
+  E2: new Audio(`${UrlNIGHTBLADE}night blade synth_17.wav`),
+  F2: new Audio(`${UrlNIGHTBLADE}night blade synth_18.wav`),
+  F2sharp: new Audio(`${UrlNIGHTBLADE}night blade synth_19.wav`),
+  G2: new Audio(`${UrlNIGHTBLADE}night blade synth_20.wav`),
+  G2sharp: new Audio(`${UrlNIGHTBLADE}night blade synth_21.wav`),
+  A2: new Audio(`${UrlNIGHTBLADE}night blade synth_22.wav`),
+  A2sharp: new Audio(`${UrlNIGHTBLADE}night blade synth_23.wav`),
+  B2: new Audio(`${UrlNIGHTBLADE}night blade synth_24.wav`),
+  C3: new Audio(`${UrlNIGHTBLADE}night blade synth_25.wav`),
 };
 
 const epiano = {
@@ -78,9 +108,9 @@ const indian = {
   C2: new Audio(`${UrlINDIAN}Pattern 1_42.wav`),
   C2sharp: new Audio(`${UrlINDIAN}Pattern 1_43.wav`),
   D2: new Audio(`${UrlINDIAN}Pattern 1_44.wav`),
-  D2sharp: new Audio(`${UrlRhodes}Pattern 1_45.wav`),
-  E2: new Audio(`${UrlRhodes}Pattern 1_46.wav`),
-  F2: new Audio(`${UrlRhodes}Pattern 1_47.wav`),
+  D2sharp: new Audio(`${UrlINDIAN}Pattern 1_45.wav`),
+  E2: new Audio(`${UrlINDIAN}Pattern 1_46.wav`),
+  F2: new Audio(`${UrlINDIAN}Pattern 1_47.wav`),
   F2sharp: new Audio(`${UrlINDIAN}Pattern 1_48.wav`),
   G2: new Audio(`${UrlINDIAN}Pattern 1_49.wav`),
   G2sharp: new Audio(`${UrlINDIAN}Pattern 1_50.wav`),
@@ -91,7 +121,10 @@ const indian = {
 };
 
 // 1.3 Preload dei campioni
-Object.values(rhodes).forEach(audio => {
+Object.values(nightblade).forEach(audio => {
+  audio.load();
+});
+Object.values(soulpad).forEach(audio => {
   audio.load();
 });
 Object.values(epiano).forEach(audio => {
@@ -102,4 +135,4 @@ Object.values(indian).forEach(audio => {
 });
 
 // 1.4 Esportazione dei campioni
-export { rhodes, epiano, indian };
+export { nightblade, epiano, indian, soulpad };
