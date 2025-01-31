@@ -708,25 +708,48 @@ Object.entries(weatherButtons).forEach(([weather, button]) => {
 });
 
 
-// Funzione per far roteare le manopole
 
-document.querySelectorAll('.knob').forEach(knob => {
-  let rotation = 0;
-  knob.addEventListener('mousedown', (event) => {
-    const startY = event.clientY;
-    const handleMouseMove = (moveEvent) => {
-      const deltaY = startY - moveEvent.clientY;
-      rotation = Math.max(-135, Math.min(135, rotation + deltaY / 5));
-      knob.style.transform = `rotate(${rotation}deg)`;
-    };
-    const stopMouseMove = () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', stopMouseMove);
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', stopMouseMove);
-  });
+// Logica per l'immagine di sfondo al click del weather button
+
+weatherButtons.sunny.addEventListener("click", () => {
+  changeBackground2("sunnyy", weatherButtons.sunny);
+});
+
+weatherButtons.rainy.addEventListener("click", () => {
+  changeBackground2("rainyy", weatherButtons.rainy);
+});
+
+weatherButtons.cloudy.addEventListener("click", () => {
+  changeBackground2("cloudyy", weatherButtons.cloudy);
+});
+
+weatherButtons.snowy.addEventListener("click", () => {
+  changeBackground2("snowyy", weatherButtons.snowy);
 });
 
 
+function changeBackground2(weather) {
+  let imageUrl;
+  
+  switch(weather) {
+    default:
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
+    case 'sunnyy':
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
+      break;
+    case 'rainyy':
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg';
+      break;
+    case 'cloudyy':
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg'; 
+      break;
+    case 'snowyy':
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg'; 
+      break;
+  }
 
+  document.body.style.backgroundImage = `url(${imageUrl})`;
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
+  document.body.style.backgroundRepeat = 'no-repeat';
+}
