@@ -1,27 +1,28 @@
+/*
 // Vettore con la scala cromatica di due ottave (C1 - C3)
 const chromaticScale = [
   "C", "Csharp", "D", "Dsharp", "E", "F", "Fsharp", "G", "Gsharp", "A", "Asharp", "B",
   "C2", "C2sharp", "D2", "D2sharp", "E2", "F2", "F2sharp", "G2", "G2sharp", "A2", "A2sharp", "B2",
   "C3"
 ];
+*/
 
-/*
 const chromaticScale = [
   "C", "Csharp", "D", "Dsharp", "E", "F", "Fsharp", "G", "Gsharp", "A", "Asharp", "B",  // 1a ottava (C1 - B1)
   "C2", "C2sharp", "D2", "D2sharp", "E2", "F2", "F2sharp", "G2", "G2sharp", "A2", "A2sharp", "B2",  // 2a ottava (C2 - B2)
   "C3", "C3sharp", "D3", "D3sharp", "E3", "F3", "F3sharp", "G3", "G3sharp", "A3", "A3sharp", "B3",  // 3a ottava (C3 - B3)
   "C4"  // 4a ottava (C4)
 ];
-*/
 
+/*
 // Intervalli della scala maggiore e minore naturale
 const majorScalePattern = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23];  // Scala maggiore
-const minorScalePattern = [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22];  // Scala minore naturale
-     
-/*
+const minorScalePattern = [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22];  // Scala minore naturale    
+*/
+
 const majorScalePattern = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24, 26, 28, 29, 31, 33, 35];  // Scala maggiore
 const minorScalePattern = [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22, 24, 26, 27, 29, 31, 32, 34];  // Scala minore naturale
-*/
+
      
 
 // Funzione per ottenere una scala a partire da una nota
