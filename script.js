@@ -424,6 +424,8 @@ function createDropdown(scaleType, weatherButton) {
   weatherButton.parentElement.insertBefore(dropdownContainer, weatherButton.nextSibling); // Aggiunge il menù a tendina creato al DOM (dopo il pulsante weatheButtons)
 }
 
+// Pullata Bande 31/01: modifica alle logiche updateChordButtons, toggleChordSelection, updateSelectedChordsDisplay
+
 // 2.4 Aggiornamento degli accordi in relazione alla scala scelta
 const chordButtonsContainer = document.querySelector(".chord-row");
 
@@ -460,39 +462,273 @@ const selectedChords = [];
 
 function toggleChordSelection(button) {
 
-  button.classList.toggle("active"); // Aggiunge/rimuove la classe "active" dal pulsante
-
-  const selectedChord = button.dataset.chord; // Recupera il valore dell'attributo data-chord associato al pulsante (vedi updateChordButtons)
-  const index = selectedChords.indexOf(selectedChord); // Cerca l'accordo selectedChord nell'array selectedChords (se è già presente restituisce il suo indice nell'array, altrimenti restituisce -1)
-
-  if (index === -1) {
-    selectedChords.push(selectedChord); // Aggiunge l'accordo selezionato all'array selectedChords
-
-  } else {
-    selectedChords.splice(index, 1); // Rimuove l'accordo selezionato (elemento nella posizione index) dall'array selectedCHords
-  }
+  const selectedChord = button.dataset.chord; // Recupera il valore dell'attributo data-chord
+  
+  selectedChords.push(selectedChord); // Aggiunge l'accordo all'array
 
   updateSelectedChordsDisplay();
-
 }
+
 
 // 2.6 Aggiornamento visualizzazione degli accordi selezionati
-const selectedChordsContainer = document.createElement("div"); // Contenitore per gli accordi selezionati
-selectedChordsContainer.classList.add("selectedChordsContainer");
-
-chordButtonsContainer.parentElement.appendChild(selectedChordsContainer); // Aggiunge l'elemento "selectedChordsContainer" come ultimo figlio dell'elemento genitore "chordButtonsContainer"
+const bottomPanelSlots = document.querySelectorAll(".bottom-panel .chord-slot");
 
 function updateSelectedChordsDisplay() {
+  selectedChords.forEach((chord, index) => {
+    if (index < bottomPanelSlots.length-1) { // Evita di superare il numero massimo di slot (8)
+      const slot = bottomPanelSlots[index];
+      let chordButton = slot.querySelector("button");
 
-  selectedChordsContainer.innerHTML = ""; // Svuota il contenitore degli accordi selezionati
+      if (!chordButton) {
+        // Se il bottone non esiste, lo crea
+        chordButton = document.createElement("button");
+        chordButton.classList.add("chord-btn");
+        slot.appendChild(chordButton);
 
-  selectedChords.forEach(chord => {
-    const chordBox = document.createElement("div");
-    chordBox.textContent = chord;
-    selectedChordsContainer.appendChild(chordBox);
+        // Aggiunge l'evento di rimozione solo alla creazione
+        chordButton.addEventListener("click", () => removeChordFromSequence(index));
+      }
+
+      // Aggiorna il contenuto del bottone senza ricrearlo
+      chordButton.textContent = getChordName(chord);
+      chordButton.dataset.chord = chord;
+    }
   });
 
+  // Rimuove eventuali accordi in eccesso
+  for (let i = selectedChords.length; i < bottomPanelSlots.length-1; i++) {
+    bottomPanelSlots[i].innerHTML = "";
+  }
+  
+  ensureShuffleButton(); // 🟢 Mantiene il bottone shuffle visibile
+  enableDragAndDrop(); // 🟢 ABILITA DRAG & DROP SOLO SUGLI ELEMENTI AGGIORNATI
 }
+
+
+function removeChordFromSequence(index) {
+  selectedChords.splice(index, 1); // Rimuove l'accordo selezionato in base all'indice
+  updateSelectedChordsDisplay(); // Aggiorna la UI
+}
+
+// Drag & Drop per riordinare gli accordi selezionati
+
+let draggedElement = null;
+let draggedIndex = null;
+
+function enableDragAndDrop() {
+  const chordSlots = document.querySelectorAll(".bottom-panel .chord-slot");
+
+  chordSlots.forEach((slot, index) => {
+    const button = slot.querySelector("button");
+    if (!button) return; // Se il contenitore è vuoto, salta
+
+    button.setAttribute("draggable", true);
+
+    // Rimuovi i listener precedenti prima di aggiungerli per evitare duplicazioni
+    button.removeEventListener("dragstart", dragStartHandler);
+    button.addEventListener("dragstart", dragStartHandler);
+
+    slot.removeEventListener("dragover", dragOverHandler);
+    slot.addEventListener("dragover", dragOverHandler);
+
+    slot.removeEventListener("drop", dropHandler);
+    slot.addEventListener("drop", dropHandler);
+
+    button.removeEventListener("dragend", dragEndHandler);
+    button.addEventListener("dragend", dragEndHandler);
+  });
+}
+
+// Funzione per avviare il trascinamento
+function dragStartHandler(event) {
+  draggedElement = event.target; // Memorizza l'elemento trascinato
+  draggedIndex = [...document.querySelectorAll(".bottom-panel .chord-slot button")].indexOf(draggedElement);
+  event.dataTransfer.effectAllowed = "move";
+  setTimeout(() => {
+    draggedElement.style.opacity = "0.5";
+  }, 0);
+}
+
+// Permette il drop e aggiunge uno stile visivo
+function dragOverHandler(event) {
+  event.preventDefault();
+  event.target.classList.add("drag-over");
+}
+
+// Gestisce il rilascio dell'elemento e lo sposta nella posizione corretta
+function dropHandler(event) {
+  event.preventDefault();
+  event.target.classList.remove("drag-over");
+
+  // Recupera l'indice corretto dell'elemento target
+  const chordButtons = [...document.querySelectorAll(".bottom-panel .chord-slot button")];
+  const targetIndex = chordButtons.indexOf(event.target);
+
+  if (draggedIndex !== targetIndex && targetIndex !== -1) {
+    swapChords(draggedIndex, targetIndex);
+  }
+}
+
+// Funzione per concludere il trascinamento
+function dragEndHandler() {
+  if (draggedElement) {
+    draggedElement.style.opacity = "1";
+  }
+  draggedElement = null;
+  draggedIndex = null;
+}
+
+// 🔄 Sposta l'accordo selezionato e fa scalare gli altri
+function swapChords(fromIndex, toIndex) {
+  if (fromIndex === toIndex) return; // Se la posizione di partenza è la stessa della destinazione, non fare nulla
+
+  let movedChord = selectedChords[fromIndex]; // Prende l'accordo da spostare
+
+  // Rimuove l'elemento da `fromIndex` e spostalo a `toIndex`
+  selectedChords.splice(fromIndex, 1); 
+  selectedChords.splice(toIndex, 0, movedChord);
+
+  // Ottimizzazione per evitare aggiornamenti del DOM troppo frequenti
+  setTimeout(() => {
+    updateSelectedChordsDisplay(); // Solo dopo aver completato l'operazione di spostamento, aggiorna la UI
+  }, 0);
+}
+
+// Logica tasto randomizzatore
+
+document.addEventListener("DOMContentLoaded", function () {
+  const shuffleButton = document.getElementById("shuffle-btn");
+  
+  shuffleButton.addEventListener("click", shuffleChords);
+});
+
+function ensureShuffleButton() {
+  let shuffleButton = document.getElementById("shuffle-btn");
+
+  if (!shuffleButton) {
+    const bottomPanel = document.querySelector(".bottom-panel");
+    
+    // Rimuove eventuali slot extra indesiderati (solo se superano il limite di 9)
+    while (bottomPanel.children.length > 9) {
+      bottomPanel.removeChild(bottomPanel.lastChild);
+    }
+
+    // Crea il contenitore solo se il bottone non esiste già
+    const shuffleSlot = document.createElement("div");
+    shuffleSlot.classList.add("chord-slot");
+
+    shuffleButton = document.createElement("button");
+    shuffleButton.id = "shuffle-btn";
+    shuffleButton.textContent = "⚡";
+    shuffleButton.addEventListener("click", shuffleChords);
+
+    shuffleSlot.appendChild(shuffleButton);
+    bottomPanel.appendChild(shuffleSlot);
+  }
+}
+
+function shuffleChords() {
+  if (selectedChords.length > 1) {
+    const shuffleButton = document.getElementById("shuffle-btn");
+
+    // Aggiunge la classe per l'animazione
+    shuffleButton.classList.add("shake");
+
+    // Dopo 600ms rimuove la classe per poterla riapplicare in futuro
+    setTimeout(() => {
+      shuffleButton.classList.remove("shake");
+    }, 600);
+
+    // Ordina casualmente senza riassegnare l'array
+    selectedChords.sort(() => Math.random() - 0.5);
+
+    updateSelectedChordsDisplay(); // Aggiorna la UI con il nuovo ordine
+  }
+}
+
+// Logica PlayChordsLoop e resetChordsLoop aggiornata
+
+// 2.8.2 Riproduzione loop con evidenziazione dell'accordo attivo
+function playChordsLoop() {
+  if (selectedChords.length === 0) {
+    alert("Seleziona almeno un accordo per avviare la riproduzione!");
+    return;
+  }
+
+  currentInterval = calculateInterval(bpm, timeSignature); // Calcola l'intervallo in base al BPM e time signature
+
+  let index = 0;
+  currentInterval = setInterval(() => {
+    // Rimuove l'illuminazione dal bottone dell'accordo precedente
+    document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
+
+    // Suona l'accordo e illumina il bottone corrispondente
+    playChord(selectedChords[index]);
+    const chordButtons = document.querySelectorAll(".chord-slot button");
+    
+    if (chordButtons[index]) {
+      chordButtons[index].classList.add("playing");
+    }
+
+    index = (index + 1) % selectedChords.length; // Passa all'accordo successivo, resetta a 0 alla fine
+
+  }, currentInterval);
+
+  const stopButton = document.getElementById("stop-btn");
+  if (stopButton) {
+    stopButton.addEventListener("click", stopChordsLoop);
+  }
+
+  const resetButton = document.getElementById("reset-btn");
+  if (resetButton) {
+    resetButton.addEventListener("click", resetChordsLoop);
+  }
+
+  function stopChordsLoop() {
+    if (currentInterval) {
+      clearInterval(currentInterval);
+      currentInterval = null;
+      console.log("Loop fermato, ma gli accordi selezionati sono ancora attivi:", selectedChords);
+
+      // Rimuove l'effetto di illuminazione
+      document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
+    }
+  }
+
+}
+
+// 🔄 Funzione per resettare la sequenza di accordi
+function resetChordsLoop() {
+  if (currentInterval) {
+      clearInterval(currentInterval);
+      currentInterval = null;
+  }
+
+  selectedChords.length = 0; // Svuota l'array degli accordi selezionati
+  console.log("Accordi deselezionati:", selectedChords);
+
+  // ✅ Resetta solo i primi 8 slot e NON crea slot extra
+  bottomPanelSlots.forEach((slot, index) => {
+    if (index < 8) {
+      slot.innerHTML = ""; // Svuota solo i primi 8 slot
+    }
+  });
+
+  // ✅ Mantiene il pulsante shuffle visibile e separato
+  ensureShuffleButton();
+
+  console.log("Loop fermato, accordi deselezionati e pulsanti ripristinati.");
+}
+
+// 🛠 Associa la funzione resetChordsLoop al tasto reset appena lo script viene caricato
+document.addEventListener("DOMContentLoaded", () => {
+  const resetButton = document.getElementById("reset-btn");
+  if (resetButton) {
+      resetButton.addEventListener("click", resetChordsLoop);
+  }
+});
+// Fine pullata Bande 31/01
+
 
 // 2.7 Logica funzionamento tasto "Play"
 const playButton = document.getElementById("play-btn");
@@ -519,68 +755,6 @@ function calculateInterval(bpm, timeSignature) {
       console.warn("Time signature non riconosciuta, impostazione predefinita su 4/4.");
       return (60000 / bpm) * 4;
   }
-}
-
-// 2.8.2 Riproduzione loop
-function playChordsLoop() {
-
-  if (selectedChords.length === 0) {
-    alert("Seleziona almeno un accordo per avviare la riproduzione!");
-    return;
-  }
-
-  currentInterval = calculateInterval(bpm, timeSignature); // Calcola l'intervallo in base alla time signature
-
-  let index = 0;
-  currentInterval = setInterval(() => { // Memorizza l'ID del timer nella variabile currentInterval
-    playChord(selectedChords[index]); // Riproduce l'accordo corrispondente all'indice corrente
-    index = (index + 1) % selectedChords.length; // Azzera l'indice quando arriva all'ultimo accordo della sequenza
-  }, currentInterval); 
-
-  const stopButton = document.getElementById("stop-btn");
-  if (stopButton) {
-    stopButton.addEventListener("click", stopChordsLoop); // Esegue la sottofunzione stopChordsLoop al premere del tasto stop
-  } else {
-    console.error("Pulsante Stop non trovato. Assicurati che abbia l'ID 'stop-btn'.");
-  }
-
-  const resetButton = document.getElementById("reset-btn");
-  if (resetButton) {
-    resetButton.addEventListener("click", resetChordsLoop); // Esegue la sottofunzione resetChordsLoop al premere del tasto reset
-  } else {
-    console.error("Pulsante Reset non trovato. Assicurati che abbia l'ID 'reset-btn'.");
-  }
-
-  // 2.8.2.1 Arresto senza deselezionare gli accordi
-  function stopChordsLoop() {
-
-    if (currentInterval) { // Verifica che currentInterval sia impostato
-      clearInterval(currentInterval); // Ferma il timer
-      currentInterval = null; // Resetta la variabile globale
-      console.log("Loop fermato, ma gli accordi selezionati sono ancora attivi:", selectedChords);
-    }
-  }
-
-  // 2.8.2.2 Arresto e ripristino alla configurazione di partenza
-  function resetChordsLoop() {
-
-    if (currentInterval) { 
-      clearInterval(currentInterval); 
-      currentInterval = null; 
-    }
-
-    selectedChords.length = 0; // Deselezione degli accordi (Svuota l'array contenente gli accordi selezionati)
-    console.log("Accordi deselezionati:", selectedChords);
-
-    selectedChordsContainer.innerHTML = ""; // Rimuove tutto il contenuto dal contenitore contenente gli accordi selezionati
-
-    const chordButtons = document.querySelectorAll(".chord-btn");
-    chordButtons.forEach(button => button.classList.remove("active")); // Ripristina tutti i pulsanti degli accordi allo stato iniziale rimuovendone la classe "active"
-
-    console.log("Loop fermato, accordi deselezionati e pulsanti ripristinati.");
-
-  }
-
 }
 
 
@@ -742,7 +916,7 @@ weatherButtons.snowy.addEventListener("click", () => {
 
 function changeBackground2(weather) {
   let imageUrl;
-  
+
   switch(weather) {
     default:
       imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
