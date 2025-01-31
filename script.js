@@ -107,12 +107,6 @@ function getWeatherData(city = "Milano") { // Default: Milano
     const randomScale = getRandomScale(weatherCondition);
     highlightWeatherButton(weatherCondition);
 
-    // Trova il primo pulsante con la classe 'weather-btn' e crea il dropdown per la condizione meteo
-    const weatherButton = document.querySelector('.weather-btn');
-    if (weatherButton) {
-    createDropdown(randomScale.scaleType, weatherButton); // Crea il dropdown per il tipo di scala specifico
-    }
-
     // Funzione che aggiorna accordi visualizzati
     updateChordButtons(randomScale.scaleType,randomScale.rootNote);
 
@@ -820,81 +814,6 @@ document.getElementById("time-signature").addEventListener("change", (e) => {
 });
 
 
-// 4 Impostazione suono di default corrispondente alla condizione meteo
-
-// Mappa dei bottoni meteo già dichiarata
-// Mappa dei suoni meteo
-const weatherSounds = {
-  sunny: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/birds.mp3'),
-  rainy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/rain.mp3'),
-  cloudy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/wind.mp3'),
-  snowy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/snow.mp3')
-};
-
-let currentSound = null; // Variabile per tenere traccia del suono in riproduzione
-
-// Funzione per riprodurre/fermare il suono
-function playWeatherSound(weather) {
-  let sound;
-
-  // Se è già in riproduzione lo stesso suono, fermalo
-  if (currentSound && currentSound !== weatherSounds[weather]) {
-    currentSound.pause();
-    currentSound.currentTime = 0; // Ripristina l'audio
-  }
-
-  // Ottieni il suono corrispondente alla condizione meteo
-  sound = weatherSounds[weather];
-  if (!sound) {
-    console.error("Suono non trovato per", weather);
-    return;
-  }
-
-  // Se il suono non è già in riproduzione, avvia la riproduzione
-  if (currentSound !== sound) {
-    console.log("Riproduzione suono:", sound.src);
-    sound.loop = true;
-    sound.currentTime = 0; // Riparte dall'inizio
-    sound.play();
-
-    // Imposta il volume iniziale dal valore dello slider
-    const volumeSlider = document.getElementById(`${weather}-volume`);
-    if (volumeSlider) {
-      sound.volume = parseFloat(volumeSlider.value); // Imposta il volume
-      volumeSlider.addEventListener("input", () => {
-        sound.volume = parseFloat(volumeSlider.value); // Cambia il volume in tempo reale
-      });
-    }
-
-    // Aggiorna la variabile currentSound
-    currentSound = sound;
-  } else {
-    // Se lo stesso suono è già in riproduzione, fermalo
-    sound.pause();
-    sound.currentTime = 0;
-    currentSound = null;
-  }
-}
-
-// Eventi sui bottoni meteo
-
-// Funzione che resetta un weather button al click di un altro)
-function resetButtons(except) {
-  Object.values(weatherButtons).forEach(button => {
-    if (button !== except) button.classList.remove("active");
-  });
-}
-
-Object.entries(weatherButtons).forEach(([weather, button]) => {
-  button.addEventListener("click", () => {
-    const isActive = button.classList.contains("active");
-    resetButtons(button); // Disattiva tutti gli altri bottoni
-    button.classList.toggle("active", !isActive); // Se era già attivo, lo spegne
-    playWeatherSound(weather);
-  });
-});
-
-
 // 4 Logica per l'immagine di sfondo al click del weather button
 
 weatherButtons.sunny.addEventListener("click", () => {
@@ -924,13 +843,13 @@ function changeBackground2(weather) {
       imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
       break;
     case 'rainyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/rainy.jpg';
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF';
       break;
     case 'cloudyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/cloudy.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF'; 
       break;
     case 'snowyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/snowy.jpg'; 
+      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'; 
       break;
   }
 
@@ -939,7 +858,6 @@ function changeBackground2(weather) {
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
 }
-
 
 // 5 Logica relativa all'attivazione dei buttons, sia quella dei suoni caratteristici sia quella della scala scelta random
 
@@ -1009,6 +927,7 @@ function playWeatherSound(weather) {
   }
 }
 
+// Eventi sui bottoni meteo
 
 // Funzione che resetta un weather button al click di un altro
 function resetButtons(except) {
@@ -1033,4 +952,3 @@ Object.entries(weatherButtons).forEach(([weather, button]) => {
     playWeatherSound(weather);
   });
 });
-
