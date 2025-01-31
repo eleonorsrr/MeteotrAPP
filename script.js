@@ -755,6 +755,7 @@ function calculateInterval(bpm, timeSignature) {
 // 3. Assegnazione degli eventi ai pulsanti
 
 // 3.1 Assegnazione delle scale proposte in base alla condizione meteo scelta
+// 3.1 Assegnazione delle scale proposte in base alla condizione meteo scelta
 const weatherButtons = {
   sunny: document.getElementById("sunny"),
   rainy: document.getElementById("rainy"),
@@ -762,20 +763,17 @@ const weatherButtons = {
   snowy: document.getElementById("snowy")
 };
 
-weatherButtons.sunny.addEventListener("click", () => {
-  createDropdown("major", weatherButtons.sunny);
-});
+// Creazione dei dropdown all'inizio per ciascun bottone meteo
+const weatherScales = {
+  sunny: "major",
+  rainy: "minor",
+  cloudy: "sus4",
+  snowy: "major7"
+};
 
-weatherButtons.rainy.addEventListener("click", () => {
-  createDropdown("minor", weatherButtons.rainy);
-});
-
-weatherButtons.cloudy.addEventListener("click", () => {
-  createDropdown("sus4", weatherButtons.cloudy);
-});
-
-weatherButtons.snowy.addEventListener("click", () => {
-  createDropdown("major7", weatherButtons.snowy);
+// Crea i dropdown per tutti i bottoni meteo all'inizio
+Object.entries(weatherButtons).forEach(([weather, button]) => {
+  createDropdown(weatherScales[weather], button); // Passa la scala corretta per ciascun bottone
 });
 
 
