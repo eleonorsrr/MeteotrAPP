@@ -159,7 +159,7 @@ const weatherCategories2 = {
     "light intensity shower rain and drizzle", "thunderstorm with drizzle"
   ],
   highrain: [
-    "heavy rain", "heavy shower rain"
+    "heavy rain", "heavy shower rain", "heavy intensity rain"
   ],
   fewclouds: [
     "few clouds", "scattered clouds", "broken clouds"
