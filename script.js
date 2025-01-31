@@ -895,7 +895,7 @@ Object.entries(weatherButtons).forEach(([weather, button]) => {
 });
 
 
-// Logica per l'immagine di sfondo al click del weather button
+// 4 Logica per l'immagine di sfondo al click del weather button
 
 weatherButtons.sunny.addEventListener("click", () => {
   changeBackground2("sunnyy", weatherButtons.sunny);
@@ -941,19 +941,96 @@ function changeBackground2(weather) {
 }
 
 
-
+// 5 Logica relativa all'attivazione dei buttons, sia quella dei suoni caratteristici sia quella della scala scelta random
 
 function highlightWeatherButton(condition) {
-  // Rimuove la classe 'active' da tutti i pulsanti meteo
+  // Rimuove la classe 'scaleactive' da tutti i pulsanti meteo
   document.querySelectorAll(".weather-btn").forEach(button => {
-    button.classList.remove("yellowactive");
+    button.classList.remove("scaleactive");
   });
 
-  // Seleziona il pulsante corrispondente alla condizione meteo e aggiunge la classe 'active'
+  // Seleziona il pulsante corrispondente alla condizione meteo e aggiunge la classe 'scaleactive'
   const activeButton = document.querySelector(`.weather-btn.${condition}`);
   if (activeButton) {
-    activeButton.classList.add("yellowactive");
+    activeButton.classList.add("scaleactive");
   }
 }
 
+// Mappa dei suoni meteo
+const weatherSounds = {
+  sunny: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/birds.mp3'),
+  rainy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/rain.mp3'),
+  cloudy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/wind.mp3'),
+  snowy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/snow.mp3')
+};
+
+let currentSound = null; // Variabile per tenere traccia del suono in riproduzione
+
+// Funzione per riprodurre/fermare il suono
+function playWeatherSound(weather) {
+  let sound;
+
+  // Se è già in riproduzione lo stesso suono, fermalo
+  if (currentSound && currentSound !== weatherSounds[weather]) {
+    currentSound.pause();
+    currentSound.currentTime = 0; // Ripristina l'audio
+  }
+
+  // Ottieni il suono corrispondente alla condizione meteo
+  sound = weatherSounds[weather];
+  if (!sound) {
+    console.error("Suono non trovato per", weather);
+    return;
+  }
+
+  // Se il suono non è già in riproduzione, avvia la riproduzione
+  if (currentSound !== sound) {
+    console.log("Riproduzione suono:", sound.src);
+    sound.loop = true;
+    sound.currentTime = 0; // Riparte dall'inizio
+    sound.play();
+
+    // Imposta il volume iniziale dal valore dello slider
+    const volumeSlider = document.getElementById(`${weather}-volume`);
+    if (volumeSlider) {
+      sound.volume = parseFloat(volumeSlider.value); // Imposta il volume
+      volumeSlider.addEventListener("input", () => {
+        sound.volume = parseFloat(volumeSlider.value); // Cambia il volume in tempo reale
+      });
+    }
+
+    // Aggiorna la variabile currentSound
+    currentSound = sound;
+  } else {
+    // Se lo stesso suono è già in riproduzione, fermalo
+    sound.pause();
+    sound.currentTime = 0;
+    currentSound = null;
+  }
+}
+
+
+// Funzione che resetta un weather button al click di un altro
+function resetButtons(except) {
+  Object.values(weatherButtons).forEach(button => {
+    if (button !== except) button.classList.remove("soundactive");
+  });
+}
+
+Object.entries(weatherButtons).forEach(([weather, button]) => {
+  button.addEventListener("click", () => {
+    // Rimuovi 'scaleactive' da tutti i bottoni meteo
+    document.querySelectorAll(".weather-btn").forEach(btn => {
+      btn.classList.remove("scaleactive");
+    });
+
+    // Aggiungi 'soundactive' al bottone cliccato
+    const isActive = button.classList.contains("soundactive");
+    resetButtons(button); // Disattiva tutti gli altri bottoni
+    button.classList.toggle("soundactive", !isActive); // Se era già attivo, lo spegne
+
+    // Riproduci il suono corrispondente
+    playWeatherSound(weather);
+  });
+});
 
