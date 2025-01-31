@@ -1,8 +1,8 @@
 // 1. Importazione script secondari
 
 // 1.1 Acquisizione, mappatura e preload dei campioni audio
-import { soulpad, epiano, indian, nightblade } from './sounds.js';
-console.log(soulpad, nightblade, epiano, indian);
+import { soulpad, nightblade, manor, ganymede } from './sounds.js';
+console.log(soulpad, nightblade, manor, ganymede);
 
 // 1.2.1 Definizione e mappatura di scale e accordi
 import { scales, chords } from './scalesandchords.js';
@@ -345,20 +345,20 @@ function changeBackground(weatherCondition2){
 // 2. Funzioni e/o logica per la gestione dell'applicazione
 
 // 2.1 Logica gestione cambio strumento
-let currentNotes = epiano; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
+let currentNotes = manor; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
 
 document.getElementById('instruments').addEventListener('change', (event) => {
 
   const selectedInstrument = event.target.value; // Rappresenta il valore attuale dell'elemento HTML che ha generato l'evento (lo strumento selezionato)
 
-  if (selectedInstrument === 'epiano') {
-    currentNotes = epiano;
+  if (selectedInstrument === 'manor') {
+    currentNotes = manor;
 
   } else if (selectedInstrument === 'nightblade') {
     currentNotes = nightblade;
 
-  } else if (selectedInstrument === 'indian') {
-    currentNotes = indian;
+  } else if (selectedInstrument === 'ganymede') {
+    currentNotes = ganymede;
 
   } else if (selectedInstrument === 'soulpad') {
     currentNotes = soulpad;
