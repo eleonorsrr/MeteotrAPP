@@ -393,3 +393,92 @@ select.dropdownContainer option:hover {
   width: 1050px;
   height: 50px;
 }
+
+/* Pullata Bande 31/01: bottoni nel bottom-panel e tasto randomizzatore
+/* Contenitori accordi selezionati in bottom-panel */
+.chord-slot {
+  width: 12%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  margin: 0 5px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Bottoni che occupano l'intero spazio disponibile nel loro contenitore */
+.chord-slot button {
+  width: 100%;
+  height: 100%;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Stile durante il trascinamento */
+.chord-slot button {
+  cursor: grab;
+}
+
+.chord-slot button:active {
+  cursor: grabbing;
+  opacity: 0.7;
+}
+
+.drag-over {
+  border: 2px dashed #000;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.chord-slot button.playing {
+  background-color: #ffeb3b !important; /* Giallo acceso */
+  box-shadow: 0 0 10px rgba(255, 235, 59, 0.8);
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
+
+/* Pulsante randomizzatore */
+#shuffle-btn {
+  background-color: rgb(1, 12, 130);
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  border: none;
+  width: 100%; /* Occupa tutto lo spazio dello slot */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+#shuffle-btn:hover {
+  background-color: rgb(30, 1, 91);
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.2s ease-in-out 3;
+}
+/* Fine pullata Bande 31/01 */
