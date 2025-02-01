@@ -23,7 +23,7 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
 ## App features 
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
 
- ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://github.io/meteotrAPP/assets/images/barra.png)
+ ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://eleonorsrr.github.io/meteotrAPP/assets/images/barra.png)
 
 ## Two creative experiences
   Le 2 modalità: interattiva e automatica 
