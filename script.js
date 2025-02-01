@@ -292,50 +292,64 @@ Object.values(images).forEach(gifUrl => {
 
 
 
-function changeBackground(weatherCondition2){
+function changeBackground(weatherCondition2) {
   let gifUrl;
 
   switch (weatherCondition2) {
     case "clear":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg';
       break;
     case "lowrain":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF';
       break;
     case "mediumrain":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumrain.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumrain.GIF';
       break;
     case "highrain":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highrain.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highrain.GIF';
       break;
     case "fewclouds":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/fewclouds.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/fewclouds.GIF';
       break;
     case "mediumclouds":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF';
       break;
     case "manyclouds":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/manyclouds.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/manyclouds.GIF';
       break;
     case "lowsnow":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowsnow.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowsnow.GIF';
       break;
     case "mediumsnow":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumsnow.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumsnow.GIF';
       break;
     case "highsnow":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF';
       break;
     default:
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg'
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
       break;
   }
 
-  document.body.style.backgroundImage = `url(${gifUrl})`;
-  document.body.style.backgroundSize = 'cover';
-  document.body.style.backgroundPosition = 'center';
-  document.body.style.backgroundRepeat = 'no-repeat';
+  // 1. Recupera il div per lo sfondo
+  const backgroundContainer = document.getElementById('background-container');
+  
+  // 2. Imposta l'opacità a 0 per iniziare la dissolvenza
+  backgroundContainer.style.opacity = 0;
+
+  // 3. Imposta un timeout per il cambio immagine dopo la dissolvenza
+  setTimeout(() => {
+    // 4. Cambia l'immagine di sfondo
+    backgroundContainer.style.backgroundImage = `url(${gifUrl})`;
+    backgroundContainer.style.backgroundSize = 'cover';
+    backgroundContainer.style.backgroundPosition = 'center';
+    backgroundContainer.style.backgroundRepeat = 'no-repeat';
+
+    // 5. Ristabilisci l'opacità a 1 per mostrare la nuova immagine
+    backgroundContainer.style.opacity = 1;
+  }, 1000);  // La durata della dissolvenza (1 secondo)
 }
+
 
 
 
@@ -388,11 +402,11 @@ function playChord(chord) {
 
 }
 
-// 2.3 Creazione e aggiornamento del menù a tendina (scelta della scala)
+// 2.3 Creazione e aggiornamento del menù a tendina (+ scelta della scala)
 function createDropdown(scaleType, weatherButton) {
 
   if (weatherButton.nextElementSibling && weatherButton.nextElementSibling.tagName === "SELECT") {
-    return; // Verifica che il pulsante weatherButtons abbia già "SELECT" come elemento successivo (se la tendina è già stata creata non fa nulla)
+    return; // Verifica che il pulsante weatherButtons abbia già "SELECT" come elemento successivo
   }
 
   const dropdownContainer = document.createElement("select"); // Crea un elemento di tipo "select" per il menù a tendina
@@ -413,10 +427,32 @@ function createDropdown(scaleType, weatherButton) {
 
   dropdownContainer.addEventListener("change", () => {
     updateChordButtons(scaleType, dropdownContainer.value); // Cambia gli accordi proposti ogni volta che viene selezionata una nuova opzione dal menù a tendina
+
+    // Mappa dei tipi di scala ai pulsanti meteo
+    const weatherMapping = {
+      'major': "sunny",
+      'minor': "rainy",
+      'sus4': "cloudy",
+      'major7': "snowy"
+    };
+
+    // Seleziona il pulsante meteo corrispondente e simula il click
+    // Selezionando una scala di un altro simbolo, autoseleziona il macro-button di appartenenza
+    const correspondingWeather = weatherMapping[scaleType];
+    if (correspondingWeather) {
+      const weatherButton = document.getElementById(correspondingWeather);
+      if (weatherButton) {
+        weatherButton.click(); // Simula il click per attivare il tasto meteo corretto
+      }
+    }
   });
 
   weatherButton.parentElement.insertBefore(dropdownContainer, weatherButton.nextSibling); // Aggiunge il menù a tendina creato al DOM (dopo il pulsante weatheButtons)
 }
+
+
+
+
 
 // Pullata Bande 31/01: modifica alle logiche updateChordButtons, toggleChordSelection, updateSelectedChordsDisplay
 
@@ -744,7 +780,13 @@ function calculateInterval(bpm, timeSignature) {
     case '3/4':
       return (60000 / bpm) * 3; // Un accordo per battuta in 3/4
     case '6/8':
-      return (60000/(bpm/2)) * 2; // Due accordi per battuta in 6/8 (SBAGLIATO)
+      return (60000/(bpm/2)) * 2; // Due accordi per battuta in 6/8
+      case '2/4':
+        return (60000 / bpm) * 2; // Due battiti per battuta in 2/4
+      case '5/4':
+        return (60000 / bpm) * 5; // Cinque battiti per battuta in 5/4 (Take Five -  Dave Brubeck)
+      case '7/4':
+        return (60000 / bpm) * 7; // Sette battiti per battuta in 7/4 (Money - Pink Floyd)
     default:
       console.warn("Time signature non riconosciuta, impostazione predefinita su 4/4.");
       return (60000 / bpm) * 4;
@@ -830,32 +872,47 @@ weatherButtons.snowy.addEventListener("click", () => {
   changeBackground2("snowyy", weatherButtons.snowy);
 });
 
-
 function changeBackground2(weather) {
   let imageUrl;
 
-  switch(weather) {
-    default:
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
-    case 'sunnyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
-      break;
-    case 'rainyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF';
-      break;
-    case 'cloudyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF'; 
-      break;
-    case 'snowyy':
-      imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'; 
-      break;
-  }
+  // 1. Imposta l'opacità a 0 per avviare la dissolvenza
+  const backgroundContainer = document.getElementById('background-container');
+  backgroundContainer.style.opacity = 0;
 
-  document.body.style.backgroundImage = `url(${imageUrl})`;
-  document.body.style.backgroundSize = 'cover';
-  document.body.style.backgroundPosition = 'center';
-  document.body.style.backgroundRepeat = 'no-repeat';
+  // 2. Imposta un timeout per dare il tempo alla dissolvenza di terminare
+  setTimeout(() => {
+    // 3. Determina l'immagine da usare
+    switch(weather) {
+      default:
+        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
+        break;
+      case 'sunnyy':
+        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
+        break;
+      case 'rainyy':
+        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF';
+        break;
+      case 'cloudyy':
+        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumclouds.GIF'; 
+        break;
+      case 'snowyy':
+        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highsnow.GIF'; 
+        break;
+    }
+
+    // 4. Cambia l'immagine di sfondo
+    backgroundContainer.style.backgroundImage = `url(${imageUrl})`;
+    backgroundContainer.style.backgroundSize = 'cover';
+    backgroundContainer.style.backgroundPosition = 'center';
+    backgroundContainer.style.backgroundRepeat = 'no-repeat';
+
+    // 5. Ristabilisci l'opacità a 1 per rendere visibile il nuovo sfondo
+    backgroundContainer.style.opacity = 1;
+  }, 1000); // Il timeout corrisponde alla durata della transizione (1 secondo)
 }
+
+
+
 
 // 5 Logica relativa all'attivazione dei buttons, sia quella dei suoni caratteristici sia quella della scala scelta random
 
