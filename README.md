@@ -69,7 +69,7 @@ The bottom section of the interface provides a space for arranging and modifying
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.
   
-  <img width="500" alt="barrasotto" src="https://github.com/user-attachments/assets/8717203b-fc5c-4df4-a7a1-dd95e31959f6" />
+  <img width="1000" alt="barrasotto" src="https://github.com/user-attachments/assets/8717203b-fc5c-4df4-a7a1-dd95e31959f6" />
 
 
  ---------------------------------
