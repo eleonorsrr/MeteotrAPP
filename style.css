@@ -76,6 +76,19 @@ body {
   gap: 0.5rem;
 }
 
+#instrument-suggestion {
+  font-style: italic;
+  font-size: 11px;
+  color: #333;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  margin-top: 2px;
+  text-align: center;
+  margin-left: 185px;
+}
+
 .instrument-selection {
   display: flex;
   align-items: center;
@@ -500,3 +513,51 @@ select.dropdownContainer option:hover {
   animation: shake 0.2s ease-in-out 3;
 }
 /* Fine pullata Bande 31/01 */
+
+/* ANNA 01/02 schermata iniziale*/
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    z-index: 9999; /* Assicurati che sia sopra tutti gli altri elementi */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+.intro-content {
+  color: white;
+  text-align: center;
+  max-width: 500px;
+  padding: 20px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-family: 'Nunito';
+}
+
+#start-button {
+  padding: 10px 20px;
+  background-color: #BEC7F4E6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: 'Nunito';
+}
+
+#start-button:hover {
+  background-color: #798ef6e6;
+}
+
+.hidden {
+  display: none;
+}
+
