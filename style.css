@@ -1,4 +1,14 @@
 /* 1. Generale */
+#background-container {
+  position: fixed;  /* Copre tutto lo schermo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;  /* Lo sfondo sarà dietro il contenuto dell'app */
+  transition: opacity 1s ease-in-out;  /* Transizione per dissolvenza */
+}
+
 body {
   background-image: url('https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg');
   background-size: cover;
