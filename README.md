@@ -35,24 +35,28 @@ The top panel contains essential controls for managing playback and tempo settin
 The central panel provides manual control over the weather-based sound selection:
 
 - **Weather Buttons:** Select a weather condition to change the background and activate its characteristic sound. Pressing an active button again stops the sound.  
-- **Root Note Selection:** Choosing a root note displays the corresponding chords for that scale.  
+- **Root Note Selection:** Choosing a root note from the dropdown container of a desidered condition displays the corresponding chords for that scale, that will appear below in the same central panel.
+
+- **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.  
 
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
 
 - **Instrument Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Ganymede, Night Blade**.  
-- **City Selection & Weather Data:** Displays the current weather details for the selected city, including:  
+- **City Selection & Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
   - Temperature (current, max, min)  
   - Wind speed and direction  
   - Local time in the selected city  
-- **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.  
+
 
 ### 🎼 Chord Arrangement Panel
 The bottom section of the interface provides a space for arranging and modifying the chord progression:
 
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.  
+
+ ---------------------------------
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
 
  ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://eleonorsrr.github.io/MeteotrAPP/assets/images/barra.png)
