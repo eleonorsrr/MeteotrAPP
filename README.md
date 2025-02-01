@@ -29,7 +29,7 @@ The top panel contains essential controls for managing playback and tempo settin
 - 🔴 **Stop Button:** Stops playback without clearing the current selection.  
 - 🟣 **Reset Button:** Clears the current selection, allowing a new one to be created.  
 - ⏱️ **BPM Selector:** Adjusts the beats per minute (default: 120 BPM). Changes can only be made while the loop is paused.  
-- 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, and 6/8** (default: 4/4).
+- 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, 6/8, 2/4, 5/4, 7/4** (default: 4/4).
   
 ![barra](https://github.com/user-attachments/assets/cfceadc1-8758-41c2-b257-b328520a9c29)
 
@@ -59,9 +59,10 @@ The lower section of the interface provides additional customization and real-ti
   - Temperature (current, max, min)  
   - Wind speed and direction  
   - Local time in the selected city
- 
-    aggiungere foto pannello weather data!!!!!!!
- 
+  - Air humidity and pressure
+
+ <img width="800" alt="scelte" src="https://github.com/user-attachments/assets/5671dfcd-b658-4e69-8ac7-a887b953baf0" />
+  
 
 ### 🎼 Chord Arrangement Panel
 The bottom section of the interface provides a space for arranging and modifying the chord progression:
@@ -73,7 +74,6 @@ The bottom section of the interface provides a space for arranging and modifying
 
 
  ---------------------------------
- ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti) 
 
  
 ## Two creative experiences
