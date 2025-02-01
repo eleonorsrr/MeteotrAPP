@@ -21,6 +21,8 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
 <img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/d75069df-1be7-406f-8cdd-a59c9e161e16" />
 
 ## 🎛️ App features: Interface Overview
+By opening the app, a quick tutorial of the main features of the app will be displayed. This will allow the user to have a more functional and coherent flow in the creative experience, through a step by step mini guide.
+The interface is divdided in sections, explained below.
 
 ### 🔝 Top Panel
 The top panel contains essential controls for managing playback and tempo settings:
