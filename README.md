@@ -30,7 +30,7 @@ The top panel contains essential controls for managing playback and tempo settin
 - 🟣 **Reset Button:** Clears the current selection, allowing a new one to be created.  
 - ⏱️ **BPM Selector:** Adjusts the beats per minute (default: 120 BPM). Changes can only be made while the loop is paused.  
 - 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, and 6/8** (default: 4/4).
-- 
+  
 ![barra](https://github.com/user-attachments/assets/cfceadc1-8758-41c2-b257-b328520a9c29)
 
 
