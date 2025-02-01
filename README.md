@@ -24,7 +24,14 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
 
  ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://eleonorsrr.github.io/MeteotrAPP/assets/images/barra.png)
+ 
+ ![Central panel](https://eleonorsrr.github.io/MeteotrAPP/assets/images/pannello centrale.png)
 
+ ![Choices](https://eleonorsrr.github.io/MeteotrAPP/assets/images/scelte.png)
+
+ ![Parameters](https://eleonorsrr.github.io/MeteotrAPP/assets/images/weather parameters.png)
+
+ 
 ## Two creative experiences
   Le 2 modalità: interattiva e automatica 
 
