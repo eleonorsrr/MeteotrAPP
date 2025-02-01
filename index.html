@@ -22,6 +22,19 @@
   <img src="https://eleonorsrr.github.io/MeteotrAPP/assets/images/logo.png" alt="Logo MeteotrAPP">
 </div>
 
+ <!-- ANNA 1/02 Schermata introduttiva -->
+ <div id="intro-screen" class="intro-overlay">
+  <div class="intro-content">
+    <h1>Welcome in MeteotrAPP! ⛅️</h1>
+    <div class="logo-container">
+      <img src="https://eleonorsrr.github.io/MeteotrAPP/assets/images/logo.png" alt="Logo MeteotrAPP">
+    </div>
+    <h2>Let the weather shape your musical idea!</h2>
+    <p>Follow the steps to create weather-based symphonies ➡️</p>
+    <button id="start-button">START</button>
+  </div>
+</div>
+
 
 <body>
   
@@ -105,8 +118,6 @@
 
     </div>
 
-
-
     <div class="weather-panel">
       <div class="instrument-search-container">
         <div class="instrument-selection">
@@ -118,7 +129,9 @@
             <option value="soulpad">Soul Pad</option>
           </select>
         </div>
-    
+
+ <div id="instrument-suggestion" class="suggestion-box"></div>
+
         <div id="city-search">
           <input type="text" id="city-input" placeholder="Search location..." />
           <button id="search-btn">Go</button>
