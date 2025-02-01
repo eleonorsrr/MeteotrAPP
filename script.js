@@ -64,11 +64,11 @@ function getWeatherData(city = "Milano") { // Default: Milano
   .then(data => {
     // Mostra i dati nel pannello laterale
     document.getElementById('location').innerText = data.name;
-    document.getElementById('temp-current').innerText = data.main.temp; // Temperatura attuale
-    document.getElementById('temp-min').innerText = data.main.temp_min; // Temperatura minima
-    document.getElementById('temp-max').innerText = data.main.temp_max; // Temperatura massima
-    document.getElementById('wind-speed').innerText = data.wind.speed; // Velocità del vento
-    document.getElementById('wind-direction').innerText = data.wind.deg; // Direzione del vento
+    document.getElementById('temp-current').innerText = data.main.temp + " °C"; // Temperatura attuale
+    document.getElementById('temp-min').innerText = data.main.temp_min + " °C"; // Temperatura minima
+    document.getElementById('temp-max').innerText = data.main.temp_max + " °C"; // Temperatura massima
+    document.getElementById('wind-speed').innerText = data.wind.speed + " m/s"; // Velocità del vento
+    document.getElementById('wind-direction').innerText = data.wind.deg + "°"; // Direzione del vento
     document.getElementById('humidity').innerText = data.main.humidity + " %"; // Umidità
     document.getElementById('pressure').innerText = data.main.pressure + " hPa"; // Pressione atmosferica
     
