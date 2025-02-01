@@ -951,50 +951,60 @@ const weatherSounds = {
 
 let currentSound = null; // Variabile per tenere traccia del suono in riproduzione
 
+// ANNA 01/02 ho pushato da qua modificando la funzione originale
+
 // Funzione per riprodurre/fermare il suono
 function playWeatherSound(weather) {
-  let sound;
-
-  // Se è già in riproduzione lo stesso suono, fermalo
-  if (currentSound && currentSound !== weatherSounds[weather]) {
-    currentSound.pause();
-    currentSound.currentTime = 0; // Ripristina l'audio
-  }
-
-  // Ottieni il suono corrispondente alla condizione meteo
-  sound = weatherSounds[weather];
+  let sound = weatherSounds[weather];
   if (!sound) {
     console.error("Suono non trovato per", weather);
     return;
   }
 
-  // Se il suono non è già in riproduzione, avvia la riproduzione
+  // Ferma il suono precedente se diverso
+  if (currentSound && currentSound !== sound) {
+    currentSound.pause();
+    currentSound.currentTime = 0;
+  }
+
+  // Avvia o ferma il suono attuale
   if (currentSound !== sound) {
-    console.log("Riproduzione suono:", sound.src);
     sound.loop = true;
-    sound.currentTime = 0; // Riparte dall'inizio
+    sound.currentTime = 0;
     sound.play();
 
-    // Imposta il volume iniziale dal valore dello slider
+    // Imposta il volume dal valore dello slider
     const volumeSlider = document.getElementById(`${weather}-volume`);
     if (volumeSlider) {
-      sound.volume = parseFloat(volumeSlider.value); // Imposta il volume
+      sound.volume = parseFloat(volumeSlider.value);
       volumeSlider.addEventListener("input", () => {
-        sound.volume = parseFloat(volumeSlider.value); // Cambia il volume in tempo reale
+        sound.volume = parseFloat(volumeSlider.value);
       });
     }
-
-    // Aggiorna la variabile currentSound
     currentSound = sound;
   } else {
-    // Se lo stesso suono è già in riproduzione, fermalo
     sound.pause();
     sound.currentTime = 0;
     currentSound = null;
   }
 }
 
-// Eventi sui bottoni meteo
+// Mappa degli strumenti suggeriti per ciascun meteo
+const weatherInstruments = {
+  sunny: "*suggestion: Manor Grand",
+  rainy: "*suggestion: Ganymede",
+  cloudy: "*suggestion: Night Blade",
+  snowy: "*suggestion: Soul Path"
+};
+
+// Funzione per mostrare il suggerimento dello strumento
+function suggestInstrument(weather) {
+  const suggestionContainer = document.getElementById("instrument-suggestion");
+  if (!suggestionContainer) return;
+
+  const suggestionText = weatherInstruments[weather];
+  suggestionContainer.textContent = suggestionText ? suggestionText : "Strumento non disponibile per questa condizione meteo.";
+}
 
 // Funzione che resetta un weather button al click di un altro
 function resetButtons(except) {
@@ -1003,28 +1013,25 @@ function resetButtons(except) {
   });
 }
 
+// Eventi sui bottoni meteo con tutte le funzionalità
 Object.entries(weatherButtons).forEach(([weather, button]) => {
   button.addEventListener("click", () => {
-    // Rimuovi 'scaleactive' da tutti i bottoni meteo
-    document.querySelectorAll(".weather-btn").forEach(btn => {
-      btn.classList.remove("scaleactive");
-    });
+    // Rimuove la classe 'scaleactive' da tutti i bottoni
+    document.querySelectorAll(".weather-btn").forEach(btn => btn.classList.remove("scaleactive"));
 
-    // Aggiungi 'soundactive' al bottone cliccato
+    // Gestione stato bottone e reset degli altri
     const isActive = button.classList.contains("soundactive");
-    resetButtons(button); // Disattiva tutti gli altri bottoni
-    button.classList.toggle("soundactive", !isActive); // Se era già attivo, lo spegne
+    resetButtons(button);
+    button.classList.toggle("soundactive", !isActive);
 
-    // Riproduci il suono corrispondente
+    // Attivazione funzioni principali
+    highlightWeatherButton(weather);
     playWeatherSound(weather);
+    suggestInstrument(weather);
   });
 });
 
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {  // Verifica se il tasto premuto è "Enter"
-      event.preventDefault();  // Previene il comportamento predefinito (utile nei form)
-      document.getElementById("search-btn").click();  // Simula il click del bottone
-  }
+
+document.getElementById("start-button").addEventListener("click", () => {
+  document.getElementById("intro-screen").classList.add("hidden");
 });
-
-
