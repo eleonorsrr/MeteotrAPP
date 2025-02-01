@@ -39,25 +39,31 @@ The central panel provides manual control over the weather-based sound selection
 
 - **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
+![pannello centrale](https://github.com/user-attachments/assets/47ae0373-2ac3-46ac-9b10-89edabbf1f4c)
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.  
+![mappa](https://github.com/user-attachments/assets/ac5ac246-2b41-42f1-a8f3-59f32f11006a)
 
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
-
-- **Instrument Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Ganymede, Night Blade**.  
+- **Instrument and City Selection Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Ganymede, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world!
+  ![scelte](https://github.com/user-attachments/assets/5058d3a3-86d0-4e34-bf60-562f1058c631)
+  
 - **City Selection & Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
   - Temperature (current, max, min)  
   - Wind speed and direction  
-  - Local time in the selected city  
-
+  - Local time in the selected city
+ 
+    aggiungere foto pannello weather data!!!!!!!
+ 
 
 ### 🎼 Chord Arrangement Panel
 The bottom section of the interface provides a space for arranging and modifying the chord progression:
 
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.  
+![barrasotto](https://github.com/user-attachments/assets/8717203b-fc5c-4df4-a7a1-dd95e31959f6)
 
  ---------------------------------
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti) 
