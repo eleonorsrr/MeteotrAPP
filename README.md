@@ -20,7 +20,39 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
 
 <img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/d75069df-1be7-406f-8cdd-a59c9e161e16" />
 
-## App features 
+## 🎛️ App features: Interface Overview
+
+### 🔝 Top Panel
+The top panel contains essential controls for managing playback and tempo settings:
+
+- 🟡 **Play Button:** Starts looping the selected chords.  
+- 🔴 **Stop Button:** Stops playback without clearing the current selection.  
+- 🟣 **Reset Button:** Clears the current selection, allowing a new one to be created.  
+- ⏱️ **BPM Selector:** Adjusts the beats per minute (default: 120 BPM). Changes can only be made while the loop is paused.  
+- 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, and 6/8** (default: 4/4).  
+
+### 🌦️ Central Panel
+The central panel provides manual control over the weather-based sound selection:
+
+- **Weather Buttons:** Select a weather condition to change the background and activate its characteristic sound. Pressing an active button again stops the sound.  
+- **Root Note Selection:** Choosing a root note displays the corresponding chords for that scale.  
+
+### 🎹 Instrument & Weather Data Panel
+The lower section of the interface provides additional customization and real-time weather information:
+
+- **Instrument Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Ganymede, Night Blade**.  
+- **City Selection & Weather Data:** Displays the current weather details for the selected city, including:  
+  - General condition (e.g., clear sky, light rain, broken clouds)  
+  - Temperature (current, max, min)  
+  - Wind speed and direction  
+  - Local time in the selected city  
+- **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.  
+
+### 🎼 Chord Arrangement Panel
+The bottom section of the interface provides a space for arranging and modifying the chord progression:
+
+- **Drag & Drop:** Rearrange selected chords manually.  
+- ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.  
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
 
  ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://eleonorsrr.github.io/MeteotrAPP/assets/images/barra.png)
