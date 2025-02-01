@@ -37,8 +37,8 @@ The top panel contains essential controls for managing playback and tempo settin
 ### 🌦️ Central Panel
 The central panel provides manual control over the weather-based sound selection:
 
-- **Weather Buttons:** Select a weather condition to change the background and activate its characteristic sound. Pressing an active button again stops the sound.  
-- **Root Note Selection:** Choosing a root note from the dropdown container of a desidered condition displays the corresponding chords for that scale, that will appear below in the same central panel.
+- **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
+- **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.  
 
