@@ -100,5 +100,15 @@ This mode allows users to manually select a weather condition without relying on
 For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
 <img width="500" alt="mi minore" src="https://github.com/user-attachments/assets/fd1c34e4-2602-4042-a01d-adfc3375d01c" />
 
-## Tester feedback
-  ⁠⁠Test sul consumatore: generare google form da inviare a tot persone per un lasso di tempo breve (finché funziona il backend), raccogliere i dati e stilare funzionalità e difetti dell’app secondo il parere esterno
+## Users' feedback
+
+To refine and enhance our app, we created a **Google Form** and shared it with friends to gather valuable insights. The survey was divided into four main sections:  
+
+- **General Experience**  
+- **Musical Features**  
+- **Technical Aspects**  
+- **Improvements**  
+
+Based on the responses collected, we dedicated time to improving the app according to the users' needs and feedback.  
+
+Below is a chart summarizing the overall trends in the responses from the users who participated in the test and survey:  
