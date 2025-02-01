@@ -49,7 +49,7 @@ The central panel provides manual control over the weather-based sound selection
 
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
-- **Instrument and City Selection Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Ganymede, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world!
+- **Instrument and City Selection Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world!
   
   <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/5058d3a3-86d0-4e34-bf60-562f1058c631" />
 
