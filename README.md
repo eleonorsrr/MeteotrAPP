@@ -22,13 +22,8 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
 
 ## App features 
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
- <img width="1470" alt="barra" src="https://github.com/user-attachments/assets/c8243ee3-e12a-4cad-84fc-2c212e12d05c" />
-//
-<img width="500" alt="weather parameters" src="https://github.com/user-attachments/assets/91ddd19f-948b-4009-a2e0-a3d1a6c86572" />
-//
-<img width="500" alt="scelte" src="https://github.com/user-attachments/assets/bd98af6d-cee7-4b5f-8439-9a6f95e8a91e" />
-//
-<img width="500" alt="pannello centrale" src="https://github.com/user-attachments/assets/09e77482-e64b-4f81-9533-d52f9b730d4f" />
+
+ ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://github.io/meteotrAPP/assets/images/barra.png)
 
 ## Two creative experiences
   Le 2 modalità: interattiva e automatica 
