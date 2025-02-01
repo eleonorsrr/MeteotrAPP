@@ -29,7 +29,10 @@ The top panel contains essential controls for managing playback and tempo settin
 - 🔴 **Stop Button:** Stops playback without clearing the current selection.  
 - 🟣 **Reset Button:** Clears the current selection, allowing a new one to be created.  
 - ⏱️ **BPM Selector:** Adjusts the beats per minute (default: 120 BPM). Changes can only be made while the loop is paused.  
-- 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, and 6/8** (default: 4/4).  
+- 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, and 6/8** (default: 4/4).
+
+   ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://eleonorsrr.github.io/MeteotrAPP/assets/images/barra.png)
+
 
 ### 🌦️ Central Panel
 The central panel provides manual control over the weather-based sound selection:
@@ -57,10 +60,7 @@ The bottom section of the interface provides a space for arranging and modifying
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.  
 
  ---------------------------------
- ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
-
- ![Top panel: Play, Stop, Reset, BPM, Time-signature](https://eleonorsrr.github.io/MeteotrAPP/assets/images/barra.png)
- 
+ ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti) 
 
  
 ## Two creative experiences
