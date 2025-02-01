@@ -989,6 +989,13 @@ function playWeatherSound(weather) {
   }
 }
 
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {  // Verifica se il tasto premuto è "Enter"
+        event.preventDefault();  // Previene il comportamento predefinito (utile nei form)
+        document.getElementById("search-btn").click();  // Simula il click del bottone
+    }
+});
+
 // Mappa degli strumenti suggeriti per ciascun meteo
 const weatherInstruments = {
   sunny: "*suggestion: Manor Grand",
