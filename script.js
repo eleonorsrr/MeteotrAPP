@@ -1,8 +1,8 @@
 // 1. Importazione script secondari
 
 // 1.1 Acquisizione, mappatura e preload dei campioni audio
-import { soulpad, nightblade, manor, ganymede } from './sounds.js';
-console.log(soulpad, nightblade, manor, ganymede);
+import { soulpad, nightblade, manor, grandpiano } from './sounds.js';
+console.log(soulpad, nightblade, manor, grandpiano);
 
 // 1.2.1 Definizione e mappatura di scale e accordi
 import { scales, chords } from './scalesandchords.js';
@@ -361,20 +361,20 @@ function changeBackground(weatherCondition2) {
 // 2. Funzioni e/o logica per la gestione dell'applicazione
 
 // 2.1 Logica gestione cambio strumento
-let currentNotes = manor; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
+let currentNotes = grandpiano; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
 
 document.getElementById('instruments').addEventListener('change', (event) => {
 
   const selectedInstrument = event.target.value; // Rappresenta il valore attuale dell'elemento HTML che ha generato l'evento (lo strumento selezionato)
 
-  if (selectedInstrument === 'manor') {
+  if (selectedInstrument === 'grandpiano') {
     currentNotes = manor;
 
   } else if (selectedInstrument === 'nightblade') {
     currentNotes = nightblade;
 
-  } else if (selectedInstrument === 'ganymede') {
-    currentNotes = ganymede;
+  } else if (selectedInstrument === 'manor') {
+    currentNotes = manor;
 
   } else if (selectedInstrument === 'soulpad') {
     currentNotes = soulpad;
@@ -999,7 +999,7 @@ document.addEventListener("keydown", function(event) {
 // Mappa degli strumenti suggeriti per ciascun meteo
 const weatherInstruments = {
   sunny: "*suggestion: Manor Grand",
-  rainy: "*suggestion: Ganymede",
+  rainy: "*suggestion: Grand Piano",
   cloudy: "*suggestion: Night Blade",
   snowy: "*suggestion: Soul Path"
 };
