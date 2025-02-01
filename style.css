@@ -365,7 +365,7 @@ select.dropdownContainer option:hover {
   color: #555555;
 }
 
-#temp-current, #temp-min, #temp-max, #humidity, #pressure, #wind-speed, #wind-direction, {
+#temp-current, #temp-min, #temp-max, #humidity, #wind-speed, #wind-direction, #pressure {
   font-weight: bold;
   color: #3e54c2e6;
 }
