@@ -1,6 +1,6 @@
 # MeteotrAPP: A Weather-Based Chord Progression Generator
 
-## What is WeatherChord?
+## What is MeteotrAPP?
 
 WeatherChord is a web app designed to inspire musicians and music lovers by generating chord progressions based on real-time weather conditions. By categorizing atmospheric conditions into four main types —**Sunny, Rainy, Cloudy, and Snowy**— the app assigns a unique harmonic character to each, allowing users to explore different moods and textures in their music.
 
