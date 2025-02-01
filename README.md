@@ -76,8 +76,29 @@ The bottom section of the interface provides a space for arranging and modifying
  ---------------------------------
 
  
-## Two creative experiences
-  Le 2 modalità: interattiva e automatica 
+## 🎵 Usage modes: two creative experiences
+
+MeteotrAPP offers two distinct modes for generating chord progressions:
+
+### 🌍 Automatic Mode
+In this mode, users can immediately search for a city using the search bar. Once a city is selected and the **Go** button (or the Enter key) is pressed, the app fetches real-time weather data using the **OpenWeather API**. The detected weather condition will:
+
+- Highlight the corresponding **weather button**.  
+- Change the background to reflect the weather.  
+- Generate a **random chord progression** based on the relevant scale.  
+
+For example, if the searched city has a **clear sky**, a random progression from the **Major Scale** (e.g., D Major) will be suggested.
+<img width="500" alt="re maggiore" src="https://github.com/user-attachments/assets/49ad82a1-e136-495e-be72-1aa16dfcd16a" />
+
+### 🎮 Play Mode
+This mode allows users to manually select a weather condition without relying on city-based weather data.
+
+- Select a condition choosing from one of the 4 **weather buttons** (to activate the characteristic sound, or go directly to the root note selection).
+- Choose one of the **7 available root notes** for that condition.  
+- The chord progression of the selected scale will appear.  
+
+For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
+<img width="500" alt="mi minore" src="https://github.com/user-attachments/assets/fd1c34e4-2602-4042-a01d-adfc3375d01c" />
 
 ## Tester feedback
   ⁠⁠Test sul consumatore: generare google form da inviare a tot persone per un lasso di tempo breve (finché funziona il backend), raccogliere i dati e stilare funzionalità e difetti dell’app secondo il parere esterno
