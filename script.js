@@ -69,6 +69,8 @@ function getWeatherData(city = "Milano") { // Default: Milano
     document.getElementById('temp-max').innerText = data.main.temp_max; // Temperatura massima
     document.getElementById('wind-speed').innerText = data.wind.speed; // Velocità del vento
     document.getElementById('wind-direction').innerText = data.wind.deg; // Direzione del vento
+    document.getElementById('humidity').innerText = data.main.humidity + " %"; // Umidità
+    document.getElementById('pressure').innerText = data.main.pressure + " hPa"; // Pressione atmosferica
     
     // Mostra descrizione delle condizioni meteo
     const weatherDescription = data.weather[0].description;
