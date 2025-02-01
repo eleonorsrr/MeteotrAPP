@@ -4,7 +4,7 @@
 const UrlNIGHTBLADE = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/night blade/';
 const UrlSOULPAD = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/soul revived pad/';
 const UrlMANOR = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/manor/';
-const UrlGANYMEDE = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/ganymede/';
+const UrlGRANDPIANO = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/grand piano/';
 
 
 // 1.2 Mappatura delle note con i rispettivi URL
@@ -128,44 +128,44 @@ const manor = {
   C4: new Audio(`${UrlMANOR}Manor grand_37.wav`)
 };
 
-const ganymede = {
-  C: new Audio(`${UrlGANYMEDE}Ganymede.wav`),
-  Csharp: new Audio(`${UrlGANYMEDE}Ganymede_2.wav`),
-  D: new Audio(`${UrlGANYMEDE}Ganymede_3.wav`),
-  Dsharp: new Audio(`${UrlGANYMEDE}Ganymede_4.wav`),
-  E: new Audio(`${UrlGANYMEDE}Ganymede_5.wav`),
-  F: new Audio(`${UrlGANYMEDE}Ganymede_6.wav`),
-  Fsharp: new Audio(`${UrlGANYMEDE}Ganymede_7.wav`),
-  G: new Audio(`${UrlGANYMEDE}Ganymede_8.wav`),
-  Gsharp: new Audio(`${UrlGANYMEDE}Ganymede_9.wav`),
-  A: new Audio(`${UrlGANYMEDE}Ganymede_10.wav`),
-  Asharp: new Audio(`${UrlGANYMEDE}Ganymede_11.wav`),
-  B: new Audio(`${UrlGANYMEDE}Ganymede_12.wav`),
-  C2: new Audio(`${UrlGANYMEDE}Ganymede_13.wav`),
-  C2sharp: new Audio(`${UrlGANYMEDE}Ganymede_14.wav`),
-  D2: new Audio(`${UrlGANYMEDE}Ganymede_15.wav`),
-  D2sharp: new Audio(`${UrlGANYMEDE}Ganymede_16.wav`),
-  E2: new Audio(`${UrlGANYMEDE}Ganymede_17.wav`),
-  F2: new Audio(`${UrlGANYMEDE}Ganymede_18.wav`),
-  F2sharp: new Audio(`${UrlGANYMEDE}Ganymede_19.wav`),
-  G2: new Audio(`${UrlGANYMEDE}Ganymede_20.wav`),
-  G2sharp: new Audio(`${UrlGANYMEDE}Ganymede_21.wav`),
-  A2: new Audio(`${UrlGANYMEDE}Ganymede_22.wav`),
-  A2sharp: new Audio(`${UrlGANYMEDE}Ganymede_23.wav`),
-  B2: new Audio(`${UrlGANYMEDE}Ganymede_24.wav`),
-  C3: new Audio(`${UrlGANYMEDE}Ganymede_25.wav`),
-  C3sharp: new Audio(`${UrlGANYMEDE}Ganymede_26.wav`),
-  D3: new Audio(`${UrlGANYMEDE}Ganymede_27.wav`),
-  D3sharp: new Audio(`${UrlGANYMEDE}Ganymede_28.wav`),
-  E3: new Audio(`${UrlGANYMEDE}Ganymede_29.wav`),
-  F3: new Audio(`${UrlGANYMEDE}Ganymede_30.wav`),
-  F3sharp: new Audio(`${UrlGANYMEDE}Ganymede_31.wav`),
-  G3: new Audio(`${UrlGANYMEDE}Ganymede_32.wav`),
-  G3sharp: new Audio(`${UrlGANYMEDE}Ganymede_33.wav`),
-  A3: new Audio(`${UrlGANYMEDE}Ganymede_34.wav`),
-  A3sharp: new Audio(`${UrlGANYMEDE}Ganymede_35.wav`),
-  B3: new Audio(`${UrlGANYMEDE}Ganymede_36.wav`),
-  C4: new Audio(`${UrlGANYMEDE}Ganymede_37.wav`)
+const grandpiano = {
+  C: new Audio(`${UrlGRANDPIANO}GRAND PIANO.wav`),
+  Csharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_2.wav`),
+  D: new Audio(`${UrlGRANDPIANO}GRAND PIANO_3.wav`),
+  Dsharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_4.wav`),
+  E: new Audio(`${UrlGRANDPIANO}GRAND PIANO_5.wav`),
+  F: new Audio(`${UrlGRANDPIANO}GRAND PIANO_6.wav`),
+  Fsharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_7.wav`),
+  G: new Audio(`${UrlGRANDPIANO}GRAND PIANO_8.wav`),
+  Gsharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_9.wav`),
+  A: new Audio(`${UrlGRANDPIANO}GRAND PIANO_10.wav`),
+  Asharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_11.wav`),
+  B: new Audio(`${UrlGRANDPIANO}GRAND PIANO_12.wav`),
+  C2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_13.wav`),
+  C2sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_14.wav`),
+  D2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_15.wav`),
+  D2sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_16.wav`),
+  E2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_17.wav`),
+  F2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_18.wav`),
+  F2sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_19.wav`),
+  G2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_20.wav`),
+  G2sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_21.wav`),
+  A2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_22.wav`),
+  A2sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_23.wav`),
+  B2: new Audio(`${UrlGRANDPIANO}GRAND PIANO_24.wav`),
+  C3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_25.wav`),
+  C3sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_26.wav`),
+  D3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_27.wav`),
+  D3sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_28.wav`),
+  E3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_29.wav`),
+  F3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_30.wav`),
+  F3sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_31.wav`),
+  G3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_32.wav`),
+  G3sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_33.wav`),
+  A3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_34.wav`),
+  A3sharp: new Audio(`${UrlGRANDPIANO}GRAND PIANO_35.wav`),
+  B3: new Audio(`${UrlGRANDPIANO}GRAND PIANO_36.wav`),
+  C4: new Audio(`${UrlGRANDPIANO}GRAND PIANO_37.wav`)
 };
 
 // 1.3 Preload dei campioni
@@ -178,9 +178,10 @@ Object.values(soulpad).forEach(audio => {
 Object.values(manor).forEach(audio => {
   audio.load();
 });
-Object.values(ganymede).forEach(audio => {
+Object.values(grandpiano).forEach(audio => {
   audio.load();
 });
 
 // 1.4 Esportazione dei campioni
-export { nightblade, manor, ganymede, soulpad };
+export { nightblade, manor, grandpiano, soulpad };
+
