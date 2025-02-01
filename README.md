@@ -1,4 +1,4 @@
-# MeteotrAPP A Weather-Based Chord Progression Generator
+# MeteotrAPP: A Weather-Based Chord Progression Generator
 
 ## What is WeatherChord?
 
