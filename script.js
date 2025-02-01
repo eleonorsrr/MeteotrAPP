@@ -424,35 +424,45 @@ function createDropdown(scaleType, weatherButton) {
   });
   
   if (scaleKeys.length > 0) {
+    dropdownContainer.value = scaleKeys[0]; // Imposta la prima scala
     updateChordButtons(scaleType, scaleKeys[0]); // Imposta automaticamente la prima scala disponibile nell'array quando si preme su weatherButton la prima volta
   }
 
   dropdownContainer.addEventListener("change", () => {
     updateChordButtons(scaleType, dropdownContainer.value); // Cambia gli accordi proposti ogni volta che viene selezionata una nuova opzione dal menù a tendina
+    simulateWeatherButtonClick(scaleType);
+  });
 
-    // Mappa dei tipi di scala ai pulsanti meteo
-    const weatherMapping = {
-      'major': "sunny",
-      'minor': "rainy",
-      'sus4': "cloudy",
-      'major7': "snowy"
-    };
-
-    // Seleziona il pulsante meteo corrispondente e simula il click
-    // Selezionando una scala di un altro simbolo, autoseleziona il macro-button di appartenenza
-    const correspondingWeather = weatherMapping[scaleType];
-    if (correspondingWeather) {
-      const weatherButton = document.getElementById(correspondingWeather);
-      if (weatherButton) {
-        weatherButton.click(); // Simula il click per attivare il tasto meteo corretto
-      }
-    }
+  // 🔴 **Forza l'aggiornamento anche se si seleziona la stessa opzione**
+  dropdownContainer.addEventListener("click", () => {
+    const currentValue = dropdownContainer.value;
+    dropdownContainer.value = ""; // Resetta temporaneamente il valore
+    setTimeout(() => {
+      dropdownContainer.value = currentValue; // Ripristina il valore
+      updateChordButtons(scaleType, currentValue); // Forza aggiornamento
+    }, 1);
   });
 
   weatherButton.parentElement.insertBefore(dropdownContainer, weatherButton.nextSibling); // Aggiunge il menù a tendina creato al DOM (dopo il pulsante weatheButtons)
 }
 
+// 🔵 Funzione per simulare il click sul pulsante meteo corrispondente
+function simulateWeatherButtonClick(scaleType) {
+  const weatherMapping = {
+    'major': "sunny",
+    'minor': "rainy",
+    'sus4': "cloudy",
+    'major7': "snowy"
+  };
 
+  const correspondingWeather = weatherMapping[scaleType];
+  if (correspondingWeather) {
+    const weatherButton = document.getElementById(correspondingWeather);
+    if (weatherButton) {
+      weatherButton.click();
+    }
+  }
+}
 
 
 
@@ -1010,12 +1020,5 @@ Object.entries(weatherButtons).forEach(([weather, button]) => {
   });
 });
 
-
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {  // Verifica se il tasto premuto è "Enter"
-      event.preventDefault();  // Previene il comportamento predefinito (utile nei form)
-      document.getElementById("search-btn").click();  // Simula il click del bottone
-  }
-});
 
 
