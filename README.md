@@ -42,12 +42,14 @@ The central panel provides manual control over the weather-based sound selection
 ![pannello centrale](https://github.com/user-attachments/assets/47ae0373-2ac3-46ac-9b10-89edabbf1f4c)
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.  
-![mappa](https://github.com/user-attachments/assets/ac5ac246-2b41-42f1-a8f3-59f32f11006a)
+  <img width="500" alt="mappa" src="https://github.com/user-attachments/assets/ac5ac246-2b41-42f1-a8f3-59f32f11006a" />
+
 
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
 - **Instrument and City Selection Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Ganymede, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world!
-  ![scelte](https://github.com/user-attachments/assets/5058d3a3-86d0-4e34-bf60-562f1058c631)
+  <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/5058d3a3-86d0-4e34-bf60-562f1058c631" />
+
   
 - **City Selection & Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
@@ -63,7 +65,8 @@ The bottom section of the interface provides a space for arranging and modifying
 
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.  
-![barrasotto](https://github.com/user-attachments/assets/8717203b-fc5c-4df4-a7a1-dd95e31959f6)
+  <img width="500" alt="barrasotto" src="https://github.com/user-attachments/assets/8717203b-fc5c-4df4-a7a1-dd95e31959f6" />
+
 
  ---------------------------------
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti) 
