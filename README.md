@@ -22,6 +22,11 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
 
 ## App features 
  ⁠⁠Zoom sugli elementi, ex: barra superiore (play stop reset bpm tempo), barra centrale  (weather box), barra inferiore (API meteo), eventuale barra laterale e verticale (possibilmente effetti)
+<img width="500" alt="weather parameters" src="https://github.com/user-attachments/assets/91ddd19f-948b-4009-a2e0-a3d1a6c86572" />
+<img width="500" alt="tastini" src="https://github.com/user-attachments/assets/8a61b0e4-5f96-4bac-8c37-cb402ef58f04" />
+<img width="500" alt="scelte" src="https://github.com/user-attachments/assets/bd98af6d-cee7-4b5f-8439-9a6f95e8a91e" />
+<img width="500" alt="pannello centrale" src="https://github.com/user-attachments/assets/09e77482-e64b-4f81-9533-d52f9b730d4f" />
+<img width="500" alt="bpm : time" src="https://github.com/user-attachments/assets/4e9e3494-0ffc-43e4-b30f-cea34e8e0d4e" />
 
 ## Two creative experiences
   Le 2 modalità: interattiva e automatica 
