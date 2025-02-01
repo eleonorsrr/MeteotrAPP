@@ -22,7 +22,7 @@ Whether you're looking for inspiration, experimenting with harmonies, or simply 
 
 ## 🎛️ App features: Interface Overview
 By opening the app, a quick tutorial of the main features of the app will be displayed. This will allow the user to have a more functional and coherent flow in the creative experience, through a step by step mini guide.
-The interface is divdided in sections, explained below.
+The interface is divided in sections, explained below.
 
 ### 🔝 Top Panel
 The top panel contains essential controls for managing playback and tempo settings:
