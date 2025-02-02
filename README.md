@@ -85,11 +85,11 @@ The bottom section of the interface provides a space for arranging and modifying
 MeteotrAPP offers two distinct modes for generating chord progressions:
 
 ### 🌍 Automatic Mode
-In this mode, users can immediately search for a city using the search bar. Once a city is selected and the **Go** button (or the Enter key) is pressed, the app fetches real-time weather data using the **OpenWeather API**. The detected weather condition will:
+In this mode, users can immediately search for a city using the search bar or flying around the world and clicking on the perfect city to get inspired. Once a city is selected, the app fetches real-time weather data using the **OpenWeather API**. The detected weather condition will:
 
 - Highlight the corresponding **weather button**.  
 - Change the background to reflect the weather.  
-- Generate a **random chord progression** based on the relevant scale.  
+- Generate a **random scale** based on the scale type associated with it.  
 
 For example, if the searched city has a **clear sky**, a random progression from the **Major Scale** (e.g., D Major) will be suggested.
   
