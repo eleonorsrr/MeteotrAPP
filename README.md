@@ -101,7 +101,7 @@ This mode allows users to manually select a weather condition without relying on
 
 - Select a condition choosing from one of the 4 **weather buttons** (to activate the characteristic sound, or go directly to the root note selection).
 - Choose one of the **7 available root notes** for that condition.  
-- The chord progression of the selected scale will appear.  
+- The chords of the selected scale will appear.  
 
 For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
   <img width="500" alt="mi" src="https://github.com/user-attachments/assets/21eeb8ca-d8c0-4a64-8b9b-f5e3d15399ea" />
@@ -119,7 +119,6 @@ Based on the responses collected, we dedicated time to improving the app accordi
 - Addition of more instruments among the possible intruments available;
 - Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
 - Addition of instructions to a better understanding of the features of the app;
-- Addition of a metronome;
-- Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data
+- Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data.
   
 Below is a chart summarizing the overall trends in the responses from the users who participated in the test and survey:  
