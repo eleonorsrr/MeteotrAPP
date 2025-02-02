@@ -112,8 +112,8 @@ To refine and enhance our app, we created a **Google Form** and shared it with f
 - **Improvements**  
 
 Based on the responses collected, we dedicated time to improving the app according to the users' needs and feedback. Some of the features requested by users are listed below:
-- Addition of a Grand Piano among the possible intruments available;
-- Possibility to type the city of interest and directly submit it with the Enter key (not just with the Go button);
+- Addition of more instruments among the possible intruments available;
+- Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
 - Addition of instructions to a better understanding of the features of the app;
 - Addition of a metronome.
   
