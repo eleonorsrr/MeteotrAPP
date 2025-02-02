@@ -835,6 +835,7 @@ function resetChordsLoop() {
 
   // ✅ Mantiene il pulsante shuffle visibile e separato
   ensureShuffleButton();
+  document.getElementById("play-btn").disabled = false; // Riabilita il tasto play
 
   console.log("Loop fermato, accordi deselezionati e pulsanti ripristinati.");
 }
