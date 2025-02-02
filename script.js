@@ -1108,18 +1108,11 @@ document.getElementById("start-button").addEventListener("click", () => {
 });
 
 
-// Assegnazione eventi al click del tasto Invio
+// Assegnazione eventi al click del tasto Esc
 
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {  
-    event.preventDefault();  
-
-    // Controlla se l'utente sta scrivendo in un input
-    if (document.activeElement.tagName === "INPUT") {
-      document.getElementById("search-btn").click();  // Simula il click del tasto di ricerca
-    } else {
-      document.getElementById("start-button").click();  // Simula il click del tasto start
-    }
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {  
+      event.preventDefault(); 
+      document.getElementById("skip-tutorial-btn").click();  
   }
 });
-
