@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const tutorialSteps = [
     {
       element: ".weather-panel",
-      text: "In this section you can search for a geographic location. Weather data will be displayed, including current weather conditions, which is essential information to determine which chords will be proposed and to recommend the most suitable instrument to reproduce them!"
+      text: "In this section you can search for a geographic location. Weather data will be displayed, including current weather conditions, which is an essential information to determine which chords will be proposed and to recommend the most suitable instrument to reproduce them!"
     },
     {
       element: ".map-panel",
-      text: "This map shows the location you searched for in the weather panel. Here you can visually see your location and improve the interaction with the weather search. It is also possible to select an area/city directly by clicking on it.",
+      text: "This map displays the location you searched for in the weather panel. To improve the interaction, it is also possible to select an area/city directly by clicking on it: this will have the same effect as choosing the city from the search bar, affecting the chords suggested",
       delay: 0
     },
     {
