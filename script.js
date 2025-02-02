@@ -539,7 +539,7 @@ function updateChordButtons(scaleType, rootNote) {
     selectedScale.forEach(note => {
 
       const button = document.createElement("button"); // Crea un elemento HTML button (pulsante)
-      button.classList.add("chord-btn"); // Aggiunge una classe a tale pulsante 
+      button.classList.add("chord-btn", "fixed-size"); // Aggiunge una classe a tale pulsante 
       button.textContent = getChordName(note);
       button.dataset.chord = note; // Aggiunge un attributo personalizzato data-chord a tale pulsante
 
@@ -572,10 +572,15 @@ function toggleChordSelection(button) {
 
 // 2.6 Aggiornamento visualizzazione degli accordi selezionati
 const bottomPanelSlots = document.querySelectorAll(".bottom-panel .chord-slot");
+const MAX_CHORDS = bottomPanelSlots.length - 1; // Numero massimo di accordi selezionabili
 
 function updateSelectedChordsDisplay() {
+  while (selectedChords.length > MAX_CHORDS) {
+    selectedChords.pop(); // Rimuove eventuali accordi in eccesso
+  }
+
   selectedChords.forEach((chord, index) => {
-    if (index < bottomPanelSlots.length-1) { // Evita di superare il numero massimo di slot (8)
+    if (index < MAX_CHORDS) { // Evita di superare il numero massimo di slot
       const slot = bottomPanelSlots[index];
       let chordButton = slot.querySelector("button");
 
@@ -595,8 +600,8 @@ function updateSelectedChordsDisplay() {
     }
   });
 
-  // Rimuove eventuali accordi in eccesso
-  for (let i = selectedChords.length; i < bottomPanelSlots.length-1; i++) {
+  // Rimuove eventuali accordi in eccesso dagli slot
+  for (let i = selectedChords.length; i < MAX_CHORDS; i++) {
     bottomPanelSlots[i].innerHTML = "";
   }
   
@@ -748,54 +753,68 @@ function shuffleChords() {
 
 // Logica PlayChordsLoop e resetChordsLoop aggiornata
 
-// 2.8.2 Riproduzione loop con evidenziazione dell'accordo attivo
+// 2.8.2 Riproduzione loop con aggiornamento dinamico di BPM e time signature
 function playChordsLoop() {
   if (selectedChords.length === 0) {
     alert("Seleziona almeno un accordo per avviare la riproduzione!");
     return;
   }
 
-  currentInterval = calculateInterval(bpm, timeSignature); // Calcola l'intervallo in base al BPM e time signature
+  if (currentInterval !== null) {
+    return; // Previene la sovrapposizione di loop
+  }
 
+  updateLoop(); // Avvia la riproduzione con BPM e time signature attuali
+  document.getElementById("play-btn").disabled = true; // Disabilita il play per evitare più cicli paralleli
+}
+
+// Funzione per aggiornare dinamicamente il loop con i nuovi valori di BPM e time signature
+function updateLoop() {
+  if (currentInterval !== null) {
+    clearInterval(currentInterval);
+  }
+
+  currentInterval = calculateInterval(bpm, timeSignature);
   let index = 0;
+
   currentInterval = setInterval(() => {
-    // Rimuove l'illuminazione dal bottone dell'accordo precedente
     document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
 
-    // Suona l'accordo e illumina il bottone corrispondente
     playChord(selectedChords[index]);
     const chordButtons = document.querySelectorAll(".chord-slot button");
-    
     if (chordButtons[index]) {
       chordButtons[index].classList.add("playing");
     }
 
-    index = (index + 1) % selectedChords.length; // Passa all'accordo successivo, resetta a 0 alla fine
+    index = (index + 1) % selectedChords.length;
 
   }, currentInterval);
-
-  const stopButton = document.getElementById("stop-btn");
-  if (stopButton) {
-    stopButton.addEventListener("click", stopChordsLoop);
-  }
-
-  const resetButton = document.getElementById("reset-btn");
-  if (resetButton) {
-    resetButton.addEventListener("click", resetChordsLoop);
-  }
-
-  function stopChordsLoop() {
-    if (currentInterval) {
-      clearInterval(currentInterval);
-      currentInterval = null;
-      console.log("Loop fermato, ma gli accordi selezionati sono ancora attivi:", selectedChords);
-
-      // Rimuove l'effetto di illuminazione
-      document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
-    }
-  }
-
 }
+
+// 2.8.3 Stop della riproduzione senza cancellare gli accordi
+function stopChordsLoop() {
+  if (currentInterval !== null) {
+    clearInterval(currentInterval);
+    currentInterval = null;
+    document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
+    document.getElementById("play-btn").disabled = false; // Riabilita il tasto play
+  }
+}
+
+// 3.3.1 Aggiornamento automatico del loop quando cambiano BPM o time signature
+document.getElementById("bpm").addEventListener("input", (e) => {
+  setBPM(e.target.value);
+  if (currentInterval !== null) updateLoop();
+});
+
+document.getElementById("time-signature").addEventListener("change", (e) => {
+  setTimeSignature(e.target.value);
+  if (currentInterval !== null) updateLoop();
+});
+
+// Associa i pulsanti
+document.getElementById("play-btn").addEventListener("click", playChordsLoop);
+document.getElementById("stop-btn").addEventListener("click", stopChordsLoop);
 
 // 🔄 Funzione per resettare la sequenza di accordi
 function resetChordsLoop() {
@@ -915,13 +934,6 @@ function setTimeSignature(value) {
   timeSignature = value;
 }
 
-document.getElementById("bpm").addEventListener("input", (e) => {
-  setBPM(e.target.value); // Imposta il nuovo BPM
-});
-
-document.getElementById("time-signature").addEventListener("change", (e) => {
-  setTimeSignature(e.target.value); // Imposta la nuova Time-Signature
-});
 
 
 // 4 Logica per l'immagine di sfondo al click del weather button
@@ -1110,3 +1122,4 @@ document.addEventListener("keydown", function(event) {
     }
   }
 });
+
