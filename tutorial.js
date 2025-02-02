@@ -1,31 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tutorialSteps = [
-      {
-        element: ".weather-panel",
-        text: "In questa sezione puoi cercare una località geografica. Verranno mostrati i dati meteo, tra cui la condizione meteo attuale, informazione fondamentale per determinare quali accordi verranno proposti e per consigliarti lo strumento più adatto per riprodurli!"
-      },
-      {
-        element: ".map-panel",
-        text: "Questa mappa mostra la località che hai cercato nel pannello meteo. Qui puoi visualizzare visivamente la tua posizione e migliorare l'interazione con la ricerca meteo!",
-        delay: 0
-      },
-      {
-        element: ".central-panel",
-        text: "Qui puoi selezionare gli accordi proposti in base alla condizione meteo relativa alla tua ricerca. Puoi anche interagire con questa sezione in modo dinamico: scegli una tra le quattro condizioni meteorologiche e ascoltane il suono caratteristico, seleziona una tra le scale disponibili e crea la tua melodia con gli accordi che ti verranno proposti! Gioca inoltre con gli slider relativi al suono caratteristico di ogni condizione meteorologica per immergerti completamente nell'esperienza!"
-      },
-      {
-        element: ".bottom-panel",
-        text: "In questa sezione puoi visualizzare gli accordi scelti. Puoi modificarne l'ordine a tuo piacimento o, per un tocco di imprevedibilità, puoi randomizzarli premendo il tasto fulmine!"
-      },
-      {
-        element: "#shuffle-btn",
-        text: "Ogni volta che premi questo pulsante, gli accordi vengono riordinati casualmente!"
-      },
-      {
-        element: ".top-panel",
-        text: "In questa sezione puoi regolare il BPM (tempo) e la time signature della tua melodia. Una volta scelti, utilizza i tasti Play, Stop e Reset per controllare la riproduzione di ciò che hai creato!"
-      }
-    ];
+  const tutorialSteps = [
+    {
+      element: ".weather-panel",
+      text: "In this section you can search for a geographic location. Weather data will be displayed, including current weather conditions, which is essential information to determine which chords will be proposed and to recommend the most suitable instrument to reproduce them!"
+    },
+    {
+      element: ".map-panel",
+      text: "This map shows the location you searched for in the weather panel. Here you can visually see your location and improve the interaction with the weather search. It is also possible to select an area/city directly by clicking on it.",
+      delay: 0
+    },
+    {
+      element: ".central-panel",
+      text: "Here you can select the proposed chords based on the weather condition related to your search. You can also interact with this section dynamically: choose one of the four weather conditions and listen to its characteristic sound, select one of the available scales and create your melody with the chords that will be proposed to you. Also play with the sliders related to the characteristic sound of each weather condition to fully immerse yourself in the experience!"
+    },
+    {
+      element: ".bottom-panel",
+      text: "In this section you can view the chosen chords. You can change the order to your liking or, for a touch of unpredictability, you can randomize them by pressing the lightning button!"
+    },
+    {
+      element: "#shuffle-btn",
+      text: "Every time you press this button, the chords are randomly reordered."
+    },
+    {
+      element: ".top-panel",
+      text: "In this section you can adjust the BPM (tempo) and time signature of your melody. Once you have chosen, use the Play, Stop and Reset buttons to control the playback of what you have created!"
+    }
+  ];
   
     let currentStep = 0;
 
