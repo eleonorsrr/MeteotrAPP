@@ -92,8 +92,10 @@ In this mode, users can immediately search for a city using the search bar. Once
 - Generate a **random chord progression** based on the relevant scale.  
 
 For example, if the searched city has a **clear sky**, a random progression from the **Major Scale** (e.g., D Major) will be suggested.
-<img width="500" alt="re maggiore" src="https://github.com/user-attachments/assets/49ad82a1-e136-495e-be72-1aa16dfcd16a" />
+  
+  (see picture above)
 
+  
 ### 🎮 Play Mode
 This mode allows users to manually select a weather condition without relying on city-based weather data.
 
