@@ -1,12 +1,169 @@
-/* 1. Generale */
-#background-container {
-  position: fixed;  /* Copre tutto lo schermo */
+/* Apertura e tutorial */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.intro-content {
+  color: white;
+  text-align: center;
+  max-width: 500px;
+  padding: 20px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-family: 'Nunito';
+}
+
+#start-button {
+  padding: 10px 20px;
+  background-color: #BEC7F4E6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: 'Nunito';
+}
+
+#start-button:hover {
+  background-color: #798ef6e6;
+}
+
+.hidden {
+  display: none;
+}
+
+.logo-container2 {
+  position: fixed; 
+  bottom: 400px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.logo-container2 img {
+  max-width: 500px;
+  height: auto;
+}
+
+#tutorial-overlay {
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;  /* Lo sfondo sarà dietro il contenuto dell'app */
-  transition: opacity 1s ease-in-out;  /* Transizione per dissolvenza */
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#tutorial-box {
+  position: absolute;
+  background: white;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 450px; 
+  min-width: 300px;
+  text-align: center;
+  font-size: 16px;
+  z-index: 1001;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  word-wrap: break-word;
+}
+
+.tutorial-highlight {
+  position: relative;
+  z-index: 1002;
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#skip-tutorial-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1003;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  animation: jump 1s ease-in-out infinite; 
+}
+
+#skip-tutorial-btn:hover {
+  background: #cc0000;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.7);
+}
+
+#restart-tutorial-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px; 
+  font-size: 14px; 
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1002;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  animation: jump 1s ease-in-out infinite;
+}
+
+#restart-tutorial-btn:hover {
+  background: #388E3C;  
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(72, 189, 85, 0.7);
+}
+
+/* 1. Generale */
+#background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; 
+  transition: opacity 1s ease-in-out; 
 }
 
 body {
@@ -23,30 +180,16 @@ body {
 }
 
 .logo-container {
-  position: fixed; /* Mantiene il logo fisso durante lo scroll */
+  position: fixed;
   bottom: -15px; 
   left: 50%;
   transform: translateX(-50%);
-  z-index: -1; /* Invia il logo sotto gli altri elementi */
-  pointer-events: none; /* Evita che catturi clic */
+  z-index: -1; 
+  pointer-events: none;
 }
 
 .logo-container img {
   max-width: 250px;
-  height: auto;
-}
-
-.logo-container2 {
-  position: fixed; /* Mantiene il logo fisso durante lo scroll */
-  bottom: 400px; 
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1; /* Logo sotto gli altri, ma visibile */
-  pointer-events: none; /* Evita che catturi clic */
-}
-
-.logo-container2 img {
-  max-width: 500px;
   height: auto;
 }
 
@@ -72,60 +215,14 @@ body {
 .input-group {
   display: flex;
   align-items: center;
-  gap: 5px; /* Avvicina l'etichetta e l'input */
+  gap: 5px;
 }
 
-.weather-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.8rem;
-  padding: 1rem;
-}
-
-.instrument-search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-#instrument-suggestion {
-  font-style: italic;
-  font-size: 11px;
-  color: #333;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  margin-top: 2px;
-  text-align: center;
-  margin-left: 185px;
-}
-
-.instrument-selection {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.instrument-selection label {
-  font-family: 'Nunito';
-  font-size: 16px;
-  font-weight: bold;
-}
-
-#city-search {
-  display: flex;
-  gap: 0.5rem;
-}
-
-#time-signature, #bpm, #instruments {
+#time-signature, #bpm {
   font-family: 'Nunito';
   padding: 5px;
   font-size: 16px;
 }
-
 
 #play-btn {
   padding: 5px 10px;
@@ -172,7 +269,7 @@ label {
   margin-right: 5px;
 }
 
-/* 3. Central Panel */
+/* 3. Main layout: Central Panel + Map Panel */
 .main-layout {
   display: flex;
   justify-content: space-between;
@@ -307,21 +404,21 @@ label {
   font-size: 14px;
   overflow: hidden;
   white-space: nowrap;
-  margin: 1px; /* Margine tra i bottoni */
-  border-radius: 8px; /* Angoli arrotondati */
-  background: linear-gradient(to bottom, hsla(230, 71%, 85%, 0.902), hsla(230, 71%, 75%, 1)); /* Effetto 3D */
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Ombra per effetto rialzato */
+  margin: 1px; 
+  border-radius: 8px; 
+  background: linear-gradient(to bottom, hsla(230, 71%, 85%, 0.902), hsla(230, 71%, 75%, 1)); 
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
   transition: all 0.2s ease-in-out;
   color: #fff;
   font-weight: bold;
 }
 
 .fixed-size:hover {
-  background: linear-gradient(to bottom, hsla(230, 71%, 75%, 1), hsla(230, 71%, 65%, 1)); /* Scurisce al passaggio del mouse */
+  background: linear-gradient(to bottom, hsla(230, 71%, 75%, 1), hsla(230, 71%, 65%, 1));
 }
 
 .fixed-size:active {
-  background: linear-gradient(to bottom, hsla(230, 71%, 65%, 1), hsla(230, 71%, 55%, 1)); /* Ancora più scuro quando premuto */
+  background: linear-gradient(to bottom, hsla(230, 71%, 65%, 1), hsla(230, 71%, 55%, 1)); 
   box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -356,8 +453,6 @@ select.dropdownContainer option:hover {
   background-color: #e0f7fa;
 }
 
-/* Mappa meteo */
-
 .map-panel {
   display: flex;
   flex-direction: column;
@@ -378,7 +473,6 @@ select.dropdownContainer option:hover {
   border-radius: 10px;
 }
 
-
 /* 4. Weather Panel */
 .weather-panel {
   background-color: #bec7f4e6;
@@ -389,6 +483,10 @@ select.dropdownContainer option:hover {
   flex-direction: row;
   gap: 15px;
   width: 1030px;
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  padding: 1rem;
 }
 
 .weather-description-panel {
@@ -450,8 +548,51 @@ select.dropdownContainer option:hover {
   background-color: #222f6ee6;
 }
 
+.instrument-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
 
-/* Bottom panel */
+#instrument-suggestion {
+  font-style: italic;
+  font-size: 11px;
+  color: #333;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  margin-top: 2px;
+  text-align: center;
+  margin-left: 185px;
+}
+
+.instrument-selection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.instrument-selection label {
+  font-family: 'Nunito';
+  font-size: 16px;
+  font-weight: bold;
+}
+
+ #instruments {
+  font-family: 'Nunito';
+  padding: 5px;
+  font-size: 16px;
+}
+
+#city-search {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* 5. Bottom panel */
 .bottom-panel {
   display: flex;
   align-items: center;
@@ -464,8 +605,6 @@ select.dropdownContainer option:hover {
   height: 50px;
 }
 
-/* Pullata Bande 31/01: bottoni nel bottom-panel e tasto randomizzatore
-/* Contenitori accordi selezionati in bottom-panel */
 .chord-slot {
   width: 12%;
   height: 100%;
@@ -480,7 +619,6 @@ select.dropdownContainer option:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Bottoni che occupano l'intero spazio disponibile nel loro contenitore */
 .chord-slot button {
   width: 100%;
   height: 100%;
@@ -496,8 +634,6 @@ select.dropdownContainer option:hover {
   justify-content: center;
 }
 
-
-/* Stile durante il trascinamento */
 .chord-slot button {
   cursor: grab;
 }
@@ -513,21 +649,19 @@ select.dropdownContainer option:hover {
 }
 
 .chord-slot button.playing {
-  background-color: #ffeb3b !important; /* Giallo acceso */
+  background-color: #ffeb3b !important;
   box-shadow: 0 0 10px rgba(255, 235, 59, 0.8);
   transform: scale(1.1);
   transition: all 0.2s ease-in-out;
 }
 
-
-/* Pulsante randomizzatore */
 #shuffle-btn {
   background-color: rgb(1, 12, 130);
   color: white;
   font-size: 1.5em;
   cursor: pointer;
   border: none;
-  width: 100%; /* Occupa tutto lo spazio dello slot */
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -550,150 +684,4 @@ select.dropdownContainer option:hover {
 
 .shake {
   animation: shake 0.2s ease-in-out 3;
-}
-/* Fine pullata Bande 31/01 */
-
-/* ANNA 01/02 schermata iniziale*/
-.intro-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    z-index: 9999; /* Assicurati che sia sopra tutti gli altri elementi */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-
-.intro-content {
-  color: white;
-  text-align: center;
-  max-width: 500px;
-  padding: 20px;
-  border: 2px solid white;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-  font-family: 'Nunito';
-}
-
-#start-button {
-  padding: 10px 20px;
-  background-color: #BEC7F4E6;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  font-family: 'Nunito';
-}
-
-#start-button:hover {
-  background-color: #798ef6e6;
-}
-
-.hidden {
-  display: none;
-}
-
-#tutorial-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-#tutorial-box {
-  position: absolute;
-  background: white;
-  color: black;
-  padding: 15px;
-  border-radius: 10px;
-  max-width: 450px; /* Maggiore larghezza per ridurre le righe di testo */
-  min-width: 300px; /* Evita che sia troppo stretto su schermi piccoli */
-  text-align: center;
-  font-size: 16px;
-  z-index: 1001;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-  pointer-events: none; /* Rende il box non interattivo */
-  opacity: 0; /* Inizialmente invisibile */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Effetto di transizione fluido */
-  word-wrap: break-word; /* Evita che il testo esca dal box */
-}
-
-.tutorial-highlight {
-  position: relative;
-  z-index: 1002;
-  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease-in-out;
-}
-
-/* Definizione dell'animazione saltellante */
-@keyframes jump {
-  0% {
-    transform: translateY(0); /* Posizione iniziale */
-  }
-  50% {
-    transform: translateY(-5px); /* Salto verso l'alto di 5px */
-  }
-  100% {
-    transform: translateY(0); /* Ritorno alla posizione iniziale */
-  }
-}
-
-#skip-tutorial-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #ff4444;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1003;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  animation: jump 1s ease-in-out infinite; /* Applica l'animazione saltellante */
-}
-
-#skip-tutorial-btn:hover {
-  background: #cc0000;
-  transform: scale(1.1); /* Ingrandisce il bottone del 10% */
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.7); /* Aggiunge l'effetto luminoso rosso */
-}
-
-#restart-tutorial-btn {
-  position: fixed;
-  bottom: 20px;  /* Posizionato sopra a skip button */
-  right: 20px;
-  background: #4CAF50;  /* Colore verde */
-  color: white;
-  border: none;
-  padding: 10px 15px;  /* Stesse dimensioni del tasto "Skip Tutorial" */
-  font-size: 14px;  /* Stesso font-size */
-  border-radius: 5px;  /* Stesso border-radius */
-  cursor: pointer;
-  z-index: 1002;  /* Un po' piÃ¹ basso di skip button per evitare conflitti */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  animation: jump 1s ease-in-out infinite; /* Applica l'animazione saltellante */
-}
-
-#restart-tutorial-btn:hover {
-  background: #388E3C;  /* Colore verde piÃ¹ scuro al passaggio del mouse */
-  transform: scale(1.1); /* Ingrandisce il bottone del 10% */
-  box-shadow: 0 4px 12px rgba(72, 189, 85, 0.7); /* Aggiunge l'effetto luminoso verde */
 }
