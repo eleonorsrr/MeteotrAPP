@@ -5,10 +5,10 @@
 MeteotrAPP is a web app designed to inspire musicians and music lovers by generating chord progressions based on real-time weather conditions. By categorizing atmospheric conditions into four main types —**Sunny, Rainy, Cloudy, and Snowy**— the app assigns a unique harmonic character to each, allowing users to explore different moods and textures in their music.
 
 Each weather condition is associated with a specific chord scale:
-- ☀️ **Sunny** → Major Scale (bright, uplifting harmonies)  
-- 🌧️ **Rainy** → Minor Scale (moody, emotional progressions)  
-- ☁️ **Cloudy** → Suspended 4th (floating, unresolved tension)  
-- ❄️ **Snowy** → Major 7th (soft, dreamy atmospheres)  
+- ☀️ **Sunny** → Major Chords (bright, uplifting harmonies)  
+- 🌧️ **Rainy** → Minor Chords (moody, emotional progressions)  
+- ☁️ **Cloudy** → Suspended 4th Chords & colorful variations (floating, unresolved tension)  
+- ❄️ **Snowy** → Major 7th Chords (soft, dreamy atmospheres)  
 
 The app suggests chords tailored to the detected weather and lets users experiment with various musical parameters, including:
 - 🎵 **Chord Selection & Playback:** Choose from suggested chords and loop them to build progressions.  
