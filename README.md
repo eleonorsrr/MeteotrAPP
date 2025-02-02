@@ -18,7 +18,7 @@ The app suggests chords tailored to the detected weather and lets users experime
 
 Whether you're looking for inspiration, experimenting with harmonies, or simply having fun with music creation, MeteotrAPP provides a unique way to blend meteorology and sound design. Let the weather shape your next musical idea!
 
- <img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/a100291f-5461-4078-b11b-4b4725a4339c" />
+  <img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/a100291f-5461-4078-b11b-4b4725a4339c" />
 
 
 ## 🎛️ App features: Interface Overview
@@ -42,8 +42,8 @@ The central panel provides manual control over the weather-based sound selection
 
 - **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
-  
- <img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/5e5eb21d-0990-4498-aa8d-8dc7671233b5" />
+
+  <img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/5e5eb21d-0990-4498-aa8d-8dc7671233b5" />
 
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
