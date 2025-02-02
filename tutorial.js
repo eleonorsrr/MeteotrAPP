@@ -182,9 +182,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ascolta i tasti per navigare tra i passi del tutorial
     document.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === "ArrowRight") {
-        nextStep(); // Passa al passo successivo
+
+        // Questo if dentro all'if mi fa sì che il primo step non venga skippato finché la schermata intro non se ne va
+        const introScreen = document.getElementById("intro-screen");
+
+        if (!introScreen.classList.contains("hidden")) {
+          document.getElementById("start-button").click();
+        } else {
+          nextStep();
+        }
+    
       } else if (event.key === "ArrowLeft" || event.key === "Backspace") {
-        previousStep(); // Torna al passo precedente
+        previousStep();
       }
     });
 
