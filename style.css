@@ -38,7 +38,7 @@ body {
 
 .logo-container2 {
   position: fixed; /* Mantiene il logo fisso durante lo scroll */
-  bottom: 350px; 
+  bottom: 400px; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 1; /* Logo sotto gli altri, ma visibile */
