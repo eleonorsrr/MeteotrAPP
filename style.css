@@ -300,6 +300,31 @@ label {
   transform: scale(1.15);
 }
 
+.fixed-size {
+  width: 90px;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 1px; /* Margine tra i bottoni */
+  border-radius: 8px; /* Angoli arrotondati */
+  background: linear-gradient(to bottom, hsla(230, 71%, 85%, 0.902), hsla(230, 71%, 75%, 1)); /* Effetto 3D */
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Ombra per effetto rialzato */
+  transition: all 0.2s ease-in-out;
+  color: #fff;
+  font-weight: bold;
+}
+
+.fixed-size:hover {
+  background: linear-gradient(to bottom, hsla(230, 71%, 75%, 1), hsla(230, 71%, 65%, 1)); /* Scurisce al passaggio del mouse */
+}
+
+.fixed-size:active {
+  background: linear-gradient(to bottom, hsla(230, 71%, 65%, 1), hsla(230, 71%, 55%, 1)); /* Ancora più scuro quando premuto */
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .selectedChordsContainer {
   display: flex;
   flex: wrap;
