@@ -44,8 +44,8 @@ const chordNameMapping = {
   "BD2sharpF2sharp": "B", // B
   "D2sharpF2sharpA2sharp": "D#m", 
   "F2sharpA2sharpC2sharp": "F#", 
-  "G2sharpBD2sharp": "G#m",// G#m
-  "A2sharpC2sharpE2": "A#dim",// A#dim
+  "G2sharpBD2sharp": "G#m",
+  "A2sharpC2sharpE2": "A#dim",
   
 
   // 2. Minor Scales
@@ -94,48 +94,49 @@ const chordNameMapping = {
   "CFG": "Csus4", // C
   "DGA": "Dsus4", 
   "EAB": "Esus4", 
-  "FBC": "Fsus4", 
+  "FBC": "Fsus4*", 
   "GC2D": "Gsus4", 
   "ADE": "Asus4", 
-  "BEF": "Bsus4", 
+  "BEF": "Bsus4*", 
+
 
   "FsharpBC2sharp": "F#sus4", // D
-  "GC2sharpD": "Gsus4", 
+  "GC2sharpD": "Gsus4*", 
   "AD2E": "Asus4", 
-  "BEFsharp": "Bsus4", 
-  "C2sharpFsharpG": "C#sus4", 
+  "BEFsharp": "Bsus4*", 
+  "C2sharpFsharpG": "C#sus4*", 
 
   "GsharpC2sharpD2sharp": "G#sus4", // E
-  "AD2sharpE": "Asus4", 
-  "BE2Fsharp": "Bsus4", 
+  "AD2sharpE": "Asus4*", 
+  "BE2Fsharp": "Bsus4*", 
   "C2sharpFsharpGsharp": "C#sus4", 
-  "D2sharpGsharpA": "D#sus4", 
+  "D2sharpGsharpA": "D#sus4*", 
 
-  "FAsharpC2": "Fsus4", // F
+  "FAsharpC2": "Fsus4*", // F
   "GC2D2": "Gsus4", 
   "AD2E2": "Asus4", 
-  "AsharpE2F": "Bsus4", 
+  "AsharpE2F": "A#sus4*", 
   "C2F2G": "Csus4", 
   "D2GA": "Dsus4", 
-  "E2AAsharp": "Esus4", 
+  "E2AAsharp": "Esus4*", 
 
   "BE2F2sharp": "Bsus4", // G
-  "C2F2sharpG": "Csus4", 
+  "C2F2sharpG": "Csus4*", 
   "D2G2A": "Dsus4",
   "E2AB": "Esus4",
   "F2sharpBC2": "F#sus4", 
 
   "C2sharpF2sharpG2sharp": "C#sus4", // A
-  "D2G2sharpA": "Dsus4",
+  "D2G2sharpA": "Dsus4*",
   "E2A2B": "Esus4", 
-  "F2sharpBC2sharp": "F#sus4",// F#sus4
-  "G2sharpC2sharpD2": "G#sus4",// G#sus4   ?????????????
+  "F2sharpBC2sharp": "F#sus4",
+  "G2sharpC2sharpD2": "G#sus4*",
 
   "D2sharpG2sharpA2sharp": "D#sus4", // B
-  "E2A2sharpB": "Esus4",
-  "F2sharpB2C2sharp": "F#sus4",// F#sus4
-  "G2sharpC2sharpD2sharp": "G#sus4",// G#sus4   ???????????????
-  "A2sharpD2sharpE2": "A#sus4",// A#sus4
+  "E2A2sharpB": "Esus4*",
+  "F2sharpB2C2sharp": "F#sus4",
+  "G2sharpC2sharpD2sharp": "G#sus4",
+  "A2sharpD2sharpE2": "A#sus4",
 
 
   // 4. Major7 Scales
@@ -159,7 +160,7 @@ const chordNameMapping = {
   "AC2sharpE2Gsharp": "Amaj7", 
   "BD2sharpF2sharpA": "B7", 
   "C2sharpE2GsharpB": "C#m7",
-  "D2sharpF2sharpAC2sharp": "D#m7b5",// D#m7b5
+  "D2sharpF2sharpAC2sharp": "D#m7b5",
 
   "FAC2E2": "Fmaj7", // F
   "GAsharpD2F2": "Gm7", 
@@ -167,28 +168,28 @@ const chordNameMapping = {
   "AsharpD2F2A": "Bmaj7", 
   "C2E2G2Asharp": "C7", 
   "D2F2AC2": "Bm7",
-  "E2G2AsharpD2": "Em7b5",// Em7b5
+  "E2G2AsharpD2": "Em7b5",
 
   "GBD2F2sharp": "Gmaj7", // G
   "BD2F2sharpA2": "Bm7",
   "C2E2G2B": "Cmaj7", 
   "D2F2sharpA2C2": "D7", 
-  "E2G2BD2": "Em7",// Em7
-  "F2sharpA2C2E2": "F#m7b5",// F#m7b5
+  "E2G2BD2": "Em7",
+  "F2sharpA2C2E2": "F#m7b5",
 
   "AC2sharpE2G2sharp": "Amaj7", // A
   "C2sharpE2G2sharpB2": "C#m7",
-  "D2F2sharpA2C2sharp": "Dmaj7",// Dmaj7
-  "E2G2sharpB2D2": "E7",// E7
-  "F2sharpA2C2sharpE2": "F#m7",// F#m7
-  "G2sharpB2D2F2sharp": "G#m7b5",// G#m7b5
+  "D2F2sharpA2C2sharp": "Dmaj7",
+  "E2G2sharpB2D2": "E7",
+  "F2sharpA2C2sharpE2": "F#m7",
+  "G2sharpB2D2F2sharp": "G#m7b5",
 
-  "BD2sharpF2sharpA2sharp": "Bmaj7", // B
+  "BD2sharpF2sharpA2sharp": "Bmaj7", 
   "D2sharpF2sharpA2sharpC3sharp": "D#m7",
-  "E2G2sharpB2D2sharp": "Emaj7",// Emaj7
-  "F2sharpA2sharpC3sharpE2": "F#7",// F#7
-  "G2sharpB2D2sharpF2sharp": "G#m7",// G#m7
-  "A2sharpC3sharpE2G2sharp": "A#m7b5",// A#m7b5
+  "E2G2sharpB2D2sharp": "Emaj7",
+  "F2sharpA2sharpC3sharpE2": "F#7",
+  "G2sharpB2D2sharpF2sharp": "G#m7",
+  "A2sharpC3sharpE2G2sharp": "A#m7b5",
 };
 
 function getChordName(notes) {
