@@ -575,3 +575,100 @@ select.dropdownContainer option:hover {
   display: none;
 }
 
+#tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#tutorial-box {
+  position: absolute;
+  background: white;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 450px; /* Maggiore larghezza per ridurre le righe di testo */
+  min-width: 300px; /* Evita che sia troppo stretto su schermi piccoli */
+  text-align: center;
+  font-size: 16px;
+  z-index: 1001;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  pointer-events: none; /* Rende il box non interattivo */
+  opacity: 0; /* Inizialmente invisibile */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Effetto di transizione fluido */
+  word-wrap: break-word; /* Evita che il testo esca dal box */
+}
+
+.tutorial-highlight {
+  position: relative;
+  z-index: 1002;
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Definizione dell'animazione saltellante */
+@keyframes jump {
+  0% {
+    transform: translateY(0); /* Posizione iniziale */
+  }
+  50% {
+    transform: translateY(-5px); /* Salto verso l'alto di 5px */
+  }
+  100% {
+    transform: translateY(0); /* Ritorno alla posizione iniziale */
+  }
+}
+
+#skip-tutorial-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1003;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  animation: jump 1s ease-in-out infinite; /* Applica l'animazione saltellante */
+}
+
+#skip-tutorial-btn:hover {
+  background: #cc0000;
+  transform: scale(1.1); /* Ingrandisce il bottone del 10% */
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.7); /* Aggiunge l'effetto luminoso rosso */
+}
+
+#restart-tutorial-btn {
+  position: fixed;
+  bottom: 20px;  /* Posizionato sopra a skip button */
+  right: 20px;
+  background: #4CAF50;  /* Colore verde */
+  color: white;
+  border: none;
+  padding: 10px 15px;  /* Stesse dimensioni del tasto "Skip Tutorial" */
+  font-size: 14px;  /* Stesso font-size */
+  border-radius: 5px;  /* Stesso border-radius */
+  cursor: pointer;
+  z-index: 1002;  /* Un po' piÃ¹ basso di skip button per evitare conflitti */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  animation: jump 1s ease-in-out infinite; /* Applica l'animazione saltellante */
+}
+
+#restart-tutorial-btn:hover {
+  background: #388E3C;  /* Colore verde piÃ¹ scuro al passaggio del mouse */
+  transform: scale(1.1); /* Ingrandisce il bottone del 10% */
+  box-shadow: 0 4px 12px rgba(72, 189, 85, 0.7); /* Aggiunge l'effetto luminoso verde */
+}
