@@ -1047,12 +1047,6 @@ function playWeatherSound(weather) {
   }
 }
 
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Enter") {  
-      event.preventDefault();  
-      document.getElementById("search-btn").click();  
-  }
-});
 
 // Mappa degli strumenti suggeriti per ciascun meteo
 const weatherInstruments = {
@@ -1099,4 +1093,20 @@ Object.entries(weatherButtons).forEach(([weather, button]) => {
 
 document.getElementById("start-button").addEventListener("click", () => {
   document.getElementById("intro-screen").classList.add("hidden");
+});
+
+
+// Assegnazione eventi al click del tasto Invio
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {  
+    event.preventDefault();  
+
+    // Controlla se l'utente sta scrivendo in un input
+    if (document.activeElement.tagName === "INPUT") {
+      document.getElementById("search-btn").click();  // Simula il click del tasto di ricerca
+    } else {
+      document.getElementById("start-button").click();  // Simula il click del tasto start
+    }
+  }
 });
