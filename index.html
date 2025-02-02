@@ -1,8 +1,7 @@
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
   <title>MeteotrAPP</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
@@ -22,8 +21,7 @@
   <img src="https://eleonorsrr.github.io/MeteotrAPP/assets/images/logo.png" alt="Logo MeteotrAPP">
 </div>
 
- <!-- ANNA 1/02 Schermata introduttiva -->
- <div id="intro-screen" class="intro-overlay">
+<div id="intro-screen" class="intro-overlay">
   <div class="intro-content">
     <h1>Welcome in MeteotrAPP!</h1>
     <div class="logo-container2">
@@ -35,12 +33,11 @@
   </div>
 </div>
 
-
 <body>
   
   <div class="app-container"> <!--Contenitore principale di tutta l'applicazione (top/central/weather/effect/bottom panels)-->
 
-    <div class="top-panel"> <!--Contenitore relativo al pannello superiore (instruments, play/reset, bpm, tempo)-->
+    <div class="top-panel"> <!--Contenitore relativo al pannello superiore (play/reset, bpm, tempo)-->
       <button id="play-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg></button>
       <button id="stop-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg></button>
       <button id="reset-btn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
@@ -60,11 +57,10 @@
       <option value="5/4">5/4</option>
       <option value="7/4">7/4</option>
     </select>
-  </div>
-    
+      </div> 
     </div>
 
-    <div class="main-layout"> <!--Parte centrale costituita da central panel + effects panel-->
+    <div class="main-layout"> <!--Parte centrale costituita da central panel + map panel-->
 
       <div class="central-panel"> <!--Contenitore relativo al blocco centrale (weather row, chord row)-->
       
@@ -109,16 +105,14 @@
         </div>
 
       </div>
-
-
-      <div class="map-panel">
+      
+      <div class="map-panel"> <!--Contenitore mappa geografica-->
         <div id="map" style="height: 195px; width: 100%; border: 1px solid #ccc;"></div>
       </div>
       
-
     </div>
 
-    <div class="weather-panel">
+    <div class="weather-panel"> <!--Contenitore con barra di ricerca, condizioni meteo e selezione strumento-->
       <div class="instrument-search-container">
         <div class="instrument-selection">
           <label for="instruments">Choose an instrument:</label>
@@ -174,8 +168,7 @@
       </div>
     </div>
     
-    <!-- Pullata Bande 31/01: Creazione bottoni per chord sequencer e pulsante randomizzatore-->
-    <div class="bottom-panel">
+    <div class="bottom-panel"> <!--Contenitore box accordi-->
       <div class="chord-slot"></div>
       <div class="chord-slot"></div>
       <div class="chord-slot"></div>
@@ -188,7 +181,6 @@
       <div class="chord-slot">
         <button id="shuffle-btn">⚡</button>
       </div>
-      <!-- Fine pullata Bande 31/01 -->
 
     </div>
     
@@ -199,4 +191,3 @@
   
 </body>
 </body>
-
