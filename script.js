@@ -72,7 +72,7 @@ function getWeatherData(city = "Milano") { // Default: Milano
 
   .then(data => {
     // Mostra i dati nel pannello laterale
-    document.getElementById('location').innerText = data.name;
+    document.getElementById('location').innerText = `${data.name}, ${data.sys.country}`;
     document.getElementById('temp-current').innerText = data.main.temp + " °C"; // Temperatura attuale
     document.getElementById('temp-min').innerText = data.main.temp_min + " °C"; // Temperatura minima
     document.getElementById('temp-max').innerText = data.main.temp_max + " °C"; // Temperatura massima
