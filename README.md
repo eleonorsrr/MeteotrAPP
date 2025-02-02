@@ -53,7 +53,7 @@ The central panel provides manual control over the weather-based sound selection
 
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
-- **Instrument and City Selection Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
+- **Instrument and City Selection:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
   
   <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/90cfea88-fcb8-4f78-8b53-9b2c7b973a0f" />
 
@@ -69,7 +69,7 @@ The lower section of the interface provides additional customization and real-ti
 
 
 ### 🎼 Chord Arrangement Panel
-The bottom section of the interface provides a space for arranging and modifying the chord progression:
+The bottom section of the interface provides a space for arranging and modifying the chord progression (for a maximum of 8 chords:
 
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.
@@ -104,7 +104,7 @@ This mode allows users to manually select a weather condition without relying on
 - The chord progression of the selected scale will appear.  
 
 For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
-<img width="500" alt="mi minore" src="https://github.com/user-attachments/assets/fd1c34e4-2602-4042-a01d-adfc3375d01c" />
+  <img width="500" alt="mi" src="https://github.com/user-attachments/assets/21eeb8ca-d8c0-4a64-8b9b-f5e3d15399ea" />
 
 ## Users' feedback
 
