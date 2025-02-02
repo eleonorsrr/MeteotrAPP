@@ -91,7 +91,7 @@ In this mode, users can immediately search for a city using the search bar or fl
 - Change the background to reflect the weather.  
 - Generate a **random scale** based on the scale type associated with it.  
 
-For example, if the searched city has a **clear sky**, a random progression from the **Major Scale** (e.g., D Major) will be suggested.
+For example, if the searched city has a **clear sky**, the chords from the **Major Scale** (e.g., D Major) will be suggested.
   
   (see picture above)
 
