@@ -55,7 +55,7 @@ The central panel provides manual control over the weather-based sound selection
 The lower section of the interface provides additional customization and real-time weather information:
 - **Instrument and City Selection Selector:** Choose from a variety of sounds: **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
   
-  <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/5058d3a3-86d0-4e34-bf60-562f1058c631" />
+  <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/90cfea88-fcb8-4f78-8b53-9b2c7b973a0f" />
 
   
 - **City Selection & Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
@@ -74,7 +74,7 @@ The bottom section of the interface provides a space for arranging and modifying
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.
   
-  <img width="1000" alt="barrasotto" src="https://github.com/user-attachments/assets/8717203b-fc5c-4df4-a7a1-dd95e31959f6" />
+  ![bottompanel](https://github.com/user-attachments/assets/0bc0a40e-8aeb-470c-99e5-c9e85c2b815a)
 
 
  ---------------------------------
