@@ -65,8 +65,8 @@ The lower section of the interface provides additional customization and real-ti
   - Local time in the selected city
   - Air humidity and pressure
 
- <img width="800" alt="scelte" src="https://github.com/user-attachments/assets/5671dfcd-b658-4e69-8ac7-a887b953baf0" />
-  
+  ![weatherpanel](https://github.com/user-attachments/assets/658e0a9d-26b2-4277-83f0-fbbb83f2773b)
+
 
 ### 🎼 Chord Arrangement Panel
 The bottom section of the interface provides a space for arranging and modifying the chord progression:
