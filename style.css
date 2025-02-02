@@ -483,7 +483,10 @@ select.dropdownContainer option:hover {
   flex-direction: row;
   gap: 15px;
   width: 1030px;
-    display: grid;
+}
+
+ .weather-panel {
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 0.8rem;
   padding: 1rem;
