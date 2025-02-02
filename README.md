@@ -44,7 +44,7 @@ The central panel provides manual control over the weather-based sound selection
 
   <img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/47ae0373-2ac3-46ac-9b10-89edabbf1f4c" />
 
-- **Map Panel:** A side panel allows users to locate and visualize the selected city on a map.
+- **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
 
   <img width="500" alt="mappa" src="https://github.com/user-attachments/assets/ac5ac246-2b41-42f1-a8f3-59f32f11006a" />
 
