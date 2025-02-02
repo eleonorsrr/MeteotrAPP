@@ -115,6 +115,7 @@ Based on the responses collected, we dedicated time to improving the app accordi
 - Addition of more instruments among the possible intruments available;
 - Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
 - Addition of instructions to a better understanding of the features of the app;
-- Addition of a metronome.
+- Addition of a metronome;
+- Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data
   
 Below is a chart summarizing the overall trends in the responses from the users who participated in the test and survey:  
