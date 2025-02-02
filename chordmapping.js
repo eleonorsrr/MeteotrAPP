@@ -188,7 +188,7 @@ const chordNameMapping = {
   "E2G2sharpB2D2sharp": "Emaj7",// Emaj7
   "F2sharpA2sharpC3sharpE2": "F#7",// F#7
   "G2sharpB2D2sharpF2sharp": "G#m7",// G#m7
-  "A2sharpC3sharpE2G2sharp": "G#m7b5",// A#m7b5
+  "A2sharpC3sharpE2G2sharp": "A#m7b5",// A#m7b5
 };
 
 function getChordName(notes) {
