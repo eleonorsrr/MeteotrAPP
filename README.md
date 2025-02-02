@@ -58,7 +58,7 @@ The lower section of the interface provides additional customization and real-ti
   <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/90cfea88-fcb8-4f78-8b53-9b2c7b973a0f" />
 
   
-- **City Selection & Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
+- **Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
   - Temperature (current, max, min)  
   - Wind speed and direction  
