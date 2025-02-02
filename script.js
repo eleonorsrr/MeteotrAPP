@@ -1064,8 +1064,8 @@ function playWeatherSound(weather) {
 const weatherInstruments = {
   sunny: "*suggestion: Manor Grand",
   rainy: "*suggestion: Grand Piano",
-  cloudy: "*suggestion: Night Blade",
-  snowy: "*suggestion: Soul Path"
+  cloudy: "*suggestion: Soul Pad",
+  snowy: "*suggestion: Night Blade"
 };
 
 // Funzione per mostrare il suggerimento dello strumento
