@@ -28,23 +28,32 @@ document.getElementById("search-btn").addEventListener("click", () => {
 let map;
 
 function initializeMap(lat, lon) {
-  // Se la mappa esiste già, rimuovila prima di crearne una nuova
   if (map) {
     map.remove();
   }
 
-  // Crea una nuova mappa e impostala sulle nuove coordinate
-  map = L.map('map').setView([lat, lon], 10);  // 10 è il livello di zoom
+  map = L.map('map').setView([lat, lon], 10); 
 
-  // Aggiungi una tile layer (mappa base)
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  // Aggiungi un marcatore alla posizione
-  L.marker([lat, lon]).addTo(map)
+  let marker = L.marker([lat, lon]).addTo(map)
     .bindPopup("Weather position")
     .openPopup();
+
+  // Aggiungi evento di clic sulla mappa
+  map.on('click', function (event) {
+    const { lat, lng } = event.latlng;
+
+    // Rimuovi il vecchio marcatore e aggiungine uno nuovo
+    marker.setLatLng([lat, lng])
+      .setPopupContent("Weather position")
+      .openPopup();
+
+    // Chiama la funzione per ottenere i dati meteo in base alla posizione selezionata
+    getWeatherDataByCoords(lat, lng);
+  });
 }
 
 
@@ -124,6 +133,59 @@ function getWeatherData(city = "Milano") { // Default: Milano
   });
 }
 
+function getWeatherDataByCoords(lat, lon) {
+  const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Errore nel recuperare i dati meteo.");
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Mostra i dati nel pannello laterale
+      document.getElementById('location').innerText = data.name || `Lat: ${lat}, Lon: ${lon}`;
+      document.getElementById('temp-current').innerText = data.main.temp + " °C"; 
+      document.getElementById('temp-min').innerText = data.main.temp_min + " °C"; 
+      document.getElementById('temp-max').innerText = data.main.temp_max + " °C"; 
+      document.getElementById('wind-speed').innerText = data.wind.speed + " m/s"; 
+      document.getElementById('wind-direction').innerText = data.wind.deg + "°"; 
+      document.getElementById('humidity').innerText = data.main.humidity + " %"; 
+      document.getElementById('pressure').innerText = data.main.pressure + " hPa"; 
+
+      const weatherDescription = data.weather[0].description;
+      document.getElementById('weather-description').innerText = weatherDescription;
+
+      // Calcola l'ora locale
+      const utcTimestamp = data.dt;
+      const timezoneOffset = data.timezone;
+      const localTimestamp = utcTimestamp + timezoneOffset - 3600; 
+
+      const localDate = new Date(localTimestamp * 1000);
+      const localTime = localDate.toLocaleTimeString('it-IT', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+
+      document.getElementById('time-time').innerText = localTime;
+
+      // Determina la condizione meteo e aggiorna la UI
+      const weatherCondition = getWeatherCondition(weatherDescription);
+      const weatherCondition2 = getWeatherCondition2(weatherDescription);
+
+      const randomScale = getRandomScale(weatherCondition);
+      highlightWeatherButton(weatherCondition);
+      updateChordButtons(randomScale.scaleType, randomScale.rootNote);
+      changeBackground(weatherCondition2);
+    })
+    .catch(error => {
+      console.error('Errore nel recuperare i dati meteo:', error);
+      alert("Errore: " + error.message);
+    });
+}
 
 // Carica i dati meteo per una città predefinita quando la pagina è pronta
 getWeatherData();
@@ -275,7 +337,7 @@ function getRandomScale(weatherCondition) {
 
 // Preload delle immagini per non aver delay
 const images = {
-  clear: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg',
+  clear: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/clearsky.GIF',
   lowrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF',
   mediumrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/mediumrain.GIF',
   highrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/highrain.GIF',
@@ -299,7 +361,7 @@ function changeBackground(weatherCondition2) {
 
   switch (weatherCondition2) {
     case "clear":
-      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg';
+      gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/clearsky.GIF';
       break;
     case "lowrain":
       gifUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF';
@@ -351,10 +413,6 @@ function changeBackground(weatherCondition2) {
     backgroundContainer.style.opacity = 1;
   }, 1000);  // La durata della dissolvenza (1 secondo)
 }
-
-
-
-
 
 
 
@@ -899,7 +957,7 @@ function changeBackground2(weather) {
         imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
         break;
       case 'sunnyy':
-        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sunny.jpg'; 
+        imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/clearsky.GIF'; 
         break;
       case 'rainyy':
         imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF';
@@ -990,10 +1048,10 @@ function playWeatherSound(weather) {
 }
 
 document.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {  // Verifica se il tasto premuto è "Enter"
-        event.preventDefault();  // Previene il comportamento predefinito (utile nei form)
-        document.getElementById("search-btn").click();  // Simula il click del bottone
-    }
+  if (event.key === "Enter") {  
+      event.preventDefault();  
+      document.getElementById("search-btn").click();  
+  }
 });
 
 // Mappa degli strumenti suggeriti per ciascun meteo
