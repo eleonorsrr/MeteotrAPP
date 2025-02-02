@@ -69,7 +69,7 @@ The lower section of the interface provides additional customization and real-ti
 
 
 ### 🎼 Chord Arrangement Panel
-The bottom section of the interface provides a space for arranging and modifying the chord progression (for a maximum of 8 chords:
+The bottom section of the interface provides a space for arranging and modifying the chord progression for a maximum of 8 chords:
 
 - **Drag & Drop:** Rearrange selected chords manually.  
 - ⚡ **Shuffle Feature:** Randomizes the order of selected chords for spontaneous inspiration.
