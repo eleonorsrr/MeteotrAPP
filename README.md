@@ -18,7 +18,7 @@ The app suggests chords tailored to the detected weather and lets users experime
 
 Whether you're looking for inspiration, experimenting with harmonies, or simply having fun with music creation, MeteotrAPP provides a unique way to blend meteorology and sound design. Let the weather shape your next musical idea!
 
-<img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/a100291f-5461-4078-b11b-4b4725a4339c" />
+ <img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/a100291f-5461-4078-b11b-4b4725a4339c" />
 
 
 ## 🎛️ App features: Interface Overview
@@ -34,7 +34,7 @@ The top panel contains essential controls for managing playback and tempo settin
 - ⏱️ **BPM Selector:** Adjusts the beats per minute (default: 120 BPM). Changes can only be made while the loop is paused.  
 - 🎵 **Time Signature Selector:** Allows switching between **4/4, 3/4, 6/8, 2/4, 5/4, 7/4** (default: 4/4).
   
-![barra](https://github.com/user-attachments/assets/cfceadc1-8758-41c2-b257-b328520a9c29)
+ ![barra](https://github.com/user-attachments/assets/cfceadc1-8758-41c2-b257-b328520a9c29)
 
 
 ### 🌦️ Central Panel
@@ -43,7 +43,7 @@ The central panel provides manual control over the weather-based sound selection
 - **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
   
-<img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/5e5eb21d-0990-4498-aa8d-8dc7671233b5" />
+ <img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/5e5eb21d-0990-4498-aa8d-8dc7671233b5" />
 
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
