@@ -368,7 +368,7 @@ document.getElementById('instruments').addEventListener('change', (event) => {
   const selectedInstrument = event.target.value; // Rappresenta il valore attuale dell'elemento HTML che ha generato l'evento (lo strumento selezionato)
 
   if (selectedInstrument === 'grandpiano') {
-    currentNotes = manor;
+    currentNotes = grandpiano;
 
   } else if (selectedInstrument === 'nightblade') {
     currentNotes = nightblade;
