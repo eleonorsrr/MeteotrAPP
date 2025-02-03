@@ -19,7 +19,8 @@ The app suggests chords tailored to the detected weather and lets users experime
 
 Whether you're looking for inspiration, experimenting with harmonies, or simply having fun with music creation, MeteotrAPP provides a unique way to blend meteorology and sound design. Let the weather shape your next musical idea!
 
-  <img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/a100291f-5461-4078-b11b-4b4725a4339c" />
+<img width="1470" alt="tutto" src="https://github.com/user-attachments/assets/b295d62a-975a-4502-87d6-84a0bc271285" />
+
 
 
 ## 🎛️ App features: Interface Overview
