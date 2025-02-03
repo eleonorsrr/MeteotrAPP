@@ -543,42 +543,43 @@ select.dropdownContainer option:hover {
 }
 
 .instrument-search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 0.5rem;
 }
 
 #instrument-suggestion {
-  font-style: italic;
-  font-size: 11px;
-  color: #333;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  margin-top: 2px;
-  text-align: center;
-  margin-left: 185px;
+font-style: italic;
+font-size: 11px;
+color: #333;
+padding: 10px;
+background-color: #f9f9f9;
+border: 1px solid #dddddd;
+border-radius: 8px;
+margin-top: -5px;
+text-align: center;
+width: 130px;
 }
 
 .instrument-selection {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+display: flex;
+align-items: center;
+gap: 0.5rem;
 }
 
 .instrument-selection label {
-  font-family: 'Nunito';
-  font-size: 16px;
-  font-weight: bold;
+font-family: 'Nunito';
+font-size: 13px;
+font-weight: bold;
 }
 
- #instruments {
-  font-family: 'Nunito';
-  padding: 5px;
-  font-size: 16px;
+#instruments {
+font-family: 'Nunito';
+padding: 5px;
+font-size: 16px;
+font-weight: bold;
 }
 
 #city-search {
