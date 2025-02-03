@@ -1,20 +1,16 @@
 // 1. Importazione script secondari
 
-// 1.1 Acquisizione, mappatura e preload dei campioni audio
 import { soulpad, nightblade, manor, grandpiano } from './sounds.js';
 console.log(soulpad, nightblade, manor, grandpiano);
 
-// 1.2.1 Definizione e mappatura di scale e accordi
 import { scales, chords } from './scalesandchords.js';
 console.log(scales, chords);
 
-// 1.2.2 Definizione e mappatura accordi nella tendina
-import { getChordName } from "./chordmapping.js";
-console.log(getChordName);
+import { updateChordButtons } from "./playchordsloop.js";
 
-// 1.3 Key API OpenWeather: ottieni dati, ottieni scala in base a dati ottenuti e cambia sfondo in base a dati ottenuti
+// 2. Key API OpenWeather: funzione principale accesso informazioni meteo e relative funzioni interne
 
-// Scelta della città
+// Scelta della città tramite barra di ricerca
 document.getElementById("search-btn").addEventListener("click", () => {
   const city = document.getElementById("city-input").value.trim();
   if (city) {
@@ -24,7 +20,66 @@ document.getElementById("search-btn").addEventListener("click", () => {
   }
 });
 
-// Variabile globale per la mappa
+// Funzione per ottenere e visualizzare i dati meteo
+function getWeatherData(city = "Milano") { // Default: Milano
+  const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Città non trovata. Controlla il nome e riprova.");
+    }
+    return response.json();
+  })
+
+  .then(data => {
+    document.getElementById('location').innerText = `${data.name}, ${data.sys.country}`;
+    document.getElementById('temp-current').innerText = data.main.temp + " °C"; // Temperatura attuale
+    document.getElementById('temp-min').innerText = data.main.temp_min + " °C"; // Temperatura minima
+    document.getElementById('temp-max').innerText = data.main.temp_max + " °C"; // Temperatura massima
+    document.getElementById('wind-speed').innerText = data.wind.speed + " m/s"; // Velocità del vento
+    document.getElementById('wind-direction').innerText = data.wind.deg + "°"; // Direzione del vento
+    document.getElementById('humidity').innerText = data.main.humidity + " %"; // Umidità
+    document.getElementById('pressure').innerText = data.main.pressure + " hPa"; // Pressione atmosferica
+    document.getElementById('time-time').innerText = localTime;
+
+    const weatherDescription = data.weather[0].description;
+    document.getElementById('weather-description').innerText = weatherDescription;
+
+    // Calcola ora locale 
+    const utcTimestamp = data.dt; 
+    const timezoneOffset = data.timezone; 
+    const localTimestamp = utcTimestamp + timezoneOffset - 3600; 
+    const localDate = new Date(localTimestamp * 1000);
+    const localTime = localDate.toLocaleTimeString('it-IT', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    }
+    );
+          
+    // Aggiungi la mappa geografica
+    const lat = data.coord.lat; 
+    const lon = data.coord.lon;
+    initializeMap(lat, lon);
+
+    const weatherCondition = getWeatherCondition(weatherDescription);
+    const weatherCondition2 = getWeatherCondition2(weatherDescription);
+    const randomScale = getRandomScale(weatherCondition);
+    highlightWeatherButton(weatherCondition);
+    updateChordButtons(randomScale.scaleType,randomScale.rootNote);
+    changeBackground(weatherCondition2);
+  }
+  )
+
+  .catch(error => {
+    console.error('Errore nel recuperare i dati meteo:', error);
+    alert("Errore: " + error.message);
+  });
+}
+
+// Inizializzazione mappa con possibilità di scelta posizione con click
 let map;
 
 function initializeMap(lat, lon) {
@@ -42,99 +97,19 @@ function initializeMap(lat, lon) {
     .bindPopup("Weather position")
     .openPopup();
 
-  // Aggiungi evento di clic sulla mappa
   map.on('click', function (event) {
     const { lat, lng } = event.latlng;
 
-    // Rimuovi il vecchio marcatore e aggiungine uno nuovo
     marker.setLatLng([lat, lng])
       .setPopupContent("Weather position")
       .openPopup();
-
-    // Chiama la funzione per ottenere i dati meteo in base alla posizione selezionata
+      
     getWeatherDataByCoords(lat, lng);
   });
 }
 
-
-// Funzione per ottenere e visualizzare i dati meteo
-function getWeatherData(city = "Milano") { // Default: Milano
-  const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
-  fetch(url)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Città non trovata. Controlla il nome e riprova.");
-    }
-    return response.json();
-  })
-
-  .then(data => {
-    // Mostra i dati nel pannello laterale
-    document.getElementById('location').innerText = `${data.name}, ${data.sys.country}`;
-    document.getElementById('temp-current').innerText = data.main.temp + " °C"; // Temperatura attuale
-    document.getElementById('temp-min').innerText = data.main.temp_min + " °C"; // Temperatura minima
-    document.getElementById('temp-max').innerText = data.main.temp_max + " °C"; // Temperatura massima
-    document.getElementById('wind-speed').innerText = data.wind.speed + " m/s"; // Velocità del vento
-    document.getElementById('wind-direction').innerText = data.wind.deg + "°"; // Direzione del vento
-    document.getElementById('humidity').innerText = data.main.humidity + " %"; // Umidità
-    document.getElementById('pressure').innerText = data.main.pressure + " hPa"; // Pressione atmosferica
-    
-    // Mostra descrizione delle condizioni meteo
-    const weatherDescription = data.weather[0].description;
-    document.getElementById('weather-description').innerText = weatherDescription;
-
-    // Calcola l'ora locale usando l'offset timezone
-    const utcTimestamp = data.dt; // Tempo UTC in secondi
-    const timezoneOffset = data.timezone; // Offset in secondi
-    const localTimestamp = utcTimestamp + timezoneOffset - 3600; // Tempo locale in secondi
-
-    // Converte il timestamp locale in un oggetto Date
-    const localDate = new Date(localTimestamp * 1000);
-          
-    // Formatta l'ora locale in un formato leggibile
-    const localTime = localDate.toLocaleTimeString('it-IT', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    }
-    );
-          
-    // Mostra l'ora locale nel pannello laterale
-    document.getElementById('time-time').innerText = localTime;
-    
-        // Aggiungi la mappa geografica
-        const lat = data.coord.lat; // Latitudine
-        const lon = data.coord.lon; // Longitudine
-        initializeMap(lat, lon);
-
-    // Usa la funzione per determinare la condizione meteo
-    const weatherCondition = getWeatherCondition(weatherDescription);
-    const weatherCondition2 = getWeatherCondition2(weatherDescription);
-
-
-    // Seleziona una scala casuale in base alla condizione meteo
-    const randomScale = getRandomScale(weatherCondition);
-    highlightWeatherButton(weatherCondition);
-
-    // Funzione che aggiorna accordi visualizzati
-    updateChordButtons(randomScale.scaleType,randomScale.rootNote);
-
-
-    // Chiama funzione che aggiorna background
-    changeBackground(weatherCondition2);
-  }
-  )
-
-  .catch(error => {
-    console.error('Errore nel recuperare i dati meteo:', error);
-    alert("Errore: " + error.message);
-  });
-}
-
 function getWeatherDataByCoords(lat, lon) {
-  const apiKey = "3cddeb2e294c555f3933428867f617d4"; // Key API OpenWeather
+  const apiKey = "3cddeb2e294c555f3933428867f617d4";
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
   fetch(url)
@@ -172,7 +147,6 @@ function getWeatherDataByCoords(lat, lon) {
 
       document.getElementById('time-time').innerText = localTime;
 
-      // Determina la condizione meteo e aggiorna la UI
       const weatherCondition = getWeatherCondition(weatherDescription);
       const weatherCondition2 = getWeatherCondition2(weatherDescription);
 
@@ -187,11 +161,9 @@ function getWeatherDataByCoords(lat, lon) {
     });
 }
 
-// Carica i dati meteo per una città predefinita quando la pagina è pronta
 getWeatherData();
 
-
-// 1.4.1 Categorie di descrizioni meteo per associazione agli accordi
+// 2.1.1 Categorie di descrizioni meteo per associazione agli accordi
 const weatherCategories = {
   sunny: [
     "clear sky"
@@ -211,7 +183,7 @@ const weatherCategories = {
   ]
 };
 
-// 1.4.2 Categorie di descrizioni meteo per cambiare background
+// 2.1.2 Categorie di descrizioni meteo per cambiare background
 const weatherCategories2 = {
   clear: ["clear sky"],
   lowrain: [
@@ -248,11 +220,10 @@ const weatherCategories2 = {
   ]
 };
 
-// 1.5.1 Funzione per associare la descrizione meteo ad una delle 4 condizioni meteo generali
+// 2.2.1 Funzione per associare la descrizione meteo ad una delle 4 condizioni meteo generali
 function getWeatherCondition(weatherDescription) {
   const description = weatherDescription.toLowerCase();
 
-  // Controlla in quale categoria rientra la descrizione
   if (weatherCategories.sunny.some(keyword => description.includes(keyword))) {
     return "sunny";
   } else if (weatherCategories.rainy.some(keyword => description.includes(keyword))) {
@@ -264,11 +235,10 @@ function getWeatherCondition(weatherDescription) {
   }
 }
 
-// 1.5.2 Funzione per associare la descrizione meteo ad una delle 10 condizioni che determinano il background
+// 2.2.2 Funzione per associare la descrizione meteo ad una delle 10 condizioni che determinano il background
 function getWeatherCondition2(weatherDescription) {
   const description2 = weatherDescription.toLowerCase();
 
-  // Controlla in quale categoria rientra la descrizione
   if (weatherCategories2.clear.some(keyword => description2.includes(keyword))) {
     return "clear";
 
@@ -293,49 +263,36 @@ function getWeatherCondition2(weatherDescription) {
   } else if (weatherCategories2.highsnow.some(keyword => description2.includes(keyword))) {
     return "highsnow";
   }
-
-
 }
 
-
-// 1.6.1 Funzione per selezionare una scala casuale in base alla condizione meteo
+// 2.3.1. Funzione per selezionare una scala casuale in base alla condizione meteo
 function getRandomScale(weatherCondition) {
   let scaleType;
-
-  // Associa la condizione meteo al tipo di scala
   switch (weatherCondition) {
     case "sunny":
-      scaleType = "major"; // Scala maggiore
+      scaleType = "major";
       break;
     case "rainy":
-      scaleType = "minor"; // Scala minore
+      scaleType = "minor";
       break;
     case "cloudy":
-      scaleType = "sus4"; // Scala sus4
+      scaleType = "sus4";
       break;
     case "snowy":
-      scaleType = "major7"; // Scala major7
+      scaleType = "major7";
       break;
     default:
-      scaleType = "major"; // Default
+      scaleType = "major";
       break;
   }
 
-  
-  // Recupera tutte le root notes disponibili per la scala
-  const rootNotes = Object.keys(scales[scaleType]); // `scales` è un oggetto globale predefinito
+  const rootNotes = Object.keys(scales[scaleType]); 
   const randomRootNote = rootNotes[Math.floor(Math.random() * rootNotes.length)];
-
-  // Ritorna sia il tipo di scala che la root note selezionata
   return { scaleType, rootNote: randomRootNote };
   
 }
 
-
-
-// 1.6.2 Funzione per cambiare il background in base alla condizione meteo
-
-// Preload delle immagini per non aver delay
+// 2.3.2 Funzione per cambiare il background in base alla condizione meteo
 const images = {
   clear: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/clearsky.GIF',
   lowrain: 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/lowrain.GIF',
@@ -353,8 +310,6 @@ Object.values(images).forEach(gifUrl => {
   const img = new Image();
   img.src = gifUrl;
 });
-
-
 
 function changeBackground(weatherCondition2) {
   let gifUrl;
@@ -395,35 +350,26 @@ function changeBackground(weatherCondition2) {
       break;
   }
 
-  // 1. Recupera il div per lo sfondo
   const backgroundContainer = document.getElementById('background-container');
-  
-  // 2. Imposta l'opacità a 0 per iniziare la dissolvenza
   backgroundContainer.style.opacity = 0;
 
-  // 3. Imposta un timeout per il cambio immagine dopo la dissolvenza
   setTimeout(() => {
-    // 4. Cambia l'immagine di sfondo
     backgroundContainer.style.backgroundImage = `url(${gifUrl})`;
     backgroundContainer.style.backgroundSize = 'cover';
     backgroundContainer.style.backgroundPosition = 'center';
     backgroundContainer.style.backgroundRepeat = 'no-repeat';
-
-    // 5. Ristabilisci l'opacità a 1 per mostrare la nuova immagine
     backgroundContainer.style.opacity = 1;
-  }, 1000);  // La durata della dissolvenza (1 secondo)
+  }, 1000);
 }
 
 
+// 3. Funzioni e/o logica per la gestione dell'applicazione
 
-// 2. Funzioni e/o logica per la gestione dell'applicazione
-
-// 2.1 Logica gestione cambio strumento
-let currentNotes = grandpiano; // Assegnazione dei dati (note .wav) contenuti in rhodes ad una variabile globale (strumento attivo di default)
-
+// 3.1 Scelta strumento
+let currentNotes = grandpiano; 
 document.getElementById('instruments').addEventListener('change', (event) => {
 
-  const selectedInstrument = event.target.value; // Rappresenta il valore attuale dell'elemento HTML che ha generato l'evento (lo strumento selezionato)
+  const selectedInstrument = event.target.value;
 
   if (selectedInstrument === 'grandpiano') {
     currentNotes = grandpiano;
@@ -440,71 +386,77 @@ document.getElementById('instruments').addEventListener('change', (event) => {
 
 });
 
-// 2.2 Riproduzione di un accordo
-function playChord(chord) { 
+// 3.2 Riproduzione di un accordo
+export function playChord(chord) { 
 
-  if (chords[chord]) { // Esegue il blocco se l'accordo "chord" è presente in chords
+  if (chords[chord]) {
 
     chords[chord].forEach(note => {
-      
-      const audio = currentNotes[note]; // Recupera l'oggetto audio associato alla nota corrente da currentNotes
+      const audio = currentNotes[note]; 
       
       if (audio) {
 
-        audio.currentTime = 0; // Resetta l'audio per fare partire il suono dall'inizio
-        audio.play(); // Avvia la riproduzione del suono associato alla nota corrente
-
+        audio.currentTime = 0; 
+        audio.play(); 
       }
-
     });
-
   }
-
 }
 
-// 2.3 Creazione e aggiornamento del menù a tendina (+ scelta della scala)
+document.querySelectorAll('.chord-row').forEach(button => {
+
+  button.addEventListener('click', (event) => {
+
+    const chord = event.target.dataset.chord; 
+
+    if (chord) {
+      playChord(chord);
+    }
+  });
+
+});
+
+// 3.3 Creazione e aggiornamento del menù a tendina (+ scelta della scala)
 function createDropdown(scaleType, weatherButton) {
 
   if (weatherButton.nextElementSibling && weatherButton.nextElementSibling.tagName === "SELECT") {
-    return; // Verifica che il pulsante weatherButtons abbia già "SELECT" come elemento successivo
+    return;
   }
 
-  const dropdownContainer = document.createElement("select"); // Crea un elemento di tipo "select" per il menù a tendina
+  const dropdownContainer = document.createElement("select");
   dropdownContainer.classList.add("dropdownContainer");
 
-  const scaleKeys = Object.keys(scales[scaleType]); // Array con tutte le scale disponibili per la scalaType selezionata
+  const scaleKeys = Object.keys(scales[scaleType]);
   
   scaleKeys.forEach(note => {
     const option = document.createElement("option");
     option.value = note;
     option.textContent = note;
-    dropdownContainer.appendChild(option); // Aggiunge l'elemento appena creato al menù a tendina
+    dropdownContainer.appendChild(option);
   });
   
   if (scaleKeys.length > 0) {
-    dropdownContainer.value = scaleKeys[0]; // Imposta la prima scala
-    updateChordButtons(scaleType, scaleKeys[0]); // Imposta automaticamente la prima scala disponibile nell'array quando si preme su weatherButton la prima volta
+    dropdownContainer.value = scaleKeys[0];
+    updateChordButtons(scaleType, scaleKeys[0]); 
   }
 
   dropdownContainer.addEventListener("change", () => {
-    updateChordButtons(scaleType, dropdownContainer.value); // Cambia gli accordi proposti ogni volta che viene selezionata una nuova opzione dal menù a tendina
+    updateChordButtons(scaleType, dropdownContainer.value); 
     simulateWeatherButtonClick(scaleType);
   });
 
-  // 🔴 **Forza l'aggiornamento anche se si seleziona la stessa opzione**
   dropdownContainer.addEventListener("click", () => {
     const currentValue = dropdownContainer.value;
-    dropdownContainer.value = ""; // Resetta temporaneamente il valore
+    dropdownContainer.value = "";
     setTimeout(() => {
-      dropdownContainer.value = currentValue; // Ripristina il valore
-      updateChordButtons(scaleType, currentValue); // Forza aggiornamento
+      dropdownContainer.value = currentValue;
+      updateChordButtons(scaleType, currentValue);
     }, 1);
   });
 
-  weatherButton.parentElement.insertBefore(dropdownContainer, weatherButton.nextSibling); // Aggiunge il menù a tendina creato al DOM (dopo il pulsante weatheButtons)
+  weatherButton.parentElement.insertBefore(dropdownContainer, weatherButton.nextSibling);
 }
 
-// 🔵 Funzione per simulare il click sul pulsante meteo corrispondente
 function simulateWeatherButtonClick(scaleType) {
   const weatherMapping = {
     'major': "sunny",
@@ -522,372 +474,8 @@ function simulateWeatherButtonClick(scaleType) {
   }
 }
 
+// 4. Assegnazione degli eventi ai pulsanti
 
-
-// Pullata Bande 31/01: modifica alle logiche updateChordButtons, toggleChordSelection, updateSelectedChordsDisplay
-
-// 2.4 Aggiornamento degli accordi in relazione alla scala scelta
-const chordButtonsContainer = document.querySelector(".chord-row");
-
-function updateChordButtons(scaleType, rootNote) {
-
-  const selectedScale = scales[scaleType][rootNote]; // ScaleType=major/minor/sus4/major7; rootNote=C,D,E..
-  chordButtonsContainer.innerHTML = ""; // Svuota i tasti esistenti
-
-  if (selectedScale) { // Verifica che la scala selezionata sia tra quelle definite
-
-    selectedScale.forEach(note => {
-
-      const button = document.createElement("button"); // Crea un elemento HTML button (pulsante)
-      button.classList.add("chord-btn", "fixed-size"); // Aggiunge una classe a tale pulsante 
-      button.textContent = getChordName(note);
-      button.dataset.chord = note; // Aggiunge un attributo personalizzato data-chord a tale pulsante
-
-      button.addEventListener("click", () => {
-        toggleChordSelection(button); // All'evento (click) passa il pulsante creato come argomento (seleziona l'accordo)
-      });
-
-      chordButtonsContainer.appendChild(button); // Aggiunge il pulsante appena creato al contenitore dei pulsanti degli accordi
-
-    });
-
-  } else {
-    console.error("Scala non trovata per", scaleType, rootNote);
-  }
-
-}
-
-// 2.5 Selezione/Deselezione di un accordo
-const selectedChords = [];
-
-function toggleChordSelection(button) {
-
-  const selectedChord = button.dataset.chord; // Recupera il valore dell'attributo data-chord
-  
-  selectedChords.push(selectedChord); // Aggiunge l'accordo all'array
-
-  updateSelectedChordsDisplay();
-}
-
-
-// 2.6 Aggiornamento visualizzazione degli accordi selezionati
-const bottomPanelSlots = document.querySelectorAll(".bottom-panel .chord-slot");
-const MAX_CHORDS = bottomPanelSlots.length - 1; // Numero massimo di accordi selezionabili
-
-function updateSelectedChordsDisplay() {
-  while (selectedChords.length > MAX_CHORDS) {
-    selectedChords.pop(); // Rimuove eventuali accordi in eccesso
-  }
-
-  selectedChords.forEach((chord, index) => {
-    if (index < MAX_CHORDS) { // Evita di superare il numero massimo di slot
-      const slot = bottomPanelSlots[index];
-      let chordButton = slot.querySelector("button");
-
-      if (!chordButton) {
-        // Se il bottone non esiste, lo crea
-        chordButton = document.createElement("button");
-        chordButton.classList.add("chord-btn");
-        slot.appendChild(chordButton);
-
-        // Aggiunge l'evento di rimozione solo alla creazione
-        chordButton.addEventListener("click", () => removeChordFromSequence(index));
-      }
-
-      // Aggiorna il contenuto del bottone senza ricrearlo
-      chordButton.textContent = getChordName(chord);
-      chordButton.dataset.chord = chord;
-    }
-  });
-
-  // Rimuove eventuali accordi in eccesso dagli slot
-  for (let i = selectedChords.length; i < MAX_CHORDS; i++) {
-    bottomPanelSlots[i].innerHTML = "";
-  }
-  
-  ensureShuffleButton(); // 🟢 Mantiene il bottone shuffle visibile
-  enableDragAndDrop(); // 🟢 ABILITA DRAG & DROP SOLO SUGLI ELEMENTI AGGIORNATI
-}
-
-
-function removeChordFromSequence(index) {
-  selectedChords.splice(index, 1); // Rimuove l'accordo selezionato in base all'indice
-  updateSelectedChordsDisplay(); // Aggiorna la UI
-}
-
-// Drag & Drop per riordinare gli accordi selezionati
-
-let draggedElement = null;
-let draggedIndex = null;
-
-function enableDragAndDrop() {
-  const chordSlots = document.querySelectorAll(".bottom-panel .chord-slot");
-
-  chordSlots.forEach((slot, index) => {
-    const button = slot.querySelector("button");
-    if (!button) return; // Se il contenitore è vuoto, salta
-
-    button.setAttribute("draggable", true);
-
-    // Rimuovi i listener precedenti prima di aggiungerli per evitare duplicazioni
-    button.removeEventListener("dragstart", dragStartHandler);
-    button.addEventListener("dragstart", dragStartHandler);
-
-    slot.removeEventListener("dragover", dragOverHandler);
-    slot.addEventListener("dragover", dragOverHandler);
-
-    slot.removeEventListener("drop", dropHandler);
-    slot.addEventListener("drop", dropHandler);
-
-    button.removeEventListener("dragend", dragEndHandler);
-    button.addEventListener("dragend", dragEndHandler);
-  });
-}
-
-// Funzione per avviare il trascinamento
-function dragStartHandler(event) {
-  draggedElement = event.target; // Memorizza l'elemento trascinato
-  draggedIndex = [...document.querySelectorAll(".bottom-panel .chord-slot button")].indexOf(draggedElement);
-  event.dataTransfer.effectAllowed = "move";
-  setTimeout(() => {
-    draggedElement.style.opacity = "0.5";
-  }, 0);
-}
-
-// Permette il drop e aggiunge uno stile visivo
-function dragOverHandler(event) {
-  event.preventDefault();
-  event.target.classList.add("drag-over");
-}
-
-// Gestisce il rilascio dell'elemento e lo sposta nella posizione corretta
-function dropHandler(event) {
-  event.preventDefault();
-  event.target.classList.remove("drag-over");
-
-  // Recupera l'indice corretto dell'elemento target
-  const chordButtons = [...document.querySelectorAll(".bottom-panel .chord-slot button")];
-  const targetIndex = chordButtons.indexOf(event.target);
-
-  if (draggedIndex !== targetIndex && targetIndex !== -1) {
-    swapChords(draggedIndex, targetIndex);
-  }
-}
-
-// Funzione per concludere il trascinamento
-function dragEndHandler() {
-  if (draggedElement) {
-    draggedElement.style.opacity = "1";
-  }
-  draggedElement = null;
-  draggedIndex = null;
-}
-
-// 🔄 Sposta l'accordo selezionato e fa scalare gli altri
-function swapChords(fromIndex, toIndex) {
-  if (fromIndex === toIndex) return; // Se la posizione di partenza è la stessa della destinazione, non fare nulla
-
-  let movedChord = selectedChords[fromIndex]; // Prende l'accordo da spostare
-
-  // Rimuove l'elemento da `fromIndex` e spostalo a `toIndex`
-  selectedChords.splice(fromIndex, 1); 
-  selectedChords.splice(toIndex, 0, movedChord);
-
-  // Ottimizzazione per evitare aggiornamenti del DOM troppo frequenti
-  setTimeout(() => {
-    updateSelectedChordsDisplay(); // Solo dopo aver completato l'operazione di spostamento, aggiorna la UI
-  }, 0);
-}
-
-// Logica tasto randomizzatore
-
-document.addEventListener("DOMContentLoaded", function () {
-  const shuffleButton = document.getElementById("shuffle-btn");
-  
-  shuffleButton.addEventListener("click", shuffleChords);
-});
-
-function ensureShuffleButton() {
-  let shuffleButton = document.getElementById("shuffle-btn");
-
-  if (!shuffleButton) {
-    const bottomPanel = document.querySelector(".bottom-panel");
-    
-    // Rimuove eventuali slot extra indesiderati (solo se superano il limite di 9)
-    while (bottomPanel.children.length > 9) {
-      bottomPanel.removeChild(bottomPanel.lastChild);
-    }
-
-    // Crea il contenitore solo se il bottone non esiste già
-    const shuffleSlot = document.createElement("div");
-    shuffleSlot.classList.add("chord-slot");
-
-    shuffleButton = document.createElement("button");
-    shuffleButton.id = "shuffle-btn";
-    shuffleButton.textContent = "⚡";
-    shuffleButton.addEventListener("click", shuffleChords);
-
-    shuffleSlot.appendChild(shuffleButton);
-    bottomPanel.appendChild(shuffleSlot);
-  }
-}
-
-function shuffleChords() {
-  if (selectedChords.length > 1) {
-    const shuffleButton = document.getElementById("shuffle-btn");
-
-    // Aggiunge la classe per l'animazione
-    shuffleButton.classList.add("shake");
-
-    // Dopo 600ms rimuove la classe per poterla riapplicare in futuro
-    setTimeout(() => {
-      shuffleButton.classList.remove("shake");
-    }, 600);
-
-    // Ordina casualmente senza riassegnare l'array
-    selectedChords.sort(() => Math.random() - 0.5);
-
-    updateSelectedChordsDisplay(); // Aggiorna la UI con il nuovo ordine
-  }
-}
-
-// Logica PlayChordsLoop e resetChordsLoop aggiornata
-
-// 2.8.2 Riproduzione loop con aggiornamento dinamico di BPM e time signature
-function playChordsLoop() {
-  if (selectedChords.length === 0) {
-    alert("Seleziona almeno un accordo per avviare la riproduzione!");
-    return;
-  }
-
-  if (currentInterval !== null) {
-    return; // Previene la sovrapposizione di loop
-  }
-
-  updateLoop(); // Avvia la riproduzione con BPM e time signature attuali
-  document.getElementById("play-btn").disabled = true; // Disabilita il play per evitare più cicli paralleli
-}
-
-// Funzione per aggiornare dinamicamente il loop con i nuovi valori di BPM e time signature
-function updateLoop() {
-  if (currentInterval !== null) {
-    clearInterval(currentInterval);
-  }
-
-  currentInterval = calculateInterval(bpm, timeSignature);
-  let index = 0;
-
-  currentInterval = setInterval(() => {
-    document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
-
-    playChord(selectedChords[index]);
-    const chordButtons = document.querySelectorAll(".chord-slot button");
-    if (chordButtons[index]) {
-      chordButtons[index].classList.add("playing");
-    }
-
-    index = (index + 1) % selectedChords.length;
-
-  }, currentInterval);
-}
-
-// 2.8.3 Stop della riproduzione senza cancellare gli accordi
-function stopChordsLoop() {
-  if (currentInterval !== null) {
-    clearInterval(currentInterval);
-    currentInterval = null;
-    document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
-    document.getElementById("play-btn").disabled = false; // Riabilita il tasto play
-  }
-}
-
-// 3.3.1 Aggiornamento automatico del loop quando cambiano BPM o time signature
-document.getElementById("bpm").addEventListener("input", (e) => {
-  setBPM(e.target.value);
-  if (currentInterval !== null) updateLoop();
-});
-
-document.getElementById("time-signature").addEventListener("change", (e) => {
-  setTimeSignature(e.target.value);
-  if (currentInterval !== null) updateLoop();
-});
-
-// Associa i pulsanti
-document.getElementById("play-btn").addEventListener("click", playChordsLoop);
-document.getElementById("stop-btn").addEventListener("click", stopChordsLoop);
-
-// 🔄 Funzione per resettare la sequenza di accordi
-function resetChordsLoop() {
-  if (currentInterval) {
-      clearInterval(currentInterval);
-      currentInterval = null;
-  }
-
-  selectedChords.length = 0; // Svuota l'array degli accordi selezionati
-  console.log("Accordi deselezionati:", selectedChords);
-
-  // ✅ Resetta solo i primi 8 slot e NON crea slot extra
-  bottomPanelSlots.forEach((slot, index) => {
-    if (index < 8) {
-      slot.innerHTML = ""; // Svuota solo i primi 8 slot
-    }
-  });
-
-  // ✅ Mantiene il pulsante shuffle visibile e separato
-  ensureShuffleButton();
-  document.getElementById("play-btn").disabled = false; // Riabilita il tasto play
-
-  console.log("Loop fermato, accordi deselezionati e pulsanti ripristinati.");
-}
-
-// 🛠 Associa la funzione resetChordsLoop al tasto reset appena lo script viene caricato
-document.addEventListener("DOMContentLoaded", () => {
-  const resetButton = document.getElementById("reset-btn");
-  if (resetButton) {
-      resetButton.addEventListener("click", resetChordsLoop);
-  }
-});
-// Fine pullata Bande 31/01
-
-
-// 2.7 Logica funzionamento tasto "Play"
-const playButton = document.getElementById("play-btn");
-
-if (playButton) {
-  playButton.addEventListener("click", playChordsLoop);
-} else {
-  console.error("Pulsante Play non trovato. Assicurati che abbia l'ID 'play-btn'.");
-}
-
-// 2.8 Riproduzione, arresto e reset del loop di accordi
-let currentInterval = null; // Variabile globale per gestire l'arresto del loop
-
-// 2.8.1 Calcolo dell'intervallo in base alla time signature e ai BPM
-function calculateInterval(bpm, timeSignature) {
-  switch (timeSignature) {
-    case '4/4':
-      return (60000 / bpm) * 4; // Un accordo per battuta in 4/4
-    case '3/4':
-      return (60000 / bpm) * 3; // Un accordo per battuta in 3/4
-    case '6/8':
-      return (60000/(bpm/2)) * 2; // Due accordi per battuta in 6/8
-      case '2/4':
-        return (60000 / bpm) * 2; // Due battiti per battuta in 2/4
-      case '5/4':
-        return (60000 / bpm) * 5; // Cinque battiti per battuta in 5/4 (Take Five -  Dave Brubeck)
-      case '7/4':
-        return (60000 / bpm) * 7; // Sette battiti per battuta in 7/4 (Money - Pink Floyd)
-    default:
-      console.warn("Time signature non riconosciuta, impostazione predefinita su 4/4.");
-      return (60000 / bpm) * 4;
-  }
-}
-
-
-// 3. Assegnazione degli eventi ai pulsanti
-
-// 3.1 Assegnazione delle scale proposte in base alla condizione meteo scelta
-// 3.1 Assegnazione delle scale proposte in base alla condizione meteo scelta
 const weatherButtons = {
   sunny: document.getElementById("sunny"),
   rainy: document.getElementById("rainy"),
@@ -895,7 +483,6 @@ const weatherButtons = {
   snowy: document.getElementById("snowy")
 };
 
-// Creazione dei dropdown all'inizio per ciascun bottone meteo
 const weatherScales = {
   sunny: "major",
   rainy: "minor",
@@ -903,68 +490,18 @@ const weatherScales = {
   snowy: "major7"
 };
 
-// Crea i dropdown per tutti i bottoni meteo all'inizio
 Object.entries(weatherButtons).forEach(([weather, button]) => {
-  createDropdown(weatherScales[weather], button); // Passa la scala corretta per ciascun bottone
+  createDropdown(weatherScales[weather], button);
 });
 
-
-// 3.2 Riproduzione dell'accordo selezionato tramite click
-document.querySelectorAll('.chord-row').forEach(button => {
-
-  button.addEventListener('click', (event) => {
-
-    const chord = event.target.dataset.chord; // Contiene l'accordo (attributo data-chord) relativo all'elemento HTML cliccato
-
-    if (chord) {
-      playChord(chord);
-    }
-  });
-
-});
-
-// 3.3 Event listeners per BPM e Time-Signature
-let bpm = 120; // Default BPM
-let timeSignature = '4/4'; // Default Time Signature
-
-function setBPM(value) {
-  bpm = value;
-}
-
-function setTimeSignature(value) {
-  timeSignature = value;
-}
-
-
-
-// 4 Logica per l'immagine di sfondo al click del weather button
-
-weatherButtons.sunny.addEventListener("click", () => {
-  changeBackground2("sunnyy", weatherButtons.sunny);
-});
-
-weatherButtons.rainy.addEventListener("click", () => {
-  changeBackground2("rainyy", weatherButtons.rainy);
-});
-
-weatherButtons.cloudy.addEventListener("click", () => {
-  changeBackground2("cloudyy", weatherButtons.cloudy);
-});
-
-weatherButtons.snowy.addEventListener("click", () => {
-  changeBackground2("snowyy", weatherButtons.snowy);
-});
-
+// 4.1 Cambio dello sfondo al click di uno dei weather-buttons
 function changeBackground2(weather) {
   let imageUrl;
 
-  // 1. Imposta l'opacità a 0 per avviare la dissolvenza
   const backgroundContainer = document.getElementById('background-container');
   backgroundContainer.style.opacity = 0;
 
-  // 2. Imposta un timeout per dare il tempo alla dissolvenza di terminare
   setTimeout(() => {
-    // 3. Determina l'immagine da usare
     switch(weather) {
       default:
         imageUrl = 'https://eleonorsrr.github.io/MeteotrAPP/assets/images/sfondo.jpg';
@@ -983,36 +520,60 @@ function changeBackground2(weather) {
         break;
     }
 
-    // 4. Cambia l'immagine di sfondo
     backgroundContainer.style.backgroundImage = `url(${imageUrl})`;
     backgroundContainer.style.backgroundSize = 'cover';
     backgroundContainer.style.backgroundPosition = 'center';
     backgroundContainer.style.backgroundRepeat = 'no-repeat';
-
-    // 5. Ristabilisci l'opacità a 1 per rendere visibile il nuovo sfondo
     backgroundContainer.style.opacity = 1;
-  }, 1000); // Il timeout corrisponde alla durata della transizione (1 secondo)
+  }, 1000); 
+}
+weatherButtons.sunny.addEventListener("click", () => {
+  changeBackground2("sunnyy", weatherButtons.sunny);
+});
+
+weatherButtons.rainy.addEventListener("click", () => {
+  changeBackground2("rainyy", weatherButtons.rainy);
+});
+
+weatherButtons.cloudy.addEventListener("click", () => {
+  changeBackground2("cloudyy", weatherButtons.cloudy);
+});
+
+weatherButtons.snowy.addEventListener("click", () => {
+  changeBackground2("snowyy", weatherButtons.snowy);
+});
+
+function resetButtons(except) {
+  Object.values(weatherButtons).forEach(button => {
+    if (button !== except) button.classList.remove("soundactive");
+  });
 }
 
+Object.entries(weatherButtons).forEach(([weather, button]) => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".weather-btn").forEach(btn => btn.classList.remove("scaleactive"));
 
+    const isActive = button.classList.contains("soundactive");
+    resetButtons(button);
+    button.classList.toggle("soundactive", !isActive);
 
-
-// 5 Logica relativa all'attivazione dei buttons, sia quella dei suoni caratteristici sia quella della scala scelta random
+    highlightWeatherButton(weather);
+    playWeatherSound(weather);
+    suggestInstrument(weather);
+  });
+});
 
 function highlightWeatherButton(condition) {
-  // Rimuove la classe 'scaleactive' da tutti i pulsanti meteo
   document.querySelectorAll(".weather-btn").forEach(button => {
     button.classList.remove("scaleactive");
   });
 
-  // Seleziona il pulsante corrispondente alla condizione meteo e aggiunge la classe 'scaleactive'
   const activeButton = document.querySelector(`.weather-btn.${condition}`);
   if (activeButton) {
     activeButton.classList.add("scaleactive");
   }
 }
 
-// Mappa dei suoni meteo
 const weatherSounds = {
   sunny: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/birds.mp3'),
   rainy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/rain.mp3'),
@@ -1020,11 +581,8 @@ const weatherSounds = {
   snowy: new Audio('https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/snow.mp3')
 };
 
-let currentSound = null; // Variabile per tenere traccia del suono in riproduzione
+let currentSound = null; 
 
-// ANNA 01/02 ho pushato da qua modificando la funzione originale
-
-// Funzione per riprodurre/fermare il suono
 function playWeatherSound(weather) {
   let sound = weatherSounds[weather];
   if (!sound) {
@@ -1032,19 +590,16 @@ function playWeatherSound(weather) {
     return;
   }
 
-  // Ferma il suono precedente se diverso
   if (currentSound && currentSound !== sound) {
     currentSound.pause();
     currentSound.currentTime = 0;
   }
 
-  // Avvia o ferma il suono attuale
   if (currentSound !== sound) {
     sound.loop = true;
     sound.currentTime = 0;
     sound.play();
 
-    // Imposta il volume dal valore dello slider
     const volumeSlider = document.getElementById(`${weather}-volume`);
     if (volumeSlider) {
       sound.volume = parseFloat(volumeSlider.value);
@@ -1060,8 +615,6 @@ function playWeatherSound(weather) {
   }
 }
 
-
-// Mappa degli strumenti suggeriti per ciascun meteo
 const weatherInstruments = {
   sunny: "*suggestion: Manor Grand",
   rainy: "*suggestion: Grand Piano",
@@ -1069,7 +622,6 @@ const weatherInstruments = {
   snowy: "*suggestion: Night Blade"
 };
 
-// Funzione per mostrare il suggerimento dello strumento
 function suggestInstrument(weather) {
   const suggestionContainer = document.getElementById("instrument-suggestion");
   if (!suggestionContainer) return;
@@ -1077,43 +629,3 @@ function suggestInstrument(weather) {
   const suggestionText = weatherInstruments[weather];
   suggestionContainer.textContent = suggestionText ? suggestionText : "Strumento non disponibile per questa condizione meteo.";
 }
-
-// Funzione che resetta un weather button al click di un altro
-function resetButtons(except) {
-  Object.values(weatherButtons).forEach(button => {
-    if (button !== except) button.classList.remove("soundactive");
-  });
-}
-
-// Eventi sui bottoni meteo con tutte le funzionalità
-Object.entries(weatherButtons).forEach(([weather, button]) => {
-  button.addEventListener("click", () => {
-    // Rimuove la classe 'scaleactive' da tutti i bottoni
-    document.querySelectorAll(".weather-btn").forEach(btn => btn.classList.remove("scaleactive"));
-
-    // Gestione stato bottone e reset degli altri
-    const isActive = button.classList.contains("soundactive");
-    resetButtons(button);
-    button.classList.toggle("soundactive", !isActive);
-
-    // Attivazione funzioni principali
-    highlightWeatherButton(weather);
-    playWeatherSound(weather);
-    suggestInstrument(weather);
-  });
-});
-
-
-document.getElementById("start-button").addEventListener("click", () => {
-  document.getElementById("intro-screen").classList.add("hidden");
-});
-
-
-// Assegnazione eventi al click del tasto Esc
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {  
-      event.preventDefault(); 
-      document.getElementById("skip-tutorial-btn").click();  
-  }
-});
