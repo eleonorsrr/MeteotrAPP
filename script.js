@@ -42,7 +42,6 @@ function getWeatherData(city = "Milano") { // Default: Milano
     document.getElementById('wind-direction').innerText = data.wind.deg + "°"; // Direzione del vento
     document.getElementById('humidity').innerText = data.main.humidity + " %"; // Umidità
     document.getElementById('pressure').innerText = data.main.pressure + " hPa"; // Pressione atmosferica
-    document.getElementById('time-time').innerText = localTime;
 
     const weatherDescription = data.weather[0].description;
     document.getElementById('weather-description').innerText = weatherDescription;
@@ -58,7 +57,8 @@ function getWeatherData(city = "Milano") { // Default: Milano
     second: '2-digit',
     }
     );
-          
+    
+    document.getElementById('time-time').innerText = localTime;
     // Aggiungi la mappa geografica
     const lat = data.coord.lat; 
     const lon = data.coord.lon;
