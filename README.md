@@ -45,7 +45,7 @@ The central panel provides manual control over the weather-based sound selection
 - **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
 
-  <img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/5e5eb21d-0990-4498-aa8d-8dc7671233b5" />
+  ![central](https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04)
 
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
@@ -57,9 +57,8 @@ The central panel provides manual control over the weather-based sound selection
 The lower section of the interface provides additional customization and real-time weather information:
 - **Instrument and City Selection:** Choose from a variety of sounds, such as **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
   
-  <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/90cfea88-fcb8-4f78-8b53-9b2c7b973a0f" />
+  ![instrument](https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955)
 
-  
 - **Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
   - Temperature (current, max, min)  
@@ -67,7 +66,7 @@ The lower section of the interface provides additional customization and real-ti
   - Local time in the selected city
   - Air humidity and pressure
 
-  ![weatherpanel](https://github.com/user-attachments/assets/658e0a9d-26b2-4277-83f0-fbbb83f2773b)
+  ![weather](https://github.com/user-attachments/assets/5f9b2632-9d14-403f-a32a-2ac13f0bea8c)
 
 
 ### 🎼 Chord Arrangement Panel
@@ -94,8 +93,8 @@ In this mode, users can immediately search for a city using the search bar or fl
 - Generate a **random scale** based on the scale type associated with it.  
 
 For example, if the searched city has a **clear sky**, the chords from the **Major Scale** (e.g., D Major) will be suggested.
-  
-  (see picture above)
+
+  ![re maggiore](https://github.com/user-attachments/assets/eac53a26-5d0f-47d0-9bc8-10929098a0d0)
 
   
 ### 🎮 Play Mode
@@ -106,7 +105,8 @@ This mode allows users to manually select a weather condition without relying on
 - The chords of the selected scale will appear.  
 
 For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
-  <img width="500" alt="mi" src="https://github.com/user-attachments/assets/21eeb8ca-d8c0-4a64-8b9b-f5e3d15399ea" />
+
+  ![mi minore](https://github.com/user-attachments/assets/823919c2-592b-48c0-9679-6ead8d43f2db)
 
 ## Users' feedback
 
