@@ -47,8 +47,7 @@ The central panel provides manual control over the weather-based sound selection
 - **Chord buttons:** The chords associated with the scale, suggested or chosen, will be displayed in the buttons below the dropdowns. By holding down the button, the notes played are shown.
 
   ![central](https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04)
-  ![tastinde](https://github.com/user-attachments/assets/59e08c4b-de22-4ef1-a2e0-267f20ec11ff)
-
+  <img width="300" alt="tutto" src="hhttps://github.com/user-attachments/assets/59e08c4b-de22-4ef1-a2e0-267f20ec11ff" />
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
 
