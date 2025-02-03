@@ -1,4 +1,9 @@
+// SCRIPT RELATIVO ALLA CREAZIONE E GESTIONE DEL TUTORIAL INTRODUTTIVO
+
 document.addEventListener("DOMContentLoaded", () => {
+  
+  // 1. Definizione della sequenza di steps nel tutorial
+  
   const tutorialSteps = [
     {
       element: ".weather-panel",
@@ -7,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       element: ".map-panel",
       text: "This map displays the location you searched for in the weather panel. To improve the interaction, it is also possible to select an area/city directly by clicking on it: this will have the same effect as choosing the city from the search bar, affecting the chords suggested",
-      delay: 0
     },
     {
       element: ".central-panel",
@@ -27,12 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
   
+
+    // 2. Definizione e creazione di box e pulsanti
+    
     let currentStep = 0;
 
+    // Definizione dell'overlay
     const overlay = document.createElement("div");
     overlay.id = "tutorial-overlay";
     document.body.appendChild(overlay);
   
+    // Definizione del tutorialBox
     const tutorialBox = document.createElement("div");
     tutorialBox.id = "tutorial-box";
     overlay.appendChild(tutorialBox);
@@ -47,100 +56,115 @@ document.addEventListener("DOMContentLoaded", () => {
     const restartButton = document.createElement("button");
     restartButton.id = "restart-tutorial-btn";
     restartButton.textContent = "Start Tutorial";
-    restartButton.style.display = "none"; // inizialmente nascosto
+    restartButton.style.display = "none";
     document.body.appendChild(restartButton);
   
+
+    // 3. Funzioni per gestione della logica del tutorial
+
+    // 3.1 Gestione delle transizioni tra gli steps del tutorial
     function showStep(step) {
-      const { element, text, delay } = tutorialSteps[step];
+      
+      const { element, text } = tutorialSteps[step];
       const targetElement = document.querySelector(element);
   
       if (!targetElement) return;
   
-      // Rimuove eventuali evidenziazioni precedenti
+      // Rimozione di eventuali evidenziazioni precedenti
       document.querySelectorAll(".tutorial-highlight").forEach(el => el.classList.remove("tutorial-highlight"));
   
-      // Posiziona il tutorialBox sopra o sotto l'elemento evidenziato in base alla sua posizione
+      // Posizionamento del tutorialBox rispetto all'elemento evidenziato
       const rect = targetElement.getBoundingClientRect();
       const tutorialBox = document.getElementById("tutorial-box");
       tutorialBox.textContent = text;
   
-      /// Calcoliamo la posizione in modo dinamico
+      // Calcolo dinamico della posizione
       let offsetY = (rect.top + rect.height + 100 > window.innerHeight) ? -100 : rect.height + 20;
   
-      // Aggiungi la transizione al tutorialBox
+      // Transizione del tutorialBox
       tutorialBox.style.opacity = "1";
       tutorialBox.style.transform = `translate(${rect.left + rect.width / 2 - 225}px, ${rect.top + window.scrollY + offsetY}px)`;
   
-      // Evidenzia l'elemento attuale
+      // Evidenziazione elemento attuale
       targetElement.classList.add("tutorial-highlight");
-  
-      if (delay) {
-        // Ritarda l'evidenziazione della mappa per farla apparire più lentamente (opzionale)
-        setTimeout(() => {
-          document.querySelector(".map-panel").classList.add("tutorial-highlight");
-        }, delay);
-      }
+
     }
   
+    // 3.2 Gestione avanzamento steps (fino al termine del tutorial)
     function nextStep() {
+
       if (currentStep < tutorialSteps.length - 1) {
+
         currentStep++;
         showStep(currentStep);
+
       } else {
-        endTutorial(); // Se siamo all'ultimo passo, termina il tutorial
+
+        endTutorial();
+
       }
+
     }
   
+    // 3.3 Gestione regressione steps
     function previousStep() {
+
       if (currentStep > 0) {
         currentStep--;
         showStep(currentStep);
       }
+
+    }
+
+    // 3.4 Preload e avvio tutorial
+    function preloadTutorial() {
+
+      const overlay = document.getElementById("tutorial-overlay");
+      const tutorialBox = document.getElementById("tutorial-box");
+      
+      overlay.style.display = "block";
+      tutorialBox.textContent = "Caricamento del tutorial...";
+      
+      setTimeout(() => {
+        // Avvio tutorial dopo il caricamento
+        showStep(currentStep); 
+      }, 100); 
+
     }
   
-    // Funzione per terminare il tutorial
+    // 3.5 Termine tutorial
     function endTutorial() {
-        // Rimuove l'overlay
+
+        // Rimozione overlay
         const overlay = document.getElementById("tutorial-overlay");
         if (overlay) overlay.remove();
 
-        // Rimuove le evidenziazioni
+        // Rimozione evidenziazioni
         document.querySelectorAll(".tutorial-highlight").forEach(el => el.classList.remove("tutorial-highlight"));
-        
-        // Mostra il contenuto dell'applicazione (assicurandosi che l'elemento esista)
-        const appContent = document.querySelector(".app-content");
-        if (appContent) {
-            appContent.style.display = "block"; 
-        }
 
-        // Rimuove il pulsante "Skip"
+        // Rimozione pulsante "Skip Tutorial"
         const skipButton = document.getElementById("skip-tutorial-btn");
-        if (skipButton) skipButton.style.display = "none"; // Nascondi il tasto Skip
+        if (skipButton) skipButton.style.display = "none"; 
 
-        // Mostra il pulsante "Restart Tutorial"
+        // Aggiunta pulsante "Restart Tutorial"
         const restartButton = document.getElementById("restart-tutorial-btn");
-        if (restartButton) restartButton.style.display = "inline-block"; // Mostra il tasto Restart
+        if (restartButton) restartButton.style.display = "inline-block"; 
+
     }
 
-    // Funzione per riavviare il tutorial
+    // 3.6 Riavvio tutorial
     function restartTutorial() {
         
-        // Ripristina lo stato iniziale
+        // Ripristino allo stato iniziale
         currentStep = 0;
 
-        // Nasconde il contenuto dell'applicazione, se presente
-        const appContent = document.querySelector(".app-content");
-        if (appContent) {
-            appContent.style.display = "none";
-        }
-
-        // Rimuove eventuali vecchi overlay e box di tutorial
+        // Rimozione eventuali overlay e boxTutorial già presenti
         const existingOverlay = document.getElementById("tutorial-overlay");
         if (existingOverlay) {
             existingOverlay.remove();
         }
 
-        // Ri-crea l'overlay e il tutorial box
+        // Ri-creazione overlay boxTtutorial
         const overlay = document.createElement("div");
         overlay.id = "tutorial-overlay";
         document.body.appendChild(overlay);
@@ -152,38 +176,28 @@ document.addEventListener("DOMContentLoaded", () => {
         overlay.style.display = "block";
         tutorialBox.textContent = "Caricamento del tutorial...";
 
-        // Nasconde il pulsante "Restart Tutorial" e mostra il tasto "Skip"
+        // Logica gestione alternata dei pulsanti "Restart Tutorial" (nascosto) e "Skip Tutorial" (mostrato)
         const restartButton = document.getElementById("restart-tutorial-btn");
-        if (restartButton) restartButton.style.display = "none"; // Nasconde il tasto Restart
+        if (restartButton) restartButton.style.display = "none";
+
         const skipButton = document.getElementById("skip-tutorial-btn");
-        if (skipButton) skipButton.style.display = "inline-block"; // Mostra il tasto Skip Tutorial
+        if (skipButton) skipButton.style.display = "inline-block";
 
-        // Precarica il tutorial e avvia il primo passo
         preloadTutorial();
-    }
 
-    // Funzione per il preload
-    function preloadTutorial() {
-      // Pre-carica il tutorial: mostra il primo passo e aspetta il caricamento completo
-      const overlay = document.getElementById("tutorial-overlay");
-      const tutorialBox = document.getElementById("tutorial-box");
-      
-      overlay.style.display = "block";
-      tutorialBox.textContent = "Caricamento del tutorial...";
-      
-      setTimeout(() => {
-        showStep(currentStep); // Avvia il tutorial dopo il caricamento
-      }, 100); // Preload per 1 secondo
     }
   
-    // Avvia il tutorial con il preload
     preloadTutorial();
   
-    // Ascolta i tasti per navigare tra i passi del tutorial
+
+    // 4. Gestione EventListeners:
+
+    // 4.1 Definizione pulsanti per navigare tra gli steps del tutorial
     document.addEventListener("keydown", (event) => {
+
       if (event.key === "Enter" || event.key === "ArrowRight") {
 
-        // Questo if dentro all'if mi fa sì che il primo step non venga skippato finché la schermata intro non se ne va
+        // Blocco dei tutorial steps fino a rimozione della schermata introduttiva
         const introScreen = document.getElementById("intro-screen");
 
         if (!introScreen.classList.contains("hidden")) {
@@ -193,20 +207,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     
       } else if (event.key === "ArrowLeft" || event.key === "Backspace") {
+
         previousStep();
+
       }
+      
     });
 
     
-    // Evento per terminare il tutorial quando si preme il pulsante "Skip Tutorial"
+    // 4.2 Blocco tutorial premendo il pulsante "Skip Tutorial"
     skipButton.addEventListener("click", () => {
         endTutorial();
     });
 
-    // Evento per riavviare il tutorial
+    // 4.3 Riavvio tutorial premendo il pulsante "Skip Tutorial"
     restartButton.addEventListener("click", () => {
         restartTutorial();
     });
   
 });
   
+
