@@ -96,11 +96,14 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 3.2 Gestione avanzamento steps (fino al termine del tutorial)
     function nextStep() {
-
+      
       if (currentStep < tutorialSteps.length - 1) {
-        
+
         currentStep++;
+        const sound = new Audio("https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/click.mp3"); 
+        sound.play();
         showStep(currentStep);
+        
 
       } else {
 
@@ -112,8 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
     // 3.3 Gestione regressione steps
     function previousStep() {
-
+      
       if (currentStep > 0) {
+  
         currentStep--;
         showStep(currentStep);
       }
@@ -197,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Gestione EventListeners:
 
     // 4.1 Definizione pulsanti per navigare tra gli steps del tutorial
-   document.addEventListener("keydown", (event) => {
+    document.addEventListener("keydown", (event) => {
 
       if (event.key === "Enter" || event.key === "ArrowRight") {
 
@@ -223,6 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
     });
+
     
     // 4.2 Blocco tutorial premendo il pulsante "Skip Tutorial"
     skipButton.addEventListener("click", () => {
@@ -240,17 +245,5 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {  
       event.preventDefault(); 
       document.getElementById("skip-tutorial-btn").click();  
-  }
-});
-
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Enter" || event.key === "ArrowRight") {  
-    event.preventDefault();  
-
-    if (document.activeElement.tagName === "INPUT") {
-      document.getElementById("search-btn").click(); 
-    } else {
-      document.getElementById("start-button").click();  
-    }
   }
 });
