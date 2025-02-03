@@ -237,3 +237,15 @@ document.addEventListener("keydown", (event) => {
       document.getElementById("skip-tutorial-btn").click();  
   }
 });
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter" || event.key === "ArrowRight") {  
+    event.preventDefault();  
+
+    if (document.activeElement.tagName === "INPUT") {
+      document.getElementById("search-btn").click(); 
+    } else {
+      document.getElementById("start-button").click();  
+    }
+  }
+});
