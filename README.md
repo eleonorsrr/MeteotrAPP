@@ -44,8 +44,10 @@ The central panel provides manual control over the weather-based sound selection
 
 - **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
+- **Chord buttons:** The chords associated with the scale, suggested or chosen, will be displayed in the buttons below the dropdowns. By holding down the button, the notes played are shown.
 
   ![central](https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04)
+  ![tastinde](https://github.com/user-attachments/assets/59e08c4b-de22-4ef1-a2e0-267f20ec11ff)
 
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
@@ -55,7 +57,7 @@ The central panel provides manual control over the weather-based sound selection
 
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
-- **Instrument and City Selection:** Choose from a variety of sounds, such as **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
+- **Instrument and City Selection:** Choose from a variety of sounds, such as **Manor Grand, Soul Pad, Grand Piano, Night Blade, Epiano, Ephemeral, Diva**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
   
   ![instrument](https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955)
 
@@ -108,11 +110,11 @@ For example, if the user selects **Rainy** and then chooses **E** from the dropd
 
   ![mi minore](https://github.com/user-attachments/assets/823919c2-592b-48c0-9679-6ead8d43f2db)
 
-### Users' feedback
+## Users' feedback
 
 To refine and enhance our app, we created a Google Form and shared it with friends to gather valuable insights. The survey was divided into four main sections:
 
-## General Experience
+### General Experience
 1. Did you find the idea of ​​combining weather and music fun? GRAFICO
 2. How intuitive is the app's user interface? ISTOGRAMMA
 3. How would you rate your overall experience with the app? 
