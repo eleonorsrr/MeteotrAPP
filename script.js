@@ -70,6 +70,8 @@ function getWeatherData(city = "Milano") { // Default: Milano
     highlightWeatherButton(weatherCondition);
     updateChordButtons(randomScale.scaleType,randomScale.rootNote);
     changeBackground(weatherCondition2);
+    playWeatherSound(weatherCondition);
+    suggestInstrument(weatherCondition);
   }
   )
 
@@ -154,6 +156,8 @@ function getWeatherDataByCoords(lat, lon) {
       highlightWeatherButton(weatherCondition);
       updateChordButtons(randomScale.scaleType, randomScale.rootNote);
       changeBackground(weatherCondition2);
+      playWeatherSound(weatherCondition);
+      suggestInstrument(weatherCondition);
     })
     .catch(error => {
       console.error('Errore nel recuperare i dati meteo:', error);
