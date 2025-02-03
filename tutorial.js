@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       element: ".central-panel",
-      text: "Here you can select the proposed chords based on the weather condition related to your search. You can also interact with this section dynamically: choose one of the four weather conditions and listen to its characteristic sound, select one of the available scales and create your melody with the chords that will be proposed to you. Also play with the sliders related to the characteristic sound of each weather condition to fully immerse yourself in the experience!"
+      text: "Here you can select the proposed chords based on the weather condition related to your search. You can also choose one of the four weather conditions and listen to its characteristic sound (adjustable with the sliders), select one of the available scales and create your melody. By holding down the button, the notes played are shown."
     },
     {
       element: ".bottom-panel",
