@@ -18,70 +18,139 @@ const chordButtonsContainer = document.querySelector(".chord-row");
 
 export function updateChordButtons(scaleType, rootNote) {
 
-    const selectedScale = scales[scaleType][rootNote]; 
-    chordButtonsContainer.innerHTML = ""; 
-  
-    // Verifica che la scala selezionata sia tra quelle definite
-    if (selectedScale) { 
-  
-      selectedScale.forEach(note => {
-  
-        // Creazione e definizione del pulsante relativo a un accordo
-        const button = document.createElement("button"); 
-        button.classList.add("chord-btn", "fixed-size"); 
-        button.textContent = getChordName(note);
-        button.dataset.chord = note; 
-  
-        // Selezione dell'accordo all'evento (click)
-        button.addEventListener("click", () => {
-          toggleChordSelection(button); 
-        });
-  
-        // Aggiunta del pulsante appena creato al contenitore dei pulsanti degli accordi
-        chordButtonsContainer.appendChild(button); 
-  
+  const selectedScale = scales[scaleType][rootNote];
+  chordButtonsContainer.innerHTML = "";
+
+  // Verifica che la scala selezionata sia tra quelle definite
+  if (selectedScale) {
+
+    selectedScale.forEach(chordName => {
+
+      // Creazione e definizione del pulsante relativo a un accordo
+      const button = document.createElement("button");
+      button.classList.add("chord-btn", "fixed-size");
+      button.textContent = getChordName(chordName);
+      button.dataset.chord = chordName;
+
+      // Recupero delle note che compongono l'accordo
+      if (chords[chordName]) {
+
+        button.dataset.notes = JSON.stringify(chords[chordName]);
+
+      } else {
+
+        console.warn("Accordo non trovato in chords:", chordName);
+        button.dataset.notes = "[]";
+
+      }
+
+      // Selezione dell'accordo all'evento (click)
+      button.addEventListener("click", () => {
+        toggleChordSelection(button);
       });
-  
-    } else {
-      console.error("Scala non trovata per", scaleType, rootNote);
-    }
-  
+
+      // Creazione del pop-up all'evento (click prolungato)
+      addLongPressEvent(button);
+
+      // Aggiunta del pulsante appena creato al contenitore dei pulsanti degli accordi
+      chordButtonsContainer.appendChild(button);
+
+    });
+
+  } else {
+    console.error("Scala non trovata per", scaleType, rootNote);
   }
 
-// 2.2 Selezione/Deselezione di un accordo
+}
+
+// 2.2 Creazione e gestione pop-up con note componenti l'accordo selezionato
+function showNoteTooltip(button, event) {
+
+  const notesArray = JSON.parse(button.dataset.notes);
+  const notesText = notesArray.join(" - ");
+
+  const tooltip = document.createElement("div");
+  tooltip.classList.add("tooltip");
+  tooltip.textContent = notesText;
+
+  // Avvio transizione
+  setTimeout(() => {
+    tooltip.classList.add("visible");
+  }, 10); 
+
+  document.body.appendChild(tooltip);
+
+  // Posizionamento pop-up rispetto al mouse
+  tooltip.style.left = `${event.pageX + 20}px`;
+  tooltip.style.top = `${event.pageY + 20}px`;
+
+  // Rimuozione pop-up
+  setTimeout(() => {
+
+    tooltip.classList.remove("visible");
+
+    setTimeout(() => {
+      tooltip.remove();
+    }, 300);
+
+  }, 2000);
+
+}
+
+// 2.3 Gestione click prolungato per creazione pop-up
+function addLongPressEvent(button) {
+
+  let pressTimer;
+
+  button.addEventListener("mousedown", (e) => {
+
+    pressTimer = setTimeout(() => {
+
+      showNoteTooltip(button, e);
+
+    }, 500); 
+
+  });
+
+  button.addEventListener("mouseup", () => clearTimeout(pressTimer));
+  button.addEventListener("mouseleave", () => clearTimeout(pressTimer));
+
+}
+
+// 2.4 Selezione/Deselezione di un accordo
 const selectedChords = [];
 
 function toggleChordSelection(button) {
 
-  const selectedChord = button.dataset.chord; 
-  
+  const selectedChord = button.dataset.chord;
+
   // Aggiunta dell'accordo selezionato all'array
-  selectedChords.push(selectedChord); 
+  selectedChords.push(selectedChord);
 
   updateSelectedChordsDisplay();
 }
 
-// 2.3 Aggiornamento visualizzazione degli accordi selezionati
+// 2.5 Aggiornamento visualizzazione degli accordi selezionati
 const bottomPanelSlots = document.querySelectorAll(".bottom-panel .chord-slot");
-const MAX_CHORDS = bottomPanelSlots.length - 1; 
+const MAX_CHORDS = bottomPanelSlots.length - 1;
 
 function updateSelectedChordsDisplay() {
 
   // Rimozione di eventuali accordi in eccesso
   while (selectedChords.length > MAX_CHORDS) {
-    selectedChords.pop(); 
+    selectedChords.pop();
   }
 
   selectedChords.forEach((chord, index) => {
 
-    if (index < MAX_CHORDS) { 
+    if (index < MAX_CHORDS) {
 
       const slot = bottomPanelSlots[index];
       let chordButton = slot.querySelector("button");
 
       // Creazione del bottone nel caso in cui non esista
       if (!chordButton) {
-        
+
         chordButton = document.createElement("button");
         chordButton.classList.add("chord-btn");
         slot.appendChild(chordButton);
@@ -103,20 +172,20 @@ function updateSelectedChordsDisplay() {
   for (let i = selectedChords.length; i < MAX_CHORDS; i++) {
     bottomPanelSlots[i].innerHTML = "";
   }
-  
+
   // Garanzia della visibilità del bottone shuffle
-  ensureShuffleButton(); 
+  ensureShuffleButton();
 
   // Abilitazione funzionalità drag & drop per gli ementi selezionati
-  enableDragAndDrop(); 
+  enableDragAndDrop();
 
 }
 
-// 2.4 Rimozione dell'accordo selezionato
+// 2.6 Rimozione dell'accordo selezionato
 function removeChordFromSequence(index) {
 
-  selectedChords.splice(index, 1); 
-  updateSelectedChordsDisplay(); 
+  selectedChords.splice(index, 1);
+  updateSelectedChordsDisplay();
 
 }
 
@@ -135,7 +204,7 @@ function enableDragAndDrop() {
 
     const button = slot.querySelector("button");
 
-    if (!button) return; 
+    if (!button) return;
 
     button.setAttribute("draggable", true);
 
@@ -159,7 +228,7 @@ function enableDragAndDrop() {
 // 3.2 Avvio trascinamento
 function dragStartHandler(event) {
 
-  draggedElement = event.target; 
+  draggedElement = event.target;
   draggedIndex = [...document.querySelectorAll(".bottom-panel .chord-slot button")].indexOf(draggedElement);
   event.dataTransfer.effectAllowed = "move";
 
@@ -208,17 +277,17 @@ function dragEndHandler() {
 // 3.6 Spostamento accordo selezionato e conseguente ridisposizione dei restanti
 function swapChords(fromIndex, toIndex) {
 
-  if (fromIndex === toIndex) return; 
+  if (fromIndex === toIndex) return;
 
-  let movedChord = selectedChords[fromIndex]; 
+  let movedChord = selectedChords[fromIndex];
 
   // Spostamento dell'elemento da `fromIndex` a `toIndex`
-  selectedChords.splice(fromIndex, 1); 
+  selectedChords.splice(fromIndex, 1);
   selectedChords.splice(toIndex, 0, movedChord);
 
   // Ottimizzazione per evitare aggiornamenti del DOM troppo frequenti
   setTimeout(() => {
-    updateSelectedChordsDisplay(); 
+    updateSelectedChordsDisplay();
   }, 0);
 
 }
@@ -230,11 +299,11 @@ function swapChords(fromIndex, toIndex) {
 document.addEventListener("DOMContentLoaded", function () {
 
   const shuffleButton = document.getElementById("shuffle-btn");
-    
+
   shuffleButton.addEventListener("click", shuffleChords);
-  
+
 });
-  
+
 // 4.2 Rimescolamento accordi e animazione pulsante
 function shuffleChords() {
 
@@ -287,19 +356,19 @@ function ensureShuffleButton() {
   }
 
 }
-  
-  
+
+
 // 5. Funzioni per gestione della logica di avvio/arresto/reset della sequenza di accordi 
 
 // 5.1 Definizione delle variabili globali (BPM & time signature)
 let bpm = 120;
-let timeSignature = '4/4'; 
-  
+let timeSignature = '4/4';
+
 // 5.2 Aggiornamento delle variabili globali
 function setBPM(value) {
   bpm = value;
 }
-  
+
 function setTimeSignature(value) {
   timeSignature = value;
 }
@@ -328,10 +397,12 @@ function calculateInterval(bpm, timeSignature) {
 
   }
 
-}  
+}
 
 // 5.3 Riproduzione della sequenza di accordi selezionati
 let currentInterval = null;
+let currentIndex = 0; 
+let lastPlayedIndex = -1; 
 
 function playChordsLoop() {
 
@@ -352,7 +423,7 @@ function playChordsLoop() {
   document.getElementById("play-btn").disabled = true;
 
 }
-  
+
 // 5.4 Aggiornamento dinamico del loop al variare di BPM e time signature
 function updateLoop() {
 
@@ -361,27 +432,26 @@ function updateLoop() {
   }
 
   currentInterval = calculateInterval(bpm, timeSignature);
-  
-  let index = 0;
 
   currentInterval = setInterval(() => {
 
     document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
+    
+    playChord(selectedChords[currentIndex]);
 
-    playChord(selectedChords[index]);
+    lastPlayedIndex = currentIndex;
 
     const chordButtons = document.querySelectorAll(".chord-slot button");
-    
-    if (chordButtons[index]) {
-      chordButtons[index].classList.add("playing");
+
+    if (chordButtons[currentIndex]) {
+      chordButtons[currentIndex].classList.add("playing");
     }
 
-    index = (index + 1) % selectedChords.length;
-
-  }, currentInterval);
+    currentIndex = (currentIndex + 1) % selectedChords.length;
+  }, currentInterval)
 
 }
-  
+
 // 5.5 Arresto riproduzione della sequenza
 function stopChordsLoop() {
 
@@ -391,9 +461,7 @@ function stopChordsLoop() {
 
     currentInterval = null;
 
-    document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
-
-    document.getElementById("play-btn").disabled = false; 
+    document.getElementById("play-btn").disabled = false;
 
   }
 
@@ -404,22 +472,24 @@ function resetChordsLoop() {
 
   if (currentInterval) {
 
-      clearInterval(currentInterval);
-      currentInterval = null;
+    clearInterval(currentInterval);
+    currentInterval = null;
 
   }
 
   // Svuotamento array contenente gli accordi selezionati
-  selectedChords.length = 0; 
+  selectedChords.length = 0;
 
   // Svuotamento degli 8 slot per gli accordi
   bottomPanelSlots.forEach((slot, index) => {
 
     if (index < 8) {
-      slot.innerHTML = ""; 
+      slot.innerHTML = "";
     }
 
   });
+
+  document.querySelectorAll(".chord-slot button").forEach(button => button.classList.remove("playing"));
 
   ensureShuffleButton();
 
@@ -427,6 +497,8 @@ function resetChordsLoop() {
 
   console.log("Loop fermato, accordi deselezionati e pulsanti ripristinati.");
 
+  currentIndex = 0;
+  lastPlayedIndex = -1;
 }
 
 
@@ -436,7 +508,7 @@ function resetChordsLoop() {
 document.getElementById("play-btn").addEventListener("click", playChordsLoop);
 document.getElementById("stop-btn").addEventListener("click", stopChordsLoop);
 document.getElementById("reset-btn").addEventListener("click", resetChordsLoop);
-  
+
 
 // 6.2 BPM & time signature (per aggiornamento dinamico della sequenza)
 document.getElementById("bpm").addEventListener("input", (e) => {
@@ -445,13 +517,16 @@ document.getElementById("bpm").addEventListener("input", (e) => {
   if (currentInterval !== null) updateLoop();
 
 });
-  
+
 document.getElementById("time-signature").addEventListener("change", (e) => {
-  
+
   setTimeSignature(e.target.value);
   if (currentInterval !== null) updateLoop();
 
 });
+
+
+
   
   
   
