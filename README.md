@@ -46,7 +46,7 @@ The central panel provides manual control over the weather-based sound selection
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
 - **Chord buttons:** The chords associated with the scale, suggested or chosen, will be displayed in the buttons below the dropdowns. By holding down the button, the notes played are shown.
 
-  ![central](https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04)
+  <img width="600" alt="tutto" src="https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04" />
   <img width="300" alt="tutto" src="https://github.com/user-attachments/assets/c32ca7f0-d418-4e5d-ba41-7596e0847bbf" />
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
