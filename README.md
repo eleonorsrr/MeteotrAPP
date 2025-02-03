@@ -2,7 +2,8 @@
 
 ## What is MeteotrAPP?
 
-MeteotrAPP is a web app designed to inspire musicians and music lovers by generating chord progressions based on real-time weather conditions. By categorizing atmospheric conditions into four main types —**Sunny, Rainy, Cloudy, and Snowy**— the app assigns a unique harmonic character to each, allowing users to explore different moods and textures in their music.
+MeteotrAPP is a web app designed to inspire musicians and music lovers by generating chord progressions based on real-time weather conditions. 'Meteo' and 'trap' represent the union of two functionalities: one linked to the weather conditions and the other symbolizing a space where new ideas can be 'captured' and developed in an original way, reflecting a fresh and creative approach. 'Trap' (not the musical genre) evokes the idea of a dynamic and innovative environment where music and weather merge in surprising ways, symbolizing a unique fusion of elements you wouldn’t normally expect together.
+By categorizing atmospheric conditions into four main types —Sunny, Rainy, Cloudy, and Snowy— the app assigns a unique harmonic character to each, allowing users to explore different moods and textures in their music.
 
 Each weather condition is associated with a specific chord scale:
 - ☀️ **Sunny** → Major Chords (bright, uplifting harmonies)  
