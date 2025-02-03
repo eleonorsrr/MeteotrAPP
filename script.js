@@ -1,7 +1,7 @@
 // 1. Importazione script secondari
 
-import { soulpad, nightblade, manor, grandpiano } from './sounds.js';
-console.log(soulpad, nightblade, manor, grandpiano);
+import { soulpad, nightblade, manor, grandpiano, epiano, ephemeral, diva } from './sounds.js';
+console.log( soulpad, nightblade, manor, grandpiano, epiano, ephemeral, diva );
 
 import { scales, chords } from './scalesandchords.js';
 console.log(scales, chords);
@@ -380,6 +380,15 @@ document.getElementById('instruments').addEventListener('change', (event) => {
 
   } else if (selectedInstrument === 'nightblade') {
     currentNotes = nightblade;
+
+  } else if (selectedInstrument === 'epiano') {
+    currentNotes = epiano;
+
+  } else if (selectedInstrument === 'ephemeral') {
+    currentNotes = ephemeral;
+
+  } else if (selectedInstrument === 'diva') {
+    currentNotes = diva;
 
   } else if (selectedInstrument === 'manor') {
     currentNotes = manor;
