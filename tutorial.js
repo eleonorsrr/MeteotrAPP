@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Gestione EventListeners:
 
     // 4.1 Definizione pulsanti per navigare tra gli steps del tutorial
-    document.addEventListener("keydown", (event) => {
+   document.addEventListener("keydown", (event) => {
 
       if (event.key === "Enter" || event.key === "ArrowRight") {
 
@@ -207,7 +207,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!introScreen.classList.contains("hidden")) {
           document.getElementById("start-button").click();
         } else {
-          nextStep();
+
+          if (document.activeElement.tagName === "INPUT") {
+            document.getElementById("search-btn").click(); 
+          } else {
+            nextStep();  
+          }
+    
         }
     
       } else if (event.key === "ArrowLeft" || event.key === "Backspace") {
@@ -217,7 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       
     });
-
     
     // 4.2 Blocco tutorial premendo il pulsante "Skip Tutorial"
     skipButton.addEventListener("click", () => {
