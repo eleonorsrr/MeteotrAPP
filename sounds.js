@@ -5,6 +5,9 @@ const UrlNIGHTBLADE = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/nig
 const UrlSOULPAD = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/soul revived pad/';
 const UrlMANOR = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/manor/';
 const UrlGRANDPIANO = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/grand piano/';
+const UrlDiva = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/diva/';
+const UrlEphemeral = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/ephemeral/';
+const UrlEpiano = 'https://eleonorsrr.github.io/MeteotrAPP/assets/sounds/epiano/';
 
 
 // 1.2 Mappatura delle note con i rispettivi URL
@@ -168,6 +171,132 @@ const grandpiano = {
   C4: new Audio(`${UrlGRANDPIANO}GRAND PIANO_37.wav`)
 };
 
+const diva = {
+  C: new Audio(`${UrlDiva}Diva.wav`), 
+  Csharp: new Audio(`${UrlDiva}Diva_2.wav`), 
+  D: new Audio(`${UrlDiva}Diva_3.wav`), 
+  Dsharp: new Audio(`${UrlDiva}Diva_4.wav`),
+  E: new Audio(`${UrlDiva}Diva_5.wav`),
+  F: new Audio(`${UrlDiva}Diva_6.wav`), 
+  Fsharp: new Audio(`${UrlDiva}Diva_7.wav`),
+  G: new Audio(`${UrlDiva}Diva_8.wav`),
+  Gsharp: new Audio(`${UrlDiva}Diva_9.wav`),
+  A: new Audio(`${UrlDiva}Diva_10.wav`),
+  Asharp: new Audio(`${UrlDiva}Diva_11.wav`),
+  B: new Audio(`${UrlDiva}Diva_12.wav`),
+  C2: new Audio(`${UrlDiva}Diva_13.wav`),
+  C2sharp: new Audio(`${UrlDiva}Diva_14.wav`),
+  D2: new Audio(`${UrlDiva}Diva_15.wav`),
+  D2sharp: new Audio(`${UrlDiva}Diva_16.wav`),
+  E2: new Audio(`${UrlDiva}Diva_17.wav`),
+  F2: new Audio(`${UrlDiva}Diva_18.wav`),
+  F2sharp: new Audio(`${UrlDiva}Diva_19.wav`),
+  G2: new Audio(`${UrlDiva}Diva_20.wav`),
+  G2sharp: new Audio(`${UrlDiva}Diva_21.wav`),
+  A2: new Audio(`${UrlDiva}Diva_22.wav`),
+  A2sharp: new Audio(`${UrlDiva}Diva_23.wav`),
+  B2: new Audio(`${UrlDiva}Diva_24.wav`),
+  C3: new Audio(`${UrlDiva}Diva_25.wav`),
+  C3sharp: new Audio(`${UrlDiva}Diva_26.wav`),
+  D3: new Audio(`${UrlDiva}Diva_27.wav`),
+  D3sharp: new Audio(`${UrlDiva}Diva_28.wav`),
+  E3: new Audio(`${UrlDiva}Diva_29.wav`),
+  F3: new Audio(`${UrlDiva}Diva_30.wav`),
+  F3sharp: new Audio(`${UrlDiva}Diva_31.wav`),
+  G3: new Audio(`${UrlDiva}Diva_32.wav`),
+  G3sharp: new Audio(`${UrlDiva}Diva_33.wav`),
+  A3: new Audio(`${UrlDiva}Diva_34.wav`),
+  A3sharp: new Audio(`${UrlDiva}Diva_35.wav`),
+  B3: new Audio(`${UrlDiva}Diva_36.wav`),
+  C4: new Audio(`${UrlDiva}Diva_37.wav`)
+};
+
+const ephemeral = {
+  C: new Audio(`${UrlEphemeral}Ephemeral.wav`), 
+  Csharp: new Audio(`${UrlEphemeral}Ephemeral_2.wav`), 
+  D: new Audio(`${UrlEphemeral}Ephemeral_3.wav`), 
+  Dsharp: new Audio(`${UrlEphemeral}Ephemeral_4.wav`),
+  E: new Audio(`${UrlEphemeral}Ephemeral_5.wav`),
+  F: new Audio(`${UrlEphemeral}Ephemeral_6.wav`), 
+  Fsharp: new Audio(`${UrlEphemeral}Ephemeral_7.wav`),
+  G: new Audio(`${UrlEphemeral}Ephemeral_8.wav`),
+  Gsharp: new Audio(`${UrlEphemeral}Ephemeral_9.wav`),
+  A: new Audio(`${UrlEphemeral}Ephemeral_10.wav`),
+  Asharp: new Audio(`${UrlEphemeral}Ephemeral_11.wav`),
+  B: new Audio(`${UrlEphemeral}Ephemeral_12.wav`),
+  C2: new Audio(`${UrlEphemeral}Ephemeral_13.wav`),
+  C2sharp: new Audio(`${UrlEphemeral}Ephemeral_14.wav`),
+  D2: new Audio(`${UrlEphemeral}Ephemeral_15.wav`),
+  D2sharp: new Audio(`${UrlEphemeral}Ephemeral_16.wav`),
+  E2: new Audio(`${UrlEphemeral}Ephemeral_17.wav`),
+  F2: new Audio(`${UrlEphemeral}Ephemeral_18.wav`),
+  F2sharp: new Audio(`${UrlEphemeral}Ephemeral_19.wav`),
+  G2: new Audio(`${UrlEphemeral}Ephemeral_20.wav`),
+  G2sharp: new Audio(`${UrlEphemeral}Ephemeral_21.wav`),
+  A2: new Audio(`${UrlEphemeral}Ephemeral_22.wav`),
+  A2sharp: new Audio(`${UrlEphemeral}Ephemeral_23.wav`),
+  B2: new Audio(`${UrlEphemeral}Ephemeral_24.wav`),
+  C3: new Audio(`${UrlEphemeral}Ephemeral_25.wav`),
+  C3sharp: new Audio(`${UrlEphemeral}Ephemeral_26.wav`),
+  D3: new Audio(`${UrlEphemeral}Ephemeral_27.wav`),
+  D3sharp: new Audio(`${UrlEphemeral}Ephemeral_28.wav`),
+  E3: new Audio(`${UrlEphemeral}Ephemeral_29.wav`),
+  F3: new Audio(`${UrlEphemeral}Ephemeral_30.wav`),
+  F3sharp: new Audio(`${UrlEphemeral}Ephemeral_31.wav`),
+  G3: new Audio(`${UrlEphemeral}Ephemeral_32.wav`),
+  G3sharp: new Audio(`${UrlEphemeral}Ephemeral_33.wav`),
+  A3: new Audio(`${UrlEphemeral}Ephemeral_34.wav`),
+  A3sharp: new Audio(`${UrlEphemeral}Ephemeral_35.wav`),
+  B3: new Audio(`${UrlEphemeral}Ephemeral_36.wav`),
+  C4: new Audio(`${UrlEphemeral}Ephemeral_37.wav`)
+};
+
+const epiano = {
+  C: new Audio(`${UrlEpiano}epiano.wav`), 
+  Csharp: new Audio(`${UrlEpiano}epiano_2.wav`), 
+  D: new Audio(`${UrlEpiano}epiano_3.wav`), 
+  Dsharp: new Audio(`${UrlEpiano}epiano_4.wav`),
+  E: new Audio(`${UrlEpiano}epiano_5.wav`),
+  F: new Audio(`${UrlEpiano}epiano_6.wav`), 
+  Fsharp: new Audio(`${UrlEpiano}epiano_7.wav`),
+  G: new Audio(`${UrlEpiano}epiano_8.wav`),
+  Gsharp: new Audio(`${UrlEpiano}epiano_9.wav`),
+  A: new Audio(`${UrlEpiano}epiano_10.wav`),
+  Asharp: new Audio(`${UrlEpiano}epiano_11.wav`),
+  B: new Audio(`${UrlEpiano}epiano_12.wav`),
+  C2: new Audio(`${UrlEpiano}epiano_13.wav`),
+  C2sharp: new Audio(`${UrlEpiano}epiano_14.wav`),
+  D2: new Audio(`${UrlEpiano}epiano_15.wav`),
+  D2sharp: new Audio(`${UrlEpiano}epiano_16.wav`),
+  E2: new Audio(`${UrlEpiano}epiano_17.wav`),
+  F2: new Audio(`${UrlEpiano}epiano_18.wav`),
+  F2sharp: new Audio(`${UrlEpiano}epiano_19.wav`),
+  G2: new Audio(`${UrlEpiano}epiano_20.wav`),
+  G2sharp: new Audio(`${UrlEpiano}epiano_21.wav`),
+  A2: new Audio(`${UrlEpiano}epiano_22.wav`),
+  A2sharp: new Audio(`${UrlEpiano}epiano_23.wav`),
+  B2: new Audio(`${UrlEpiano}epiano_24.wav`),
+  C3: new Audio(`${UrlEpiano}epiano_25.wav`),
+  C3sharp: new Audio(`${UrlEpiano}epiano_26.wav`),
+  D3: new Audio(`${UrlEpiano}epiano_27.wav`),
+  D3sharp: new Audio(`${UrlEpiano}epiano_28.wav`),
+  E3: new Audio(`${UrlEpiano}epiano_29.wav`),
+  F3: new Audio(`${UrlEpiano}epiano_30.wav`),
+  F3sharp: new Audio(`${UrlEpiano}epiano_31.wav`),
+  G3: new Audio(`${UrlEpiano}epiano_32.wav`),
+  G3sharp: new Audio(`${UrlEpiano}epiano_33.wav`),
+  A3: new Audio(`${UrlEpiano}epiano_34.wav`),
+  A3sharp: new Audio(`${UrlEpiano}epiano_35.wav`),
+  B3: new Audio(`${UrlEpiano}epiano_36.wav`),
+  C4: new Audio(`${UrlEpiano}epiano_37.wav`)
+};
+
+
+
+
+
+
+
 // 1.3 Preload dei campioni
 Object.values(nightblade).forEach(audio => {
   audio.load();
@@ -181,7 +310,16 @@ Object.values(manor).forEach(audio => {
 Object.values(grandpiano).forEach(audio => {
   audio.load();
 });
+Object.values(epiano).forEach(audio => {
+  audio.load();
+});
+Object.values(diva).forEach(audio => {
+  audio.load();
+});
+Object.values(ephemeral).forEach(audio => {
+  audio.load();
+});
+
 
 // 1.4 Esportazione dei campioni
-export { nightblade, manor, grandpiano, soulpad };
-
+export { nightblade, manor, grandpiano, soulpad, diva, ephemeral, epiano};
