@@ -2,6 +2,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   
+  document.getElementById("start-button").addEventListener("click", () => {
+    document.getElementById("intro-screen").classList.add("hidden");
+  });
+
   // 1. Definizione della sequenza di steps nel tutorial
   
   const tutorialSteps = [
@@ -227,4 +231,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
 });
   
-
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {  
+      event.preventDefault(); 
+      document.getElementById("skip-tutorial-btn").click();  
+  }
+});
