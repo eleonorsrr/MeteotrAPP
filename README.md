@@ -45,7 +45,7 @@ The central panel provides manual control over the weather-based sound selection
 - **Scale Dropdowns:** Select a root note from one of the four dropdown containers to select the corrisponding weather condition: it changes the background and displays the corresponding chords for that scale below in the same central panel.
 - **Weather Buttons:** By clicking on the desidered weather button, a characteristic sound can be activated (it will highlight the button with a blue border). Pressing an active button again stops the sound, pressing another button stop the previous sound and activate the new one.
 
-  ![central](https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04)
+  <img width="500" alt="pannellocentrale" src="https://github.com/user-attachments/assets/5e5eb21d-0990-4498-aa8d-8dc7671233b5" />
 
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
@@ -57,8 +57,9 @@ The central panel provides manual control over the weather-based sound selection
 The lower section of the interface provides additional customization and real-time weather information:
 - **Instrument and City Selection:** Choose from a variety of sounds, such as **Manor Grand, Soul Pad, Grand Piano, Night Blade**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
   
-  ![instrument](https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955)
+  <img width="500" alt="scelte" src="https://github.com/user-attachments/assets/90cfea88-fcb8-4f78-8b53-9b2c7b973a0f" />
 
+  
 - **Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
   - Temperature (current, max, min)  
@@ -66,7 +67,7 @@ The lower section of the interface provides additional customization and real-ti
   - Local time in the selected city
   - Air humidity and pressure
 
-  ![weather](https://github.com/user-attachments/assets/5f9b2632-9d14-403f-a32a-2ac13f0bea8c)
+  ![weatherpanel](https://github.com/user-attachments/assets/658e0a9d-26b2-4277-83f0-fbbb83f2773b)
 
 
 ### 🎼 Chord Arrangement Panel
@@ -93,8 +94,8 @@ In this mode, users can immediately search for a city using the search bar or fl
 - Generate a **random scale** based on the scale type associated with it.  
 
 For example, if the searched city has a **clear sky**, the chords from the **Major Scale** (e.g., D Major) will be suggested.
-
-  ![re maggiore](https://github.com/user-attachments/assets/eac53a26-5d0f-47d0-9bc8-10929098a0d0)
+  
+  (see picture above)
 
   
 ### 🎮 Play Mode
@@ -105,16 +106,45 @@ This mode allows users to manually select a weather condition without relying on
 - The chords of the selected scale will appear.  
 
 For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
-
-  ![mi minore](https://github.com/user-attachments/assets/823919c2-592b-48c0-9679-6ead8d43f2db)
+  <img width="500" alt="mi" src="https://github.com/user-attachments/assets/21eeb8ca-d8c0-4a64-8b9b-f5e3d15399ea" />
 
 ## Users' feedback
 
 To refine and enhance our app, we created a **Google Form** and shared it with friends to gather valuable insights. The survey was divided into four main sections:  
 
-- **General Experience**  
-- **Musical Features**  
-- **Technical Aspects**  
+- **General Experience**
+1. Did you find the idea of ​​combining weather and music fun? 
+GRAFICO
+
+2. How intuitive is the app's user interface?
+ISTOGRAMMA
+
+3. How would you rate your overall experience with the app?
+   The %% of the users found the experience nice non lo so vediamo
+   
+- **Musical Features**
+4. Which features have you used the most?
+  The %% of the users prefers the automatic mode, the other %% prefers the play mode.
+GRAFICO
+
+5. Did you find the main features easy to understand and use?
+   THE %% of the users found the main features easy to use.
+
+6. Were the proposed scales and chords useful and intuitive in creating your symphony?
+   %% e grafico
+
+7. Do you like the tools provided? What additional tools would you like to have?
+   Most of the users suggested to add classical instruments like a grand piano (which we decided to add from this feedback), a guitar or a trumpet. Other users were satisfied with the particular sounds we added.
+
+- **Technical Aspects**
+8. Have you encountered any technical issues or bugs while using the app?
+  GRAFICO
+
+9. Is the transition between different weather conditions and associated sounds smooth?
+
+10. How would you rate the graphics and design of the app?
+    Most of the users appreciated the graphics of MeteotrAPP!
+
 - **Improvements**  
 
 Based on the responses collected, we dedicated time to improving the app according to the users' needs and feedback. Some of the features requested by users are listed below:
