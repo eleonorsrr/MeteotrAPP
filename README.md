@@ -108,19 +108,38 @@ For example, if the user selects **Rainy** and then chooses **E** from the dropd
 
   ![mi minore](https://github.com/user-attachments/assets/823919c2-592b-48c0-9679-6ead8d43f2db)
 
-## Users' feedback
+### Users' feedback
 
-To refine and enhance our app, we created a **Google Form** and shared it with friends to gather valuable insights. The survey was divided into four main sections:  
+To refine and enhance our app, we created a Google Form and shared it with friends to gather valuable insights. The survey was divided into four main sections:
 
-- **General Experience**  
-- **Musical Features**  
-- **Technical Aspects**  
-- **Improvements**  
+## General Experience
+1. Did you find the idea of ​​combining weather and music fun? GRAFICO
+2. How intuitive is the app's user interface? ISTOGRAMMA
+3. How would you rate your overall experience with the app? 
+   The %% of the users found the experience nice non lo so vediamo
 
+## Musical Features
+4. Which features have you used the most? 
+  The %% of the users prefers the automatic mode, the other %% prefers the play mode. GRAFICO
+5. Did you find the main features easy to understand and use? 
+  THE %% of the users found the main features easy to use.
+6. Were the proposed scales and chords useful and intuitive in creating your symphony? 
+  %% e grafico
+7. Do you like the tools provided? What additional tools would you like to have? 
+  Most of the users suggested to add classical instruments like a grand piano (which we decided to add from this feedback), a guitar or a trumpet. Other users were satisfied with the particular sounds we added.
+
+## Technical Aspects
+8. Have you encountered any technical issues or bugs while using the app? 
+GRAFICO
+9. Is the transition between different weather conditions and associated sounds smooth?
+10. How would you rate the graphics and design of the app? 
+  Most of the users appreciated the graphics of MeteotrAPP!
+
+## Improvements
 Based on the responses collected, we dedicated time to improving the app according to the users' needs and feedback. Some of the features requested by users are listed below:
-- Addition of more instruments among the possible intruments available;
-- Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
-- Addition of instructions to a better understanding of the features of the app;
-- Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data.
-  
-Below is a chart summarizing the overall trends in the responses from the users who participated in the test and survey:  
+
+Addition of more instruments among the possible intruments available;
+Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
+Addition of instructions to a better understanding of the features of the app;
+Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data.
+Below is a chart summarizing the overall trends in the responses from the users who participated in the test and survey:
