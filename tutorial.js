@@ -98,9 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function nextStep() {
 
       if (currentStep < tutorialSteps.length - 1) {
-
-        const stepSound = new Audio("https://eleonorsrr.github.io/MeteotrAPP/assets/weather sounds/clickk.mp3");
-        stepSound.play();
+        
         currentStep++;
         showStep(currentStep);
 
