@@ -69,7 +69,7 @@ The lower section of the interface provides additional customization and real-ti
   - Air humidity and pressure
  
     
-  <img width="700" alt="mappa" src="https://github.com/user-attachments/assets/5f9b2632-9d14-403f-a32a-2ac13f0bea8c" />
+  <img width="500" alt="weather" src="https://github.com/user-attachments/assets/5f9b2632-9d14-403f-a32a-2ac13f0bea8c" />
 
 
 ### 🎼 Chord Arrangement Panel
