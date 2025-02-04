@@ -136,7 +136,7 @@ The 75% of the users found the experience postitive and fun.
 ### Musical Features
 #### 4. Which features have you used the most? 
   
-The 45% of the users prefers the automatic mode, the other 55% prefers the play mode. 
+The 55% of the users prefers the automatic mode, the other 45% prefers the play mode. 
 
   <img width="580" alt="domanda4" src="https://github.com/user-attachments/assets/cc275b14-3e28-4cf0-8761-f228c2e20ba9" />
 
