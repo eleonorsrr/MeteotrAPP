@@ -114,33 +114,53 @@ For example, if the user selects **Rainy** and then chooses **E** from the dropd
 To refine and enhance our app, we created a Google Form and shared it with friends to gather valuable insights. The survey was divided into four main sections:
 
 ### General Experience
-1. Did you find the idea of ​​combining weather and music fun? GRAFICO
-2. How intuitive is the app's user interface? ISTOGRAMMA
-3. How would you rate your overall experience with the app? 
-   The %% of the users found the experience nice non lo so vediamo
+1. Did you find the idea of ​​combining weather and music fun?
+   The 90% of the users found fun the idea to combine weather and music.
+   <img width="459" alt="domanda1" src="https://github.com/user-attachments/assets/212c853c-92b1-49da-a583-40a94a718bcc" />
 
-## Musical Features
+2. How intuitive is the app's user interface?
+   <img width="701" alt="domanda2" src="https://github.com/user-attachments/assets/95e57e2c-6163-4fe1-af82-4665c08a8b0d" />
+
+3. How would you rate your overall experience with the app? 
+   The 75% of the users found the experience postitive and fun.
+  <img width="704" alt="domanda3" src="https://github.com/user-attachments/assets/15e041b6-fea6-41d4-a7f4-197d07528d66" />
+
+### Musical Features
 4. Which features have you used the most? 
-  The %% of the users prefers the automatic mode, the other %% prefers the play mode. GRAFICO
+  The %% of the users prefers the automatic mode, the other %% prefers the play mode. 
+  <img width="580" alt="domanda4" src="https://github.com/user-attachments/assets/cc275b14-3e28-4cf0-8761-f228c2e20ba9" />
+
 5. Did you find the main features easy to understand and use? 
-  THE %% of the users found the main features easy to use.
+  The 85% of the users found the main features easy to use.
+<img width="444" alt="domanda5" src="https://github.com/user-attachments/assets/1048171b-375f-4fef-8dc2-0043e5b397a9" />
+
 6. Were the proposed scales and chords useful and intuitive in creating your symphony? 
-  %% e grafico
+   The 90% of the users found the proposed scales and chords useful and intuitive in creating their symphony.
+<img width="444" alt="domanda6" src="https://github.com/user-attachments/assets/033236eb-25fa-48f3-8db8-e1ee6f5d7dde" />
+
 7. Do you like the tools provided? What additional tools would you like to have? 
   Most of the users suggested to add classical instruments like a grand piano (which we decided to add from this feedback), a guitar or a trumpet. Other users were satisfied with the particular sounds we added.
 
-## Technical Aspects
-8. Have you encountered any technical issues or bugs while using the app? 
-GRAFICO
+### Technical Aspects
+8. Have you encountered any technical issues or bugs while using the app?
+   For 90% of users the app worked without bugs or interruptions.
+  <img width="444" alt="domanda8" src="https://github.com/user-attachments/assets/87ea4803-af61-456b-ad9f-8f2cab9547b9" />
+
 9. Is the transition between different weather conditions and associated sounds smooth?
+   The 95% of the users found the transition between different weather conditions and associated sounds smooth.
+    <img width="444" alt="domanda9" src="https://github.com/user-attachments/assets/b06b5e70-f9cc-40c2-a45a-e6f93cbf87a9" />
+
 10. How would you rate the graphics and design of the app? 
   Most of the users appreciated the graphics of MeteotrAPP!
+  <img width="713" alt="domanda10" src="https://github.com/user-attachments/assets/b9a37da1-523e-4582-a1f9-1ef7deec973c" />
+
+11. Would you recommend this app to a friend interested in music and creativity?
+    The 90% of the users would recommand this app to friends.
+    <img width="409" alt="domanda11" src="https://github.com/user-attachments/assets/04ccd1a1-5dfd-47f2-ba75-3e4914e37e90" />
 
 ## Improvements
 Based on the responses collected, we dedicated time to improving the app according to the users' needs and feedback. Some of the features requested by users are listed below:
-
-Addition of more instruments among the possible intruments available;
-Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
-Addition of instructions to a better understanding of the features of the app;
-Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data.
-Below is a chart summarizing the overall trends in the responses from the users who participated in the test and survey:
+- Addition of more instruments among the possible intruments available;
+- Possibility to directly submit the city of interest with the Enter key (not just with the Go button);
+- Addition of instructions to a better understanding of the features of the app;
+- Making the map on the right panel interactive (if you press on it, it detectes the location and it returns the weather data.
