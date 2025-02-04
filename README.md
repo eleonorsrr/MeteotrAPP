@@ -96,8 +96,7 @@ In this mode, users can immediately search for a city using the search bar or fl
 
 For example, if the searched city has a **clear sky**, the chords from the **Major Scale** (e.g., D Major) will be suggested.
 
-  ![re maggiore](https://github.com/user-attachments/assets/eac53a26-5d0f-47d0-9bc8-10929098a0d0)
-
+  <img width="500" alt="remag" src="https://github.com/user-attachments/assets/eac53a26-5d0f-47d0-9bc8-10929098a0d0" />
   
 ### 🎮 Play Mode
 This mode allows users to manually select a weather condition without relying on city-based weather data.
@@ -108,8 +107,8 @@ This mode allows users to manually select a weather condition without relying on
 
 For example, if the user selects **Rainy** and then chooses **E** from the dropdown, the app will display **chords from the E Minor Scale**.
 
-  ![mi minore](https://github.com/user-attachments/assets/823919c2-592b-48c0-9679-6ead8d43f2db)
-
+  <img width="500" alt="mimin" src="https://github.com/user-attachments/assets/823919c2-592b-48c0-9679-6ead8d43f2db" />
+  
 ## Users' feedback
 
 To refine and enhance our app, we created a Google Form and shared it with friends to gather valuable feedbacks. The survey was divided into four main sections:
