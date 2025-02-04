@@ -632,7 +632,7 @@ const weatherInstruments = {
   sunny: "*suggestion: Manor Grand",
   rainy: "*suggestion: Grand Piano",
   cloudy: "*suggestion: Soul Pad",
-  snowy: "*suggestion: Night Blade"
+  snowy: "*suggestion: Epiano"
 };
 
 function suggestInstrument(weather) {
