@@ -48,7 +48,7 @@ The central panel provides manual control over the weather-based sound selection
 
   <img width="600" alt="tutto" src="https://github.com/user-attachments/assets/8775f908-8a7a-4ac4-88cb-edd1977add04" />
   
-  <img width="300" alt="tutto" src="https://github.com/user-attachments/assets/c32ca7f0-d418-4e5d-ba41-7596e0847bbf" />
+  <img width="300" alt="note" src="https://github.com/user-attachments/assets/c32ca7f0-d418-4e5d-ba41-7596e0847bbf" />
 
 - **Map Panel:** A side panel allows users to locate and visualize the selected city on a map. It is also possible to select an area/city directly by clicking on it.
 
@@ -59,7 +59,7 @@ The central panel provides manual control over the weather-based sound selection
 The lower section of the interface provides additional customization and real-time weather information:
 - **Instrument and City Selection:** Choose from a variety of sounds, such as **Manor Grand, Soul Pad, Grand Piano, Night Blade, Epiano, Ephemeral, Diva**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
 
-  <img width="500" alt="mappa" src="https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955" />
+  <img width="500" alt="scelta" src="https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955" />
 
 - **Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
@@ -67,7 +67,8 @@ The lower section of the interface provides additional customization and real-ti
   - Wind speed and direction  
   - Local time in the selected city
   - Air humidity and pressure
-
+ 
+    
   <img width="700" alt="mappa" src="https://github.com/user-attachments/assets/5f9b2632-9d14-403f-a32a-2ac13f0bea8c" />
 
 
