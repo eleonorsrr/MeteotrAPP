@@ -58,8 +58,8 @@ The central panel provides manual control over the weather-based sound selection
 ### 🎹 Instrument & Weather Data Panel
 The lower section of the interface provides additional customization and real-time weather information:
 - **Instrument and City Selection:** Choose from a variety of sounds, such as **Manor Grand, Soul Pad, Grand Piano, Night Blade, Epiano, Ephemeral, Diva**. Type and press 'Go' to visualize the weather conditions of any city in the world! A suggestion of a suitable instrument for a selected weather condition will be provided.
-  
-  ![instrument](https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955)
+
+  <img width="500" alt="mappa" src="https://github.com/user-attachments/assets/565cd09c-f77a-476e-9937-bd3ab6052955" />
 
 - **Weather Data:** Changes the background based on the condition in the selected city and displays the current weather details for it, including:  
   - General condition (e.g., clear sky, light rain, broken clouds)  
