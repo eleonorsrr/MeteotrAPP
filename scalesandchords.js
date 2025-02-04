@@ -1,24 +1,11 @@
-/*
-// Vettore con la scala cromatica di due ottave (C1 - C3)
+// Definizione scala cromatica 3 ottave
 const chromaticScale = [
-  "C", "Csharp", "D", "Dsharp", "E", "F", "Fsharp", "G", "Gsharp", "A", "Asharp", "B",
-  "C2", "C2sharp", "D2", "D2sharp", "E2", "F2", "F2sharp", "G2", "G2sharp", "A2", "A2sharp", "B2",
-  "C3"
-];
-*/
-
-const chromaticScale = [
-  "C", "Csharp", "D", "Dsharp", "E", "F", "Fsharp", "G", "Gsharp", "A", "Asharp", "B",  // 1a ottava (C1 - B1)
-  "C2", "C2sharp", "D2", "D2sharp", "E2", "F2", "F2sharp", "G2", "G2sharp", "A2", "A2sharp", "B2",  // 2a ottava (C2 - B2)
-  "C3", "C3sharp", "D3", "D3sharp", "E3", "F3", "F3sharp", "G3", "G3sharp", "A3", "A3sharp", "B3",  // 3a ottava (C3 - B3)
-  "C4"  // 4a ottava (C4)
+  "C", "Csharp", "D", "Dsharp", "E", "F", "Fsharp", "G", "Gsharp", "A", "Asharp", "B",  
+  "C2", "C2sharp", "D2", "D2sharp", "E2", "F2", "F2sharp", "G2", "G2sharp", "A2", "A2sharp", "B2", 
+  "C3", "C3sharp", "D3", "D3sharp", "E3", "F3", "F3sharp", "G3", "G3sharp", "A3", "A3sharp", "B3",  
+  "C4"  
 ];
 
-/*
-// Intervalli della scala maggiore e minore naturale
-const majorScalePattern = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23];  // Scala maggiore
-const minorScalePattern = [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22];  // Scala minore naturale    
-*/
 
 const majorScalePattern = [0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24, 26, 28, 29, 31, 33, 35];  // Scala maggiore
 const minorScalePattern = [0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22, 24, 26, 27, 29, 31, 32, 34];  // Scala minore naturale
@@ -48,7 +35,8 @@ function getAccordsForScale(rootNote, scalePattern, chordType) {
   const accords = [];
   for (let index = 0; index < 7; index++) {
     let chord;
-
+    
+    //Logica inversioni in base a grado accordo
     if (chordType === 'triad') {
       if (index === 3 || index === 4) {
         chord = getTriad(index).map((note, i) => (i === 2 ? chromaticScale[chromaticScale.indexOf(note) - 12] : note));
@@ -81,8 +69,6 @@ function getAccordsForScale(rootNote, scalePattern, chordType) {
   return accords;
 }
 
-
-// Strutture finali per scales e chords
 const scales = {
   major: {},
   minor: {},
@@ -95,26 +81,26 @@ const chords = {};
 // Funzione per estrarre gli accordi da scales e popolare chords e scales con i nomi degli accordi
 function populateChordsAndUpdateScales() {
   const scaleTypes = ["major", "minor", "sus4", "major7"];  // Tipi di scale
-  const notes = ["C", "D", "E", "F", "G", "A", "B"];  // Le note da C a B
+  const notes = ["C", "D", "E", "F", "G", "A", "B"];  
 
   // Itera attraverso i tipi di scala (major, minor, sus4, major7)
   scaleTypes.forEach(scaleType => {
     notes.forEach(note => {
       // Per ogni nota della scala, prendi gli accordi corrispondenti
       scales[scaleType][note].forEach((chordArray) => {
-        // Creiamo un nome per l'accordo (es. "C", "Dm", "Em" ecc.)
+        
         let chordName;
         
-        // Se 'chordArray' è un array, allora uniscilo in una stringa
+        
         if (Array.isArray(chordArray)) {
-          chordName = chordArray.join("");  // E.g. "C", "Dm", "Em" etc.
+          chordName = chordArray.join("");  
         } else {
-          chordName = chordArray; // Se non è un array, prendiamo direttamente il nome
+          chordName = chordArray; 
         }
         
         // Aggiungi l'accordo a chords se non esiste già
         if (!chords[chordName]) {
-          chords[chordName] = chordArray;  // Assegna l'array di note all'accordo
+          chords[chordName] = chordArray; 
         }
 
         // Aggiungi il nome dell'accordo alla lista di scales (al posto dell'array di note)
@@ -126,8 +112,8 @@ function populateChordsAndUpdateScales() {
     });
   });
 
-  console.log("Chords:", chords);  // Mostra la struttura finale
-  console.log("Scales:", scales);  // Mostra la struttura aggiornata di scales
+  console.log("Chords:", chords);  
+  console.log("Scales:", scales);  
 }
 
 // Funzione per generare scales e chords per tutte le note
@@ -144,11 +130,11 @@ function generateScales() {
   });
 
   console.log("Scales:", scales);
-  populateChordsAndUpdateScales();  // Popola chords e aggiorna scales con i nomi degli accordi
+  populateChordsAndUpdateScales();  
 }
 
 // Esegui la funzione per generare le strutture
 generateScales();
 
-// 1.3 Esportazione di scale e accordi
+// Esportazione di scale e accordi
 export { scales, chords };
