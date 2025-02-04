@@ -24,7 +24,7 @@ const chordNameMapping = {
   "FAC2": "F", // F
   "GAsharpD2": "Gm", 
   "AC2E2": "Am", 
-  "AsharpD2F": "Bd", 
+  "AsharpD2F": "Bb", 
   "C2E2G": "C", 
   "D2FA": "Dm", 
   "E2GAsharp": "Edim",
