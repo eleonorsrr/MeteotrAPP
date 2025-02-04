@@ -168,8 +168,8 @@ For 90% of users the app worked without bugs or interruptions.
 The 95% of the users found the transition between different weather conditions and associated sounds smooth.
 
    <img width="444" alt="domanda9" src="https://github.com/user-attachments/assets/b06b5e70-f9cc-40c2-a45a-e6f93cbf87a9" />
-#### 
-10. How would you rate the graphics and design of the app? 
+   
+#### 10. How would you rate the graphics and design of the app? 
   
 Most of the users appreciated the graphics of MeteotrAPP!
 
