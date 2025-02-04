@@ -176,7 +176,7 @@ Most of the users appreciated the graphics of MeteotrAPP!
 
 #### 11. Would you recommend this app to a friend interested in music and creativity?
     
-The 90% of the users would recommand this app to friends.
+The 90% of the users would recommend this app to friends.
 
    <img width="409" alt="domanda11" src="https://github.com/user-attachments/assets/04ccd1a1-5dfd-47f2-ba75-3e4914e37e90" />
 
