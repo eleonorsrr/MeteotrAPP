@@ -81,13 +81,12 @@ const chordNameMapping = {
   "BD2F2": "Bdim", // A
   "C2E2G2": "C", 
   "E2G2B": "Em", 
-  "G2BD2": "G", // G
+  "G2BD2": "G", 
 
   "C2sharpE2G2": "C#dim", // B
   "D2F2sharpA2": "D", 
   "F2sharpA2C2sharp": "F#m", 
-  // G
-  "A2C2sharpE2": "A",// A
+  "A2C2sharpE2": "A",
 
 
   // 3. Sus4 Scales
@@ -184,7 +183,7 @@ const chordNameMapping = {
   "F2sharpA2C2sharpE2": "F#m7",
   "G2sharpB2D2F2sharp": "G#m7b5",
 
-  "BD2sharpF2sharpA2sharp": "Bmaj7", 
+  "BD2sharpF2sharpA2sharp": "Bmaj7", // B
   "D2sharpF2sharpA2sharpC3sharp": "D#m7",
   "E2G2sharpB2D2sharp": "Emaj7",
   "F2sharpA2sharpC3sharpE2": "F#7",
